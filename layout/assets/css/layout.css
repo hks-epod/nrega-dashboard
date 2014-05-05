@@ -60,17 +60,22 @@ body{
 }
 .sub-nav .nav-pills a{
 	color: #333;
-	padding: 15px 37px
+	padding: 15px 37px;
+	border-right: solid 1px #cAc3b4;
+	border-radius: 0;
+}
+.sub-nav .nav-pills> li:first-child >a,
+.sub-nav .nav-pills> li.active:first-child >a{
+	border-left:solid 1px #cAc3b4;
 }
 .sub-nav .nav-pills>li.active>a,
 .sub-nav .nav-pills>li.active>a:hover,
 .sub-nav .nav-pills>li.active>a:focus{
-/*	color: #76080B;*/
-/*	color:#a00; */
 	color: #000;
 	border-radius: 0;
 	background-color: #cAc3b4;
-	border: 0
+	border: 0;
+
 }
 
 
