@@ -1,6 +1,7 @@
 /*-------------[ Global : Base ]-------------------*/
 body{
 	background-color: #fcf8ee;
+	margin-top: 78px
 }
 
 
@@ -54,9 +55,16 @@ body{
 .sub-nav{
 	background-color: #f3ede1;
 	border-bottom: 1px solid #cAc3b4;
+	position: fixed;
+	top: 78px;
+	width: 100%;
+	z-index: 900
 }
 .sub-nav .nav-pills{
 	margin-left: -15px;
+}
+.sub-nav .nav-pills>li+li {
+	margin-left: 0;
 }
 .sub-nav .nav-pills a{
 	color: #333;
@@ -65,7 +73,9 @@ body{
 	border-radius: 0;
 }
 .sub-nav .nav-pills> li:first-child >a,
-.sub-nav .nav-pills> li.active:first-child >a{
+.sub-nav .nav-pills> li.active:first-child >a.
+.sub-nav .nav-pills> li.active:first-child >a:hover,
+.sub-nav .nav-pills> li.active:first-child >a:focus{
 	border-left:solid 1px #cAc3b4;
 }
 .sub-nav .nav-pills>li.active>a,
@@ -81,8 +91,54 @@ body{
 
 
 
+/*-------------[ Global: Sidebar]-------------------*/
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 130px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f3ede1;
+    border-right: 1px solid #cAc3b4;
+  }
+}
 
-
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+  color: #000
+}
+.nav-sidebar > .active > a {
+  color: #fff;
+  background-color: #428bca;
+}
+.main {
+  padding: 20px;
+  margin-top: 100px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
 
 
 
