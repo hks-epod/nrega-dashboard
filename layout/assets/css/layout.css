@@ -1,29 +1,39 @@
 /*-------------[ Global: Navbar]-------------------*/
+body{
+	background-color: #fcf8ee;
+}
+
+
+
+/*-------------[ Global: Navbar]-------------------*/
 .nrd-nav{
-	background: #f5f5f5;
-	border-bottom: 1px solid #ddd;
+	background: #EAE3D4;
+	border-bottom: 1px solid #c5b591;
 	color: #444;
 	padding: 6px 0 5px;
 }
 .nrd-nav .navbar-brand{
 	padding: 0;
 	margin: 0;
-	color: #555;
+	color: #453531;
 }
 .nrd-nav .logo{
   height: 100%
 }
+.nrd-nav .brush{
+  height: 17px
+}
 .nrd-nav .navbar-nav > li > a {
-  color: #E85272;
+  color: #9f8447;
 }
 .nrd-nav .navbar-nav > li > a:hover,
 .nrd-nav .navbar-nav > li > a:focus  {
-  color: #78a30B;
+  color: #333;
 }
 .nrd-nav .navbar-nav > .active > a,
 .nrd-nav .navbar-nav > .active > a:hover,
 .nrd-nav .navbar-nav > .active > a:focus {
-  color: #78a30B;
+  color: #333;
   background-color: transparent;
 }
 .nrd-nav .navbar-toggle {
@@ -34,7 +44,7 @@
   border-color: #f5f5f5;
 }
 .nrd-nav .navbar-toggle .icon-bar {
-	background-color: #E85272;
+	background-color: #c5b591;
 }
 .nrd-nav .navbar-toggle:hover .icon-bar {
 	background-color: #c83252;
