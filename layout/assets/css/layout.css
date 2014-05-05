@@ -1,16 +1,16 @@
-/*-------------[ Global: Navbar]-------------------*/
+/*-------------[ Global : Base ]-------------------*/
 body{
 	background-color: #fcf8ee;
 }
 
 
-
 /*-------------[ Global: Navbar]-------------------*/
 .nrd-nav{
 	background: #f3ede1;
-	border-bottom: 1px solid #c5b591;
+	border-bottom: 1px solid #cAc3b4;
 	color: #444;
-	padding: 6px 0 5px;
+	padding: 14px 0 13px;
+	margin-bottom: 0;
 }
 .nrd-nav .navbar-brand{
 	padding: 0;
@@ -49,3 +49,41 @@ body{
 .nrd-nav .navbar-toggle:hover .icon-bar {
 	background-color: #c83252;
 }
+
+/*-------------[ Global: Sub-nav]-------------------*/
+.sub-nav{
+	background-color: #f3ede1;
+	border-bottom: 1px solid #cAc3b4;
+}
+.sub-nav .nav-pills{
+	margin-left: -15px;
+}
+.sub-nav .nav-pills a{
+	color: #333;
+	padding: 15px 37px
+}
+.sub-nav .nav-pills>li.active>a,
+.sub-nav .nav-pills>li.active>a:hover,
+.sub-nav .nav-pills>li.active>a:focus{
+/*	color: #76080B;*/
+/*	color:#a00; */
+	color: #000;
+	border-radius: 0;
+	background-color: #cAc3b4;
+	border: 0
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
