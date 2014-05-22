@@ -1,7 +1,7 @@
 /*-------------[ Global : Base ]-------------------*/
 body{
 	background-color: #fcf8ee;
-	margin-top: 78px
+	margin-top: 50px
 }
 
 
@@ -10,22 +10,25 @@ body{
 	background: #f3ede1;
 	border-bottom: 1px solid #cAc3b4;
 	color: #444;
-	padding: 14px 0 13px;
+	padding: 0;
 	margin-bottom: 0;
 }
 .nrd-nav .navbar-brand{
-	padding: 0;
+	padding: 0 0 0 20px;
 	margin: 0;
 	color: #453531;
+  line-height: 50px;
 }
 .nrd-nav .logo{
-  height: 100%
+  height: 85%;
+  margin-top: -4px;
 }
 .nrd-nav .brush{
-  height: 17px
+  height: 17px;
 }
 .nrd-nav .navbar-nav > li > a {
-  color: #9f8447;
+  color: #3f3407;
+  border-left:solid 1px #cAc3b4;
 }
 .nrd-nav .navbar-nav > li > a:hover,
 .nrd-nav .navbar-nav > li > a:focus  {
@@ -35,7 +38,7 @@ body{
 .nrd-nav .navbar-nav > .active > a:hover,
 .nrd-nav .navbar-nav > .active > a:focus {
   color: #333;
-  background-color: transparent;
+  background-color:  #dAd3c4;
 }
 .nrd-nav .navbar-toggle {
   border-color: transparent;
@@ -98,7 +101,7 @@ body{
 @media (min-width: 768px) {
   .sidebar {
     position: fixed;
-    top: 130px;
+    top: 50px;
     bottom: 0;
     left: 0;
     z-index: 1000;
