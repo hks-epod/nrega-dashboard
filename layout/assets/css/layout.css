@@ -112,13 +112,28 @@ body{
 }
 
 /* Sidebar navigation */
-.nav-sidebar {
+.sidebar-wrap {
   margin-right: -21px; /* 20px padding + 1px border */
   margin-bottom: 20px;
   margin-left: -20px;
   margin-top: -21px;
 }
+.nav-sidebar{
 
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar > li >  a:hover{
+  background-color: transparent;
+}
+.nav-sidebar > .active > a {
+  color: #000;
+  background-color: #428bca;
+  font-weight: 500;
+  background-color: transparent;
+}
 
 .nrd-accordion .panel-default{
   border-radius: 0;
