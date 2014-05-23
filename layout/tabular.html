@@ -80,189 +80,266 @@
   <section class="container-fluid">
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar">
-        <ul class="nav nav-sidebar">
-          <li><a href="#">Select State</a>
-          </li>
-          <li><a href="#">Select District</a>
-          </li>
-          <li><a href="#">Select Block</a>
-          </li>
-          <li><a href="#">Select GP</a>
-          </li>
-        </ul>
-      </div>
-      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <h3>Demand Registration</h3>
-        <br>
-        <div class="table-reponsive">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th colspan="2">Parameter</th>
-                <th>Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td colspan="2">Demand Registered this month</td>
-                <td>34349</td>
-              </tr>
-              <tr>
-                <td colspan="2">Work Alloted</td>
-                <td>34349</td>
-              </tr>
-              <tr>
-                <td colspan="2">Unmet Demand</td>
-                <td>34349</td>
-              </tr>
-              <tr>
-                <td rowspan="2">Unemployment Allowances</td>
-                <td>Due for PDs</td>
-                <td>234</td>
-              </tr>
-              <tr>
-                <td>Amount Payable</td>
-                <td>56767</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
 
-        <h3>Physical Progress</h3>
-        <br>
-        <div class="table-reponsive">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th colspan="2">Parameter</th>
-                <th>Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td colspan="2">Persondays: LB Approved</td>
-                <td>34349</td>
-              </tr>
-              <tr>
-                <td rowspan="3">PersonDays: PD Generated</td>
-                <td>SC %</td>
-                <td>23</td>
-              </tr>
-              <tr>
-                <td>ST %</td>
-                <td>67</td>
-              </tr>
-              <tr>
-                <td>Women %</td>
-                <td>56</td>
-              </tr>
-              <tr>
-                <td colspan="2">HHs provided employment</td>
-                <td>34349</td>
-              </tr>
-              <tr>
-                <td colspan="2">Work completion rate</td>
-                <td>34349</td>
-              </tr>
-              <tr>
-                <td colspan="2">Total GPs</td>
-                <td>34349</td>
-              </tr>
-              <tr>
-                <td colspan="2">GPs with nil expenditure</td>
-                <td>34349</td>
-              </tr>
-              <tr>
-                <td colspan="2">GPs with no employment generation in last month</td>
-                <td>34349</td>
-              </tr>
-              <tr>
-                <td colspan="2">GPs with no approbed works</td>
-                <td>34349</td>
-              </tr>
-              <tr>
-                <td colspan="2">GPs with no ongoing works</td>
-                <td>34349</td>
-              </tr>
-              <tr>
-                <td colspan="2">HHS completed 100 days</td>
-                <td>34349</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="table-reponsive">
-            <h3>Financial Progress</h3>
-            <br>
-            <div class="table-reponsive">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th colspan="2">Parameter</th>
-                    <th>Value</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td rowspan="2">Total Expenditure</td>
-                    <td>Wage %</td>
-                    <td>23</td>
-                  </tr>
-                  <tr>
-                    <td>Admin %</td>
-                    <td>56</td>
-                  </tr>
-                  <tr>
-                    <td rowspan="2">Delayed Payment</td>
-                    <td>PDs Payable</td>
-                    <td>23</td>
-                  </tr>
-                  <tr>
-                    <td>Amount payable %</td>
-                    <td>56</td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">Average wage per PD</td>
-                    <td>34349</td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">Average cost per PD</td>
-                    <td>34349</td>
-                  </tr>
-                  <tr>
-                    <td rowspan="5">eFMS</td>
-                    <td>Total number of blocks %</td>
-                    <td>23</td>
-                  </tr>
-                  <tr>
-                    <td>Started in No. of blocks(wages)</td>
-                    <td>56</td>
-                  </tr>
-                  <tr>
-                    <td>Started in No. of blocks(Material)</td>
-                    <td>56</td>
-                  </tr>
-                  <tr>
-                    <td>Started in No. of blocks(Admin)</td>
-                    <td>56</td>
-                  </tr>
-                  <tr>
-                    <td>% of expenditure through eFMS</td>
-                    <td>56</td>
-                  </tr>
-                  <tr>
-                    <td rowspan="2">DBT</td>
-                    <td>% of active workers A/Cs freezed</td>
-                    <td>56</td>
-                  </tr>
-                  <tr>
-                    <td>% of aadhar seeding against total active worker</td>
-                    <td>56</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="table-reponsive">
+        <div class="panel-group nrd-accordion sidebar-wrap" id="nrd-accordion">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#nrd-accordion" href="#collapseOne">
+                  <span class=" glyphicon glyphicon-record"></span>&nbsp;&nbsp;Reports
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+              <div class="panel-body">
+                <ul class="nav nav-sidebar">
+                  <li class="active"><a href="#">Demand Registration</a>
+                  </li>
+                  <li><a href="#">Physical Progress</a>
+                  </li>
+                  <li><a href="#">Financial Progress</a>
+                  </li>
+                </ul>
               </div>
             </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#nrd-accordion" href="#collapseTwo">
+                  <span class="glyphicon glyphicon-record"></span>&nbsp;&nbsp;Rankings
+                </a>
+              </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+              <div class="panel-body">
+                sss
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#nrd-accordion" href="#collapseThree">
+                  <span class="glyphicon glyphicon-record"></span>&nbsp;&nbsp;SMS Service
+                </a>
+              </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+              <div class="panel-body">
+                dfdf
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+        <div class="status-bar">
+          <div class="btn-group pull-right" data-toggle="buttons">
+            <label class="btn btn-sm btn-default">
+              <input type="radio" name="options" id="option1">
+              <span class="glyphicon glyphicon-th"></span>&nbsp;Table View
+            </label>
+            <label class="btn btn-sm btn-default">
+              <input type="radio" name="options" id="option2">
+              <span class="glyphicon glyphicon-stats"></span>&nbsp; Graph View
+            </label>
+          </div>
+          <button type="button" class="btn btn-sm btn-warning">Select State
+            <span class="glyphicon glyphicon-chevron-down"></span>
+          </button>
+          <button type="button" class="btn btn-sm btn-warning">Select District
+            <span class="glyphicon glyphicon-chevron-down"></span>
+          </button>
+          <button type="button" class="btn btn-sm btn-warning">Select Block
+            <span class="glyphicon glyphicon-chevron-down"></span>
+          </button>
+          <button type="button" class="btn btn-sm btn-success">View Results
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+
+          <!-- <ol class="breadcrumb nrd-breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Library</a></li>
+            <li class="active">Data</li>
+          </ol> -->
+        </div>
+        <div class="main-content">
+          <h3>Demand Registration</h3>
+          <br>
+          <div class="table-reponsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th colspan="2">Parameter</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="2">Demand Registered this month</td>
+                  <td>34349</td>
+                </tr>
+                <tr>
+                  <td colspan="2">Work Alloted</td>
+                  <td>34349</td>
+                </tr>
+                <tr>
+                  <td colspan="2">Unmet Demand</td>
+                  <td>34349</td>
+                </tr>
+                <tr>
+                  <td rowspan="2">Unemployment Allowances</td>
+                  <td>Due for PDs</td>
+                  <td>234</td>
+                </tr>
+                <tr>
+                  <td>Amount Payable</td>
+                  <td>56767</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Physical Progress</h3>
+          <br>
+          <div class="table-reponsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th colspan="2">Parameter</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="2">Persondays: LB Approved</td>
+                  <td>34349</td>
+                </tr>
+                <tr>
+                  <td rowspan="3">PersonDays: PD Generated</td>
+                  <td>SC %</td>
+                  <td>23</td>
+                </tr>
+                <tr>
+                  <td>ST %</td>
+                  <td>67</td>
+                </tr>
+                <tr>
+                  <td>Women %</td>
+                  <td>56</td>
+                </tr>
+                <tr>
+                  <td colspan="2">HHs provided employment</td>
+                  <td>34349</td>
+                </tr>
+                <tr>
+                  <td colspan="2">Work completion rate</td>
+                  <td>34349</td>
+                </tr>
+                <tr>
+                  <td colspan="2">Total GPs</td>
+                  <td>34349</td>
+                </tr>
+                <tr>
+                  <td colspan="2">GPs with nil expenditure</td>
+                  <td>34349</td>
+                </tr>
+                <tr>
+                  <td colspan="2">GPs with no employment generation in last month</td>
+                  <td>34349</td>
+                </tr>
+                <tr>
+                  <td colspan="2">GPs with no approbed works</td>
+                  <td>34349</td>
+                </tr>
+                <tr>
+                  <td colspan="2">GPs with no ongoing works</td>
+                  <td>34349</td>
+                </tr>
+                <tr>
+                  <td colspan="2">HHS completed 100 days</td>
+                  <td>34349</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Financial Progress</h3>
+          <br>
+          <div class="table-reponsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th colspan="2">Parameter</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td rowspan="2">Total Expenditure</td>
+                  <td>Wage %</td>
+                  <td>23</td>
+                </tr>
+                <tr>
+                  <td>Admin %</td>
+                  <td>56</td>
+                </tr>
+                <tr>
+                  <td rowspan="2">Delayed Payment</td>
+                  <td>PDs Payable</td>
+                  <td>23</td>
+                </tr>
+                <tr>
+                  <td>Amount payable %</td>
+                  <td>56</td>
+                </tr>
+                <tr>
+                  <td colspan="2">Average wage per PD</td>
+                  <td>34349</td>
+                </tr>
+                <tr>
+                  <td colspan="2">Average cost per PD</td>
+                  <td>34349</td>
+                </tr>
+                <tr>
+                  <td rowspan="5">eFMS</td>
+                  <td>Total number of blocks %</td>
+                  <td>23</td>
+                </tr>
+                <tr>
+                  <td>Started in No. of blocks(wages)</td>
+                  <td>56</td>
+                </tr>
+                <tr>
+                  <td>Started in No. of blocks(Material)</td>
+                  <td>56</td>
+                </tr>
+                <tr>
+                  <td>Started in No. of blocks(Admin)</td>
+                  <td>56</td>
+                </tr>
+                <tr>
+                  <td>% of expenditure through eFMS</td>
+                  <td>56</td>
+                </tr>
+                <tr>
+                  <td rowspan="2">DBT</td>
+                  <td>% of active workers A/Cs freezed</td>
+                  <td>56</td>
+                </tr>
+                <tr>
+                  <td>% of aadhar seeding against total active worker</td>
+                  <td>56</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </section>
 
 
