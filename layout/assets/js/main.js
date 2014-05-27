@@ -45,3 +45,24 @@ var phy_chart = c3.generate({
         //width: 100 // this makes bar width 100px
     }
 });
+
+
+var chart = c3.generate({
+    bindto: '#fin_chart',
+    data: {
+
+        columns: [
+            ['Started in No. of blocks(wages)', 120],
+            ['Started in No. of blocks(Material)', 110],
+            ['Started in No. of blocks(Admin)', 110],
+        ],
+        type : 'donut'
+    },
+    donut: {
+        title: "eFMS",
+        onclick: function (d, i) { console.log(d, i); },
+        onmouseover: function (d, i) { console.log(d, i); },
+        onmouseout: function (d, i) { console.log(d, i); }
+    }
+});
+
