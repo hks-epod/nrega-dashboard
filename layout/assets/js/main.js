@@ -1,6 +1,7 @@
 //Demand Registration
 
 var chart = c3.generate({
+  bindto: '#chart',
   data: {
     x: 'x',
     columns: [
@@ -21,4 +22,26 @@ var chart = c3.generate({
       }
     }
   }
+});
+
+
+
+var phy_chart = c3.generate({
+    bindto: '#phy_chart',
+    data: {
+        columns: [
+            ['HHs provided employment', 30, 200, 100, 400, 150, 250],
+            ['Work completion rate', 130, 100, 140, 200, 150, 50],
+            ['Total GPs', 230, 320, 210, 130, 250, 150],
+            ['GPs with nil expenditure', 100, 60, 90, 250, 100, 20]
+        ],
+        type: 'bar'
+    },
+    bar: {
+        width: {
+            ratio: 0.5 // this makes bar width 50% of length between ticks
+        }
+        // or
+        //width: 100 // this makes bar width 100px
+    }
 });
