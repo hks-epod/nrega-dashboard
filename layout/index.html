@@ -8,7 +8,7 @@
   <meta name="description" content="NREGA Report Dashboard">
   <meta name="author" content="Ravi Suhag">
   <link rel="shortcut icon" href="assets/img/favicon.png">
-  <title>NREGA - Report Dashbaord</title>
+  <title>MGNREGA - Report Dashbaord</title>
   <link href="assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/css/c3.css" rel="stylesheet">
   <link href="assets/css/layout.css" rel="stylesheet">
@@ -31,7 +31,7 @@
         </button>
         <a class="navbar-brand" href="#">
           <img class="logo" src="assets/img/Emblem_of_India.png" alt="">&nbsp;&nbsp;&nbsp;
-          <strong>MNREGA</strong>
+          <strong>MGNREGA</strong>
           <small>Dashboard</small>
           <img class="brush" src="assets/img/brush_125.png" alt="">
         </a>
@@ -138,8 +138,10 @@
 
         <div class="status-bar">
           <div class="btn-group pull-right">
-            <a href="tabular.html" class="btn btn-default"><span class="glyphicon glyphicon-th"></span>&nbsp;Table View</a>
-            <a href="index.html" class="btn btn-default active"><span class="glyphicon glyphicon-stats"></span>&nbsp; Graph View</a>
+            <a href="tabular.html" class="btn btn-default">
+              <span class="glyphicon glyphicon-th"></span>&nbsp;Table View</a>
+            <a href="index.html" class="btn btn-default active">
+              <span class="glyphicon glyphicon-stats"></span>&nbsp; Graph View</a>
           </div>
 
           <button type="button" class="btn btn-sm btn-warning">Select State
@@ -154,7 +156,7 @@
           <button type="button" class="btn btn-sm btn-success">View Results
             <span class="glyphicon glyphicon-search"></span>
           </button>
-          
+
           <!-- <ol class="breadcrumb nrd-breadcrumb">
             <li><a href="#">Home</a></li>
             <li><a href="#">Library</a></li>
@@ -172,25 +174,68 @@
           <div class='chart'>
             <div id='unmet_Demand_chart'></div>
           </div>
-          
+
           <div class='chart'>
             <div id='Unemployment_allowances_chart'></div>
           </div>
 
           <br>
           <h3>Physical Progress</h3>
-          <div class="chart">
-            <div id="phy_chart"></div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="chart">
+                <div id="phy_chart"></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="chart">
+                <div id="totalgps_chart"></div>
+              </div>
+            </div>
           </div>
-          
+
+
           <div class="chart">
             <div id="persondaysmonthly_chart"></div>
           </div>
+          <div class="chart">
+            <div id="persondayscaste_chart"></div>
+          </div>
+          <div class="chart">
+            <div id="HHprovidedemployment_chart"></div>
+          </div>
+          <div class="chart">
+            <div id="workcompletion_chart"></div>
+          </div>
+          <div class="chart">
+            <div id="hhscompleted100days_chart"></div>
+          </div>
+
 
 
           <h3>Financial Progress</h3>
           <div class="chart">
-            <div id="fin_chart"></div>
+            <div id="wage_chart"></div>
+          </div>
+          
+          <div class="chart">
+            <div id="delayedpayment_chart"></div>
+          </div>
+
+          <div class="chart">
+            <div id="wageperPD_chart"></div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="chart">
+                <div id="fin_chart"></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div id="DBT_chart"></div>
+            </div>
           </div>
 
         </div>
