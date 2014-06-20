@@ -21,6 +21,75 @@ var chart = c3.generate({
   }
 });
 
+var work_alloted_chart = c3.generate({
+  bindto: '#work_alloted_chart',
+  data: {
+    x: 'x',
+    columns: [
+            ['x', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+            ['Work Alloted', 30, 200, 100, 400, 150, 250,30, 200, 100, 400, 150, 250]
+        ],
+    // type: 'spline'
+  },
+  axis: {
+    x: {
+      type: 'timeseries',
+      tick: {
+        format: '%m'
+      }
+    }
+  }
+});
+
+var unmet_Demand_chart = c3.generate({
+  bindto: '#unmet_Demand_chart',
+  data: {
+    x: 'x',
+    columns: [
+            ['x', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+            ['Unmet Demand', 30, 200, 100, 400, 150, 250,30, 200, 100, 400, 150, 250]
+        ],
+    // type: 'spline'
+  },
+  axis: {
+    x: {
+      type: 'timeseries',
+      tick: {
+        format: '%m'
+      }
+    }
+  }
+});
+
+var Unemployment_allowances_chart= c3.generate({
+  bindto: '#unmet_Demand_chart',
+  data: {
+    x: 'x',
+    columns: [
+            ['x', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+            ['Due for PDs', 30, 200, 100, 400, 150, 250,30, 200, 100, 400, 150, 250],
+            ['Amount payable', 130, 340, 200, 500, 250, 350, 130, 340, 200, 500, 250, 350],
+
+        ],
+    type: 'bar',
+    types: {
+            'Due for PDs': 'line',
+            'Amount payable': 'bar',
+        },
+  },
+  axis: {
+    x: {
+      type: 'timeseries',
+      tick: {
+        format: '%m'
+      }
+    }
+  }
+});
+
+
+
+
 
 
 var phy_chart = c3.generate({
