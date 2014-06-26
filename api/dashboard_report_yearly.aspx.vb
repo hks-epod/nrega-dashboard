@@ -17,11 +17,22 @@ Partial Class nrega_reportdashboard_api_dashboard_report_yearly
     Dim myreader, myreader1 As SqlDataReader
     Public str, yr, cond, val_code, val_code_p, cond_p, state_code As String
     Dim conobj As New ConnectNREGA
+    Dim dsOrderRel, dsOrderRel1, dsOrderRel2, dsOrderRel3 As DataRelation
+    Private _rows As Object
+
+    Private Property rows(ByVal p1 As String, ByVal p2 As Integer) As Object
+        Get
+            Return _rows
+        End Get
+        Set(ByVal value As Object)
+            _rows = value
+        End Set
+    End Property
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Request.QueryString("fin_year") = "" Then
-            Response.Write("Enter fin Year")
+            Response.Write("Enter Fin Year")
             Response.End()
 
         End If
@@ -54,6 +65,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_yearly
 
     End Sub
     Public Function Demand_registered_yearly(ByVal state_code As String, ByVal fin_year As String) As String
+
         yr = Mid(fin_year, 3, 2) & Mid(fin_year, 8, 2)
         Dim dt As New DataTable()
         Dim ds As New DataSet()
@@ -63,17 +75,17 @@ Partial Class nrega_reportdashboard_api_dashboard_report_yearly
 
         '***********************************Demand_registered
 
-        cmd = New SqlCommand("select p." & val_code & ",isnull(SUM(isnull(reghh,0)),0)demand_register  from panchayats_rep" & yr & " p  left outer join demregister_panch" & yr & " pp on p.panchayat_code=pp.panchayat_code where p." & cond & " group by p." & val_code & "", con)
+        cmd = New SqlCommand("select p." & val_code & " code,isnull(SUM(isnull(reghh,0)),0)demand_register  from panchayats_rep" & yr & " p  left outer join demregister_panch" & yr & " pp on p.panchayat_code=pp.panchayat_code where p." & cond & " group by p." & val_code & "", con)
         da = New SqlDataAdapter(cmd)
-        da.Fill(ds, "dt")
+        da.Fill(ds, "dt0")
         cmd.Dispose()
 
 
         '***********************************Labour_Budget
         If Request.QueryString("type") = "b" Then
-            cmd = New SqlCommand("select " & val_code & ",isnull(SUM(isnull(manday_prj_curryear,0)),0)labour_budget from labour_budget_GP_trans" & yr & " where " & cond & " and month_code='03' group by " & val_code & "", con)
+            cmd = New SqlCommand("select " & val_code & " code,isnull(SUM(isnull(manday_prj_curryear,0)),0)labour_budget from labour_budget_GP_trans" & yr & " where " & cond & " and month_code='03' group by " & val_code & "", con)
         Else
-            cmd = New SqlCommand("select " & val_code & ",isnull(SUM(isnull(manday_prj_curryear,0)),0)labour_budget from approved_labour_budget_GP_trans" & yr & " where " & cond & "  and month_code='03' group by " & val_code & "", con)
+            cmd = New SqlCommand("select " & val_code & " code,isnull(SUM(isnull(manday_prj_curryear,0)),0)labour_budget from approved_labour_budget_GP_trans" & yr & " where " & cond & "  and month_code='03' group by " & val_code & "", con)
         End If
 
         da = New SqlDataAdapter(cmd)
@@ -82,7 +94,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_yearly
 
         '***********************************Work_Allotted
 
-        cmd = New SqlCommand("select p." & val_code & ",isnull(SUM(isnull(eproh,0)),0)work_alloted  from panchayats_rep" & yr & " p  left outer join demregister_panch" & yr & " pp on p.panchayat_code=pp.panchayat_code where p." & cond & " group by p." & val_code & "", con)
+        cmd = New SqlCommand("select p." & val_code & " code,isnull(SUM(isnull(eproh,0)),0)work_alloted  from panchayats_rep" & yr & " p  left outer join demregister_panch" & yr & " pp on p.panchayat_code=pp.panchayat_code where p." & cond & " group by p." & val_code & "", con)
         da = New SqlDataAdapter(cmd)
         da.Fill(ds, "dt2")
         cmd.Dispose()
@@ -90,7 +102,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_yearly
         '***********************************Unemployement_Allowance Duedays/DueAmount
 
         str = ""
-        str = "select p." & val_code & ", "
+        str = "select p." & val_code & " code, "
         str = str & " isnull(sum(isnull(dueamt,0)),0) payable_amount,isnull(sum(isnull(duedays,0)),0) payable_days  from panchayats_rep" & yr & " p  left outer join nrega_unemp_allow" & yr & " pp on p.panchayat_code=pp.panchayat_code"
         str = str & "   where  p." & cond & " and type='unemp'"
         str = str & " Group by p." & val_code & ""
@@ -102,7 +114,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_yearly
         '***********************************Unemployement_Allowance Approved_days/Rejected_days
 
         str = ""
-        str = "select p." & val_code & ", "
+        str = "select p." & val_code & " code, "
         str = str & " isnull(sum(case when bdo_po_approval='Y' then isnull(eligible_unemployement_days,0) end ),0)approved_days,  "
         str = str & " isnull(sum(case when bdo_po_approval='N' then isnull(eligible_unemployement_days,0) end ),0)rejected_days "
         str = str & "  from panchayats_rep" & yr & " p  left outer join approval_unemployment pp on p.panchayat_code=pp.panchayat_code"
@@ -115,67 +127,23 @@ Partial Class nrega_reportdashboard_api_dashboard_report_yearly
 
         con.Close()
 
-        '******************************************//////////////////////////////////////////////////////////////////////*********************************************************************
+        ''******************************************//////////////////////////////////////////////////////////////////////*********************************************************************
         Dim serializer As New System.Web.Script.Serialization.JavaScriptSerializer()
         Dim rows As New List(Of Dictionary(Of String, Object))()
 
-        '**************************************************Demand_registered
+        Dim data As New Dictionary(Of String, Object)
+        For Each table As DataTable In ds.Tables
+            For Each dr1 As DataRow In table.Rows
+                For Each col1 As DataColumn In table.Columns
 
-        Dim row As Dictionary(Of String, Object)
-        For Each dr As DataRow In ds.Tables("dt").Rows
-            row = New Dictionary(Of String, Object)()
-            For Each col As DataColumn In ds.Tables("dt").Columns
-                row.Add(col.ColumnName, dr(col))
+                    If Not data.ContainsKey(col1.ColumnName) Then
+                        data.Add(col1.ColumnName, dr1(col1))
+                    End If
+
+                Next
             Next
-            rows.Add(row)
         Next
-
-        '***************************************Labour_Budget
-
-        Dim row1 As Dictionary(Of String, Object)
-        For Each dr1 As DataRow In ds.Tables("dt1").Rows
-            row1 = New Dictionary(Of String, Object)()
-            For Each col1 As DataColumn In ds.Tables("dt1").Columns
-                row1.Add(col1.ColumnName, dr1(col1))
-            Next
-            rows.Add(row1)
-        Next
-
-        '***************************************Work_Allotted
-
-        Dim row2 As Dictionary(Of String, Object)
-        For Each dr2 As DataRow In ds.Tables("dt2").Rows
-            row2 = New Dictionary(Of String, Object)()
-            For Each col2 As DataColumn In ds.Tables("dt2").Columns
-                row2.Add(col2.ColumnName, dr2(col2))
-            Next
-            rows.Add(row2)
-        Next
-
-        '***************************************Unemployement_Allowance Duedays/DueAmount
-
-        Dim row3 As Dictionary(Of String, Object)
-        For Each dr3 As DataRow In ds.Tables("dt3").Rows
-            row3 = New Dictionary(Of String, Object)()
-            For Each col3 As DataColumn In ds.Tables("dt3").Columns
-                row3.Add(col3.ColumnName, dr3(col3))
-            Next
-            rows.Add(row3)
-        Next
-
-        '***************************************Unemployement_Allowance Approved_days/Rejected_days
-
-        Dim row4 As Dictionary(Of String, Object)
-        For Each dr4 As DataRow In ds.Tables("dt4").Rows
-            row4 = New Dictionary(Of String, Object)()
-            For Each col4 As DataColumn In ds.Tables("dt4").Columns
-                row4.Add(col4.ColumnName, dr4(col4))
-            Next
-            rows.Add(row4)
-        Next
-
-        '****************************************
-
+        rows.Add(data)
 
         Response.Write(serializer.Serialize(rows))
         Return serializer.Serialize(rows)

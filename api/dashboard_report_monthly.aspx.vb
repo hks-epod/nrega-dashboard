@@ -121,43 +121,23 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
 
         con.Close()
         '******************************************//////////////////////////////////////////////////////////////////////*********************************************************************
+        ''******************************************//////////////////////////////////////////////////////////////////////*********************************************************************
         Dim serializer As New System.Web.Script.Serialization.JavaScriptSerializer()
         Dim rows As New List(Of Dictionary(Of String, Object))()
 
-        '**************************************************Demand_registered
+        Dim data As New Dictionary(Of String, Object)
+        For Each table As DataTable In ds.Tables
+            For Each dr1 As DataRow In table.Rows
+                For Each col1 As DataColumn In table.Columns
 
-        Dim row As Dictionary(Of String, Object)
-        For Each dr As DataRow In ds.Tables("dt").Rows
-            row = New Dictionary(Of String, Object)()
-            For Each col As DataColumn In ds.Tables("dt").Columns
-                row.Add(col.ColumnName, dr(col))
+                    If Not data.ContainsKey(col1.ColumnName) Then
+                        data.Add(col1.ColumnName, dr1(col1))
+                    End If
+
+                Next
             Next
-            rows.Add(row)
         Next
-
-        '***************************************Labour_Budget
-
-        Dim row1 As Dictionary(Of String, Object)
-        For Each dr1 As DataRow In ds.Tables("dt1").Rows
-            row1 = New Dictionary(Of String, Object)()
-            For Each col1 As DataColumn In ds.Tables("dt1").Columns
-                row1.Add(col1.ColumnName, dr1(col1))
-            Next
-            rows.Add(row1)
-        Next
-
-        '***************************************Work_Allotted
-
-        Dim row2 As Dictionary(Of String, Object)
-        For Each dr2 As DataRow In ds.Tables("dt2").Rows
-            row2 = New Dictionary(Of String, Object)()
-            For Each col2 As DataColumn In ds.Tables("dt2").Columns
-                row2.Add(col2.ColumnName, dr2(col2))
-            Next
-            rows.Add(row2)
-        Next
-
-        '****************************************
+        rows.Add(data)
 
         Response.Write(serializer.Serialize(rows))
         Return serializer.Serialize(rows)
