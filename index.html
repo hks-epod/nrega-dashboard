@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="Nregadash">
 
 <head>
   <meta charset="utf-8">
@@ -49,13 +49,16 @@
     </div>
   </div>
 
+  <ng-view></ng-view>
 
 
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
-  <script src="assets/js/d3.v3.min.js"></script>
-  <script src="assets/js/c3.min.js"></script>
-  <script src="assets/js/main.js"></script>
+
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/angular-route/angular-route.min.js"></script>
+  <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
+  <script src="modules/app.js"></script>
+  <script src="modules/home/homeCtrl.js"></script>
+
 </body>
 
 </html>
