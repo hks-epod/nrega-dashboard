@@ -90,16 +90,16 @@
       <div class="status-bar btselector warning">
         <div class="btn-group pull-right">
           <a href="tabular.html" class="btn btn-default">
-            <span class="glyphicon glyphicon-th"></span>&nbsp;Table View</a>
+            <span class="glyphicon glyphicon-th"></span>&nbsp;</a>
           <a href="index.html" class="btn btn-default active">
-            <span class="glyphicon glyphicon-stats"></span>&nbsp; Graph View</a>
+            <span class="glyphicon glyphicon-stats"></span>&nbsp;</a>
         </div>
         <selectyear></selectyear>
         <selectstate></selectstate>
         <selectdistrict></selectdistrict>
-        <!-- <selectblock></selectblock>
-        <selectgp></selectgp> -->
-        <button type="button" class="btn btn-sm btn-success">View Results
+        <selectblock></selectblock>
+       <!--  <selectgp></selectgp> -->
+        <button ng-click="viewResults()" type="button" class="btn btn-sm btn-success">View Results
           <span class="glyphicon glyphicon-search"></span>
         </button>
 
