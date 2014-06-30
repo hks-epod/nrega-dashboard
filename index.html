@@ -10,8 +10,10 @@
   <link rel="shortcut icon" href="assets/img/favicon.png">
   <title>MGNREGA - Report Dashbaord</title>
   <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/css/c3.css" rel="stylesheet">
+  <link rel="stylesheet" href="lib/select2/select2.css">
+  <link rel="stylesheet" href="lib/select2/select2-bootstrap.css">
   <link href="assets/css/layout.css" rel="stylesheet">
+
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -52,13 +54,19 @@
   <ng-view></ng-view>
 
 
+  <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
 
   <script src="lib/angular/angular.min.js"></script>
   <script src="lib/angular-route/angular-route.min.js"></script>
   <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
+  <script src="lib/select2/select2.min.js"></script>
+  <script src="lib/angular-ui-select2/select2.js"></script>
+
+
   <script src="modules/app.js"></script>
-  <script src="modules/home/homeCtrl.js"></script>
-  <script src="modules/home/homeService.js"></script>
+  <script src="modules/reportdash/reportdashCtrl.js"></script>
+  <script src="modules/reportdash/reportdashService.js"></script>
+  <script src="modules/reportdash/selectors/selectorDirective.js"></script>
 
 </body>
 

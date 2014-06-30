@@ -1,4 +1,4 @@
-<section class="sub-nav" ng-controller="homeCtrl">
+<section class="sub-nav" ng-controller="reportdashCtrl">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
@@ -86,26 +86,22 @@
 
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-      <div class="status-bar">
+      <div class="status-bar btselector warning">
         <div class="btn-group pull-right">
           <a href="tabular.html" class="btn btn-default">
             <span class="glyphicon glyphicon-th"></span>&nbsp;Table View</a>
           <a href="index.html" class="btn btn-default active">
             <span class="glyphicon glyphicon-stats"></span>&nbsp; Graph View</a>
         </div>
-
-        <button type="button" class="btn btn-sm btn-warning">Select State
-          <span class="glyphicon glyphicon-chevron-down"></span>
-        </button>
-        <button type="button" class="btn btn-sm btn-warning">Select District
-          <span class="glyphicon glyphicon-chevron-down"></span>
-        </button>
-        <button type="button" class="btn btn-sm btn-warning">Select Block
-          <span class="glyphicon glyphicon-chevron-down"></span>
-        </button>
+        <selectyear></selectyear>
+        <selectstate></selectstate>
+        <selectdistrict></selectdistrict>
+        <selectblock></selectblock>
+        <selectgp></selectgp>
         <button type="button" class="btn btn-sm btn-success">View Results
           <span class="glyphicon glyphicon-search"></span>
         </button>
+
       </div>
 
 
@@ -151,13 +147,11 @@
 
 
 
-        {{yearlydata}}
 
 
 
 
 
 
-
-      </div>
+    </div>
 </section>

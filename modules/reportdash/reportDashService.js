@@ -1,4 +1,4 @@
-home.factory('YearlyReport', ['$http',
+reportdash.factory('YearlyReport', ['$http',
   function($http) {
     var YearlyReport = function(data) {
       angular.extend(this, data);

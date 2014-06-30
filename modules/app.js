@@ -1,4 +1,4 @@
-var nregadash = angular.module('Nregadash', ['ngRoute', 'home']);
+var nregadash = angular.module('Nregadash', ['ngRoute', 'ReportDash','ui.select2']);
 
 nregadash.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
@@ -6,8 +6,8 @@ nregadash.config(['$routeProvider', '$locationProvider',
 
     $routeProvider.
     when('/', {
-      templateUrl: 'modules/home/home.html',
-      controller: 'homeCtrl'
+      templateUrl: 'modules/reportdash/reportdashView.html',
+      controller: 'reportdashCtrl'
     }).
     otherwise({
       redirectTo: '/'
