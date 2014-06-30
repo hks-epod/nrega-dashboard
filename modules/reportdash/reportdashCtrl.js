@@ -11,10 +11,70 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       $scope.$watch('selectedState', function() {
         fetchDistricts($scope.selectedState);
       });
+      $scope.$watch('selectedDistrict', function() {
+        fetchBlocks($scope.selectedState, $scope.selectedDistrict);
+      });
+
     });
 
+    function fetchDistricts(selectedState) {
+      $scope.districts = [];
+      $scope.districts = $scope.regions[1][selectedState];
+    };
+
+    function fetchBlocks(selectedState, selectedDistrict) {
+      $scope.blocks = [];
+      if (selectedState) $scope.blocks = $scope.regions[2][selectedState][selectedDistrict];
+    };
 
 
+    $scope.viewResults = function() {
+      codetype = buildCode();
+      console.log(codetype);
+
+    };
+
+    function buildCode() {
+
+      // Only State
+      if ($scope.selectedState && !$scope.selectedDistrict && !$scope.selectedBlock) {
+        return {
+          code: leftPad($scope.selectedState),
+          type: 'S'
+        };
+      };
+      // State+District
+      if ($scope.selectedState && $scope.selectedDistrict && !$scope.selectedBlock) {
+        return {
+          code: leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2),
+          type: 'D'
+        };
+      };
+      // State+District+Blocks
+      if ($scope.selectedState && $scope.selectedDistrict && $scope.selectedBlock) {
+        return {
+          code: leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2)+leftPad($scope.selectedBlock, 3),
+          type: 'B'
+        };
+      };
+
+
+
+
+    };
+
+
+    // converting numbers to a generic digit
+    // leftPad(1, 2)  ---> 01
+    // leftPad(10, 3) ---> 010
+
+    function leftPad(number, targetLength) {
+      var output = number + '';
+      while (output.length < targetLength) {
+        output = '0' + output;
+      }
+      return output;
+    }
 
 
 
@@ -28,24 +88,6 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
 
 
 
-
-    function fetchDistricts(selectedState) {
-      $scope.districts = [];
-      console.log(selectedState);
-      $scope.districts = $scope.regions[1][selectedState];
-    };
-
-
-    // converting numbers to a generic digit
-    		// leftPad(1, 2)  ---> 01
-    		// leftPad(10, 3) ---> 010
-    function leftPad(number, targetLength) {
-      var output = number + '';
-      while (output.length < targetLength) {
-        output = '0' + output;
-      }
-      return output;
-    }
 
 
 
