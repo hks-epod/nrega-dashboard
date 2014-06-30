@@ -1,96 +1,51 @@
 var reportdash = angular.module('ReportDash', []);
 
-reportdash.controller('reportdashCtrl', ['$scope', '$rootScope','YearlyReport',
-  function($scope, $rootScope, YearlyReport) {
-    
-  	
-  	// Select Year
-    $scope.yearselector = {
-      minimumInputLength: 1,
-      placeholder: 'Select Year',
-      maximumSelectionSize: 1,
-      query: function(query) {
- 
-      },
-      formatResult: function(item) {
-        return '<div>' +
-          '<span class="search-results-name">' + item.text + '</span >'+
-          '</div>';
-      }
-    };
-
-  	// Select State
-    $scope.stateselector = {
-      minimumInputLength: 1,
-      placeholder: 'Select State',
-      maximumSelectionSize: 1,
-      query: function(query) {
- 
-      },
-      formatResult: function(item) {
-        return '<div>' +
-          '<span class="search-results-name">' + item.text + '</span >'+
-          '</div>';
-      }
-    };
-
-    // Select District
-    $scope.districtselector = {
-      minimumInputLength: 1,
-      placeholder: 'Select District',
-      maximumSelectionSize: 1,
-      query: function(query) {
- 
-      },
-      formatResult: function(item) {
-        return '<div>' +
-          '<span class="search-results-name">' + item.text + '</span >'+
-          '</div>';
-      }
-    };
-
-    // Select Block
-    $scope.blockselector = {
-      minimumInputLength: 1,
-      placeholder: 'Select Block',
-      maximumSelectionSize: 1,
-      query: function(query) {
- 
-      },
-      formatResult: function(item) {
-        return '<div>' +
-          '<span class="search-results-name">' + item.text + '</span >'+
-          '</div>';
-      }
-    };
-
-    // Select GP
-    $scope.gpselector = {
-      minimumInputLength: 1,
-      placeholder: 'Select GP',
-      maximumSelectionSize: 1,
-      query: function(query) {
- 
-      },
-      formatResult: function(item) {
-        return '<div>' +
-          '<span class="search-results-name">' + item.text + '</span >'+
-          '</div>';
-      }
-    };
+reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport', 'Regions',
+  function($scope, $rootScope, YearlyReport, Regions) {
 
 
+    $scope.years = ['2012-13', '2013-14', '2014-15'];
 
-
-
-
-
-
-
-    YearlyReport.fetch().then(function(response){
-      $scope.yearlydata= response;
+    Regions.fetch().then(function(data) {
+      $scope.regions = data;
+      $scope.$watch('selectedState', function() {
+        fetchDistricts($scope.selectedState);
+      });
     });
 
+
+
+
+
+
+
+
+
+    YearlyReport.fetch().then(function(response) {
+      $scope.yearlydata = response;
+    });
+
+
+
+
+
+    function fetchDistricts(selectedState) {
+      $scope.districts = [];
+      console.log(selectedState);
+      $scope.districts = $scope.regions[1][selectedState];
+    };
+
+
+    // converting numbers to a generic digit
+    		// leftPad(1, 2)  ---> 01
+    		// leftPad(10, 3) ---> 010
+    function leftPad(number, targetLength) {
+      var output = number + '';
+      while (output.length < targetLength) {
+        output = '0' + output;
+      }
+      return output;
+    }
 
 
 
