@@ -3,7 +3,6 @@ var reportdash = angular.module('ReportDash', []);
 reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport', 'Regions',
   function($scope, $rootScope, YearlyReport, Regions) {
 
-
     $scope.years = ['2012-13', '2013-14', '2014-15'];
 
     Regions.fetch().then(function(data) {
@@ -14,7 +13,6 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       $scope.$watch('selectedDistrict', function() {
         fetchBlocks($scope.selectedState, $scope.selectedDistrict);
       });
-
     });
 
     function fetchDistricts(selectedState) {
@@ -27,15 +25,16 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       if (selectedState) $scope.blocks = $scope.regions[2][selectedState][selectedDistrict];
     };
 
-
     $scope.viewResults = function() {
       codetype = buildCode();
       console.log(codetype);
+      YearlyReport.fetch().then(function(response) {
+        $scope.yearlydata = response;
+      });
 
     };
 
     function buildCode() {
-
       // Only State
       if ($scope.selectedState && !$scope.selectedDistrict && !$scope.selectedBlock) {
         return {
@@ -53,20 +52,14 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       // State+District+Blocks
       if ($scope.selectedState && $scope.selectedDistrict && $scope.selectedBlock) {
         return {
-          code: leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2)+leftPad($scope.selectedBlock, 3),
+          code: leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2) + leftPad($scope.selectedBlock, 3),
           type: 'B'
         };
       };
-
-
-
-
     };
 
 
-    // converting numbers to a generic digit
-    // leftPad(1, 2)  ---> 01
-    // leftPad(10, 3) ---> 010
+    // converting numbers to a generic digit  : leftPad(1, 2)  ---> 01
 
     function leftPad(number, targetLength) {
       var output = number + '';
@@ -74,23 +67,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         output = '0' + output;
       }
       return output;
-    }
-
-
-
-
-
-
-    YearlyReport.fetch().then(function(response) {
-      $scope.yearlydata = response;
-    });
-
-
-
-
-
-
-
+    };
 
 
   }
