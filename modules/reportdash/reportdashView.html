@@ -30,58 +30,17 @@
 <section class="container-fluid">
   <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
-      <div class="panel-group nrd-accordion sidebar-wrap" id="nrd-accordion">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a data-toggle="collapse" data-parent="#nrd-accordion" href="#collapseOne">
-                <span class=" glyphicon glyphicon-record"></span>&nbsp;&nbsp;Reports
-              </a>
-            </h4>
-          </div>
-          <div id="collapseOne" class="panel-collapse collapse in">
-            <div class="panel-body">
-              <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">Demand Registration</a>
-                </li>
-                <li><a href="#">Physical Progress</a>
-                </li>
-                <li><a href="#">Financial Progress</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a data-toggle="collapse" data-parent="#nrd-accordion" href="#collapseTwo">
-                <span class="glyphicon glyphicon-record"></span>&nbsp;&nbsp;Rankings
-              </a>
-            </h4>
-          </div>
-          <div id="collapseTwo" class="panel-collapse collapse">
-            <div class="panel-body">
-              sss
-            </div>
-          </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a data-toggle="collapse" data-parent="#nrd-accordion" href="#collapseThree">
-                <span class="glyphicon glyphicon-record"></span>&nbsp;&nbsp;SMS Service
-              </a>
-            </h4>
-          </div>
-          <div id="collapseThree" class="panel-collapse collapse">
-            <div class="panel-body">
-              dfdf
-            </div>
-          </div>
-        </div>
+      <div class="sidebar-header">
+      <span class=" glyphicon glyphicon-record"></span>&nbsp;&nbsp;&nbsp;FILTERS
       </div>
-
+      <selectyear></selectyear>
+      <selectstate></selectstate>
+      <selectdistrict></selectdistrict>
+      <selectblock></selectblock>
+      <!--  <selectgp></selectgp> -->
+      <button ng-click="viewResults()" type="button" class="btn btn-block btn-success">View Results
+        <span class="glyphicon glyphicon-search"></span>
+      </button>
 
     </div>
 
@@ -94,14 +53,7 @@
           <a href="index.html" class="btn btn-default active">
             <span class="glyphicon glyphicon-stats"></span>&nbsp;</a>
         </div>
-        <selectyear></selectyear>
-        <selectstate></selectstate>
-        <selectdistrict></selectdistrict>
-        <selectblock></selectblock>
-       <!--  <selectgp></selectgp> -->
-        <button ng-click="viewResults()" type="button" class="btn btn-sm btn-success">View Results
-          <span class="glyphicon glyphicon-search"></span>
-        </button>
+
 
       </div>
 
