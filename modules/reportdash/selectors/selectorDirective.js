@@ -57,7 +57,7 @@ reportdash.directive('selectblock', function() {
 reportdash.directive('selectgp', function() {
   return {
     restrict: 'AE',
-    template: '<input id="rd-gp" class="" ui-select2="gpselector" ng-model="selectedGp">',
+    template: '<select class="selector" ui-select2 ng-model="selectedGP" data-placeholder="Select GP"><option value=""></option><option ng-repeat="(key, value) in gps" value="{{key}}">{{value}}</option></select>',
     replace: true,
     controller: ['$rootScope', '$scope',
       function($rootScope, $scope) {
