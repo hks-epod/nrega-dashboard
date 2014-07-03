@@ -2,7 +2,6 @@ var reportdash = angular.module('ReportDash', []);
 
 reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport', 'Regions', 'GPRegions',
   function($scope, $rootScope, YearlyReport, Regions, GPRegions) {
-
     $scope.isTable = false;
     $scope.switchview = function() {
       $scope.isTable = !$scope.isTable;
@@ -40,11 +39,11 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
     function fetchGPs(selectedBlock) {
       $scope.gps = [];
       if (selectedBlock) {
-        GPRegions.fetch($scope.selectedBlock,$scope.selectedYear).then(function(response) {
-            $scope.gps =response[0];
+        GPRegions.fetch($scope.selectedBlock, $scope.selectedYear).then(function(response) {
+          $scope.gps = response[0];
         });
       };
-      
+
     };
 
     function buildCode() {
@@ -76,7 +75,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       if ($scope.selectedState && $scope.selectedDistrict && $scope.selectedBlock && $scope.selectedGP) {
         return {
           code_type: 'panchayat',
-          code: leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2) + leftPad($scope.selectedBlock, 3)+leftPad($scope.selectedGP, 10),
+          code: leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2) + leftPad($scope.selectedBlock, 3) + leftPad($scope.selectedGP, 10),
           type: 'p'
         };
       };
@@ -100,7 +99,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       data: {
         x: 'x',
         columns: [
-                  ['x', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+                  ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
                   ['Demand Registered', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
                   ['Labour Budget', 130, 340, 200, 500, 250, 350, 130, 340, 200, 500, 250, 350],
               ],
@@ -109,10 +108,10 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: {
           type: 'timeseries',
           tick: {
-            format: '%m'
+            format: '%B'
           }
         }
-      }
+      },
     };
 
     $scope.work_alloted_chart = {
@@ -120,7 +119,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       data: {
         x: 'x',
         columns: [
-                  ['x', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+                  ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
                   ['Demand Registered', 30, 20, 10, 40, 150, 250, 30, 200, 100, 400, 150, 250],
                   ['Labour Budget', 130, 340, 200, 500, 250, 350, 130, 340, 200, 500, 250, 350],
               ],
@@ -140,7 +139,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       data: {
         x: 'x',
         columns: [
-            ['x', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+            ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
             ['Unmet Demand', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250]
         ],
         // type: 'spline'
@@ -160,7 +159,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       data: {
         x: 'x',
         columns: [
-            ['x', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+            ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
             ['Unemployment Allowances - Due for PDs', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
             ['Amount payable', 130, 340, 200, 500, 250, 350, 130, 340, 200, 500, 250, 350],
 
@@ -230,7 +229,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       data: {
         x: 'x',
         columns: [
-            ['x', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+            ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
             ['Persondays : LB Approved Monthly', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250]
         ],
         // type: 'spline'
@@ -250,7 +249,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       data: {
         x: 'x',
         columns: [
-            ['x', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+            ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
             ['Persondays:PD Generated for SC', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
             ['ST', 130, 340, 200, 500, 250, 350, 130, 340, 200, 500, 250, 350],
             ['Women', 110, 300, 120, 300, 350, 250, 100, 240, 230, 300, 230, 310],
@@ -274,7 +273,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       data: {
         x: 'x',
         columns: [
-            ['x', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+            ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
             ['HH provided employment', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250]
         ],
         // type: 'spline'
@@ -294,7 +293,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       data: {
         x: 'x',
         columns: [
-            ['x', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+            ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
             ['Work Completion Rate', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250]
         ],
         // type: 'spline'
@@ -316,7 +315,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       data: {
         x: 'x',
         columns: [
-            ['x', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+            ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
             ['HHs completed 100 days', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250]
         ],
         // type: 'spline'
@@ -337,7 +336,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       data: {
         x: 'x',
         columns: [
-            ['x', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+            ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
             ['Total', 130, 340, 200, 500, 250, 350, 130, 340, 200, 500, 250, 350],
             ['Wage %', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
 
@@ -364,7 +363,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       data: {
         x: 'x',
         columns: [
-            ['x', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+            ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
             ['Delayed payment :PDs Payable', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
             ['Amount payable', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
         ],
@@ -390,7 +389,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       data: {
         x: 'x',
         columns: [
-            ['x', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+            ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
             ['Average wage per PD', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
             ['Cost per PD', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
         ],
