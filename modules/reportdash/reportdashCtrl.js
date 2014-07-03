@@ -3,13 +3,11 @@ var reportdash = angular.module('ReportDash', []);
 reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport', 'Regions',
   function($scope, $rootScope, YearlyReport, Regions) {
 
-
-
-    $scope.years = ['2012-13', '2013-14', '2014-15'];
-
     ///////////////////////
     //  Region Handelers //
     ///////////////////////
+    
+    $scope.years = ['2012-13', '2013-14', '2014-15'];
     Regions.fetch().then(function(data) {
       $scope.regions = data;
       $scope.$watch('selectedState', function() {
