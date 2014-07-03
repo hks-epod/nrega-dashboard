@@ -59,17 +59,18 @@
           {{regions[2][selectedState][selectedDistrict][selectedBlock]}}
         </span>
         <div class="btn-group pull-right">
-          <a href="tabular.html" class="btn btn-default">
-            <span class="glyphicon glyphicon-th"></span>&nbsp;</a>
-          <a href="index.html" class="btn btn-default active">
-            <span class="glyphicon glyphicon-stats"></span>&nbsp;</a>
+
+          <button type="button" class="btn btn-default" ng-click="switchview()" ng-class="{'active disabled': isTable==true}"><span class="glyphicon glyphicon-th"></span>&nbsp;</a></button>
+          <button type="button" class="btn btn-default" ng-click="switchview()" ng-class="{'active disabled': isTable==false}"><span class="glyphicon glyphicon-stats"></span>&nbsp;</a></button>
+
+            
         </div>
         <div class="clearfix"></div>
       </div>
 
       <div class="main-content">
-        <div ng-if="false" ng-include="'modules/reportdash/tabular/tableview.html'"></div>
-        <div ng-if="true" ng-include="'modules/reportdash/viz/viz.html'"></div>
+        <div ng-show="isTable" ng-include="'modules/reportdash/tabular/tableview.html'"></div>
+        <div ng-hide="isTable" ng-include="'modules/reportdash/viz/viz.html'"></div>
       </div>
 
 

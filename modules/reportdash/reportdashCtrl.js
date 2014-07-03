@@ -3,6 +3,12 @@ var reportdash = angular.module('ReportDash', []);
 reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport', 'Regions',
   function($scope, $rootScope, YearlyReport, Regions) {
 
+    $scope.isTable = false;
+    $scope.switchview = function() {
+      $scope.isTable = !$scope.isTable;
+    };
+
+
     ///////////////////////
     //  Region Handelers //
     ///////////////////////
@@ -281,7 +287,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
 
 
 
-     $scope.hhscompleted100days_chart = {
+    $scope.hhscompleted100days_chart = {
       bindto: '#hhscompleted100days_chart',
       data: {
         x: 'x',
@@ -302,7 +308,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
     };
 
 
-     $scope.wage_chart = {
+    $scope.wage_chart = {
       bindto: '#wage_chart',
       data: {
         x: 'x',
@@ -329,7 +335,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
     };
 
 
-     $scope.delayedpayment_chart = {
+    $scope.delayedpayment_chart = {
       bindto: '#delayedpayment_chart',
       data: {
         x: 'x',
@@ -355,7 +361,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
     };
 
 
-     $scope.wageperPD_chart = {
+    $scope.wageperPD_chart = {
       bindto: '#wageperPD_chart',
       data: {
         x: 'x',
@@ -377,7 +383,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
     };
 
 
-     $scope.efms_chart = {
+    $scope.efms_chart = {
       bindto: '#efms_chart',
       data: {
 
@@ -387,22 +393,10 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
             ['Started in No. of blocks(Admin)', 20],
         ],
         type: 'donut'
-      },
-      donut: {
-        title: "eFMS",
-        onclick: function(d, i) {
-          console.log(d, i);
-        },
-        onmouseover: function(d, i) {
-          console.log(d, i);
-        },
-        onmouseout: function(d, i) {
-          console.log(d, i);
-        }
       }
     };
 
-     $scope.DBT_chart = {
+    $scope.DBT_chart = {
       bindto: '#DBT_chart',
       data: {
 
@@ -411,18 +405,6 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
             ['Aadhar seeding against total active worker', 30],
         ],
         type: 'donut'
-      },
-      donut: {
-        title: "DBT",
-        onclick: function(d, i) {
-          console.log(d, i);
-        },
-        onmouseover: function(d, i) {
-          console.log(d, i);
-        },
-        onmouseout: function(d, i) {
-          console.log(d, i);
-        }
       }
     };
 
