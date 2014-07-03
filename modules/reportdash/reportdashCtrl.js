@@ -40,7 +40,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         return {
           code_type : 'state',
           code: leftPad($scope.selectedState),
-          type: 'S'
+          type: 's'
         };
       };
       // State + District
@@ -48,7 +48,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         return {
           code_type : 'district',
           code: leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2),
-          type: 'D'
+          type: 'd'
         };
       };
       // State + District + Blocks
@@ -56,7 +56,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         return {
           code_type : 'block',
           code: leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2) + leftPad($scope.selectedBlock, 3),
-          type: 'B'
+          type: 'b'
         };
       };
     };
