@@ -146,7 +146,7 @@
 }
 .status-bar {
   border-bottom: solid 1px #ddd;
-  padding: 20px;
+  padding: 8px 20px 9px;
 }
 .nrd-breadcrumb {
   padding: 0;
@@ -160,17 +160,24 @@
   width:100%;
   margin-bottom: 10px;
 }
-.sidebar-header {
+.sidebar-header{
   font-size: 16px;
   border-bottom: solid 1px #ddd;
   margin-right: -21px;
   margin-bottom: 20px;
   margin-left: -20px;
   margin-top: -20px;
-  padding:15px 19px;
+  padding:25px 20px;
 }
-
-
+.sidebar h5{
+  margin-top: 0;
+  padding-top: 0;
+}
+.brcrumb{
+  font-size: 15px;
+  padding-top: 8px;
+  display: inline-block;
+}
 
 
 
