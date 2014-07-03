@@ -25,7 +25,7 @@ reportdash.factory('YearlyReport', ['$http',
 
 
     YearlyReport.fetch = function(id) {
-      return $http.get('api/dashboard_report_monthly.aspx?state_code=29&fin_year=2014-2015&type=s' + id)
+      return $http.get('api/dashboard_report_monthly.aspx?state_code=29&fin_year=2014-2015&type=s')
         .then(function(response) {
           return response.data;
         });
