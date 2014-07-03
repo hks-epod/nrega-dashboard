@@ -74,6 +74,11 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
         cmd = New SqlCommand(str, con)
         da = New SqlDataAdapter(cmd)
         da.Fill(ds, "dt")
+
+
+
+
+
         cmd.Dispose()
 
         str = ""
