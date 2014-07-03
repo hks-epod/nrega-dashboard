@@ -1,0 +1,1 @@
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Dashboard_report_panchayat.aspx.vb" Inherits="nrega_reportdashboard_api_Dashboard_report_panchayat" %>
