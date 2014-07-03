@@ -168,7 +168,8 @@
   margin-bottom: 20px;
   margin-left: -20px;
   margin-top: -20px;
-  padding:25px 20px;
+  padding:14px 20px;
+  font-weight: 600;
 }
 .sidebar h5{
   margin-top: 0;
@@ -196,7 +197,9 @@
   font-size: 17px;
   background-color: #f3ede1;
   border-bottom: solid 1px #ddd;
+  margin-bottom: 20px;
 }
+
 
 
 
