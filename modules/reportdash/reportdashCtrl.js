@@ -38,7 +38,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       // Only State
       if ($scope.selectedState && !$scope.selectedDistrict && !$scope.selectedBlock) {
         return {
-          code_type : 'state'
+          code_type : 'state',
           code: leftPad($scope.selectedState),
           type: 'S'
         };
