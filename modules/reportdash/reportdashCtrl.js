@@ -27,10 +27,10 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
 
     $scope.viewResults = function() {
       codetype = buildCode();
-      console.log(codetype);
-      YearlyReport.fetch().then(function(response) {
-        $scope.yearlydata = response;
-      });
+      // YearlyReport.fetch().then(function(response) {
+      //   $scope.yearlydata = response;
+      // });
+      $scope.yearlydata = YearlyReport.testfetch;
 
     };
 
@@ -68,6 +68,48 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       }
       return output;
     };
+
+    // Vizulization data
+    $scope.vizconfig = {
+      bindto: '#chart',
+      data: {
+        x: 'x',
+        columns: [
+                  ['x', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+                  ['Demand Registered', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
+                  ['Labour Budget', 130, 340, 200, 500, 250, 350, 130, 340, 200, 500, 250, 350],
+              ],
+      },
+      axis: {
+        x: {
+          type: 'timeseries',
+          tick: {
+            format: '%m'
+          }
+        }
+      }
+    };
+
+    $scope.vizconfig2 = {
+      bindto: '#chart2',
+      data: {
+        x: 'x',
+        columns: [
+                  ['x', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+                  ['Demand Registered', 300, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
+                  ['Labour Budget', 130, 340, 200, 500, 250, 350, 130, 340, 200, 500, 250, 350],
+              ],
+      },
+      axis: {
+        x: {
+          type: 'timeseries',
+          tick: {
+            format: '%m'
+          }
+        }
+      }
+    }
+
 
 
   }
