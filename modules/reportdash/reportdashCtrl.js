@@ -13,7 +13,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
     //  Region Handelers //
     ///////////////////////
 
-    $scope.years = ['2012-13', '2013-14', '2014-15'];
+    $scope.years = ['2012-2013', '2013-2014', '2014-2015'];
     Regions.fetch().then(function(data) {
       $scope.regions = data;
       $scope.$watch('selectedState', function() {
@@ -38,6 +38,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       // Only State
       if ($scope.selectedState && !$scope.selectedDistrict && !$scope.selectedBlock) {
         return {
+          code_type : 'state'
           code: leftPad($scope.selectedState),
           type: 'S'
         };
@@ -45,6 +46,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       // State + District
       if ($scope.selectedState && $scope.selectedDistrict && !$scope.selectedBlock) {
         return {
+          code_type : 'district',
           code: leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2),
           type: 'D'
         };
@@ -52,6 +54,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       // State + District + Blocks
       if ($scope.selectedState && $scope.selectedDistrict && $scope.selectedBlock) {
         return {
+          code_type : 'block',
           code: leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2) + leftPad($scope.selectedBlock, 3),
           type: 'B'
         };
@@ -421,8 +424,9 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
     //////////////////////////
 
     $scope.viewResults = function() {
-      codetype = buildCode();
-      YearlyReport.fetch().then(function(response) {
+      params = buildCode();
+
+      YearlyReport.fetch(params, $scope.selectedYear).then(function(response) {
         $scope.yearlydata = response[0];
       });
       // $scope.yearlydata = YearlyReport.testfetch;

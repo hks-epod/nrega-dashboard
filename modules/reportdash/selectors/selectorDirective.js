@@ -1,7 +1,7 @@
 reportdash.directive('selectyear', function() {
   return {
     restrict: 'AE',
-    template: '<select class="selector" ui-select2 ng-model="selectDistrict" data-placeholder="Select Year"><option value=""></option><option ng-repeat="year in years" value="{{$index}}">{{year}}</option></select>',
+    template: '<select class="selector" ui-select2 ng-model="selectedYear" data-placeholder="Select Year"><option value=""></option><option ng-repeat="year in years" value="{{year}}">{{year}}</option></select>',
     replace: true,
     controller: ['$rootScope', '$scope',
       function($rootScope, $scope) {
