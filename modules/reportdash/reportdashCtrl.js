@@ -1,7 +1,7 @@
 var reportdash = angular.module('ReportDash', []);
 
-reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport', 'Regions',
-  function($scope, $rootScope, YearlyReport, Regions) {
+reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport', 'Regions', 'GPRegions',
+  function($scope, $rootScope, YearlyReport, Regions, GPRegions) {
 
     $scope.isTable = false;
     $scope.switchview = function() {
@@ -22,6 +22,9 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       $scope.$watch('selectedDistrict', function() {
         fetchBlocks($scope.selectedState, $scope.selectedDistrict);
       });
+      $scope.$watch('selectedBlock', function() {
+        fetchGPs($scope.selectedBlock);
+      });
     });
 
     function fetchDistricts(selectedState) {
@@ -34,11 +37,21 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       if (selectedState) $scope.blocks = $scope.regions[2][selectedState][selectedDistrict];
     };
 
+    function fetchGPs(selectedBlock) {
+      $scope.gps = [];
+      if (selectedBlock) {
+        GPRegions.fetch($scope.selectedBlock,$scope.selectedYear).then(function(response) {
+            $scope.gps =response[0];
+        });
+      };
+      
+    };
+
     function buildCode() {
       // Only State
       if ($scope.selectedState && !$scope.selectedDistrict && !$scope.selectedBlock) {
         return {
-          code_type : 'state',
+          code_type: 'state',
           code: leftPad($scope.selectedState),
           type: 's'
         };
@@ -46,17 +59,25 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       // State + District
       if ($scope.selectedState && $scope.selectedDistrict && !$scope.selectedBlock) {
         return {
-          code_type : 'district',
+          code_type: 'district',
           code: leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2),
           type: 'd'
         };
       };
       // State + District + Blocks
-      if ($scope.selectedState && $scope.selectedDistrict && $scope.selectedBlock) {
+      if ($scope.selectedState && $scope.selectedDistrict && $scope.selectedBlock && !$scope.selectedGP) {
         return {
-          code_type : 'block',
+          code_type: 'block',
           code: leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2) + leftPad($scope.selectedBlock, 3),
           type: 'b'
+        };
+      };
+      // State + District + Blocks + GP
+      if ($scope.selectedState && $scope.selectedDistrict && $scope.selectedBlock && $scope.selectedGP) {
+        return {
+          code_type: 'panchayat',
+          code: leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2) + leftPad($scope.selectedBlock, 3)+leftPad($scope.selectedGP, 10),
+          type: 'p'
         };
       };
     };
