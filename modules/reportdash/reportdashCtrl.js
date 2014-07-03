@@ -423,7 +423,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
     $scope.viewResults = function() {
       codetype = buildCode();
       YearlyReport.fetch().then(function(response) {
-        $scope.yearlydata = response;
+        $scope.yearlydata = response[0];
       });
       // $scope.yearlydata = YearlyReport.testfetch;
     };
