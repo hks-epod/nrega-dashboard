@@ -1,0 +1,37 @@
+<div class="main-content">
+  <h3>Demand Registration</h3>
+  <br>
+  <div class="table-reponsive">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th colspan="2">Parameter</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="2">Demand Registered</td>
+          <td>{{yearlydata[0].demand_register}}</td>
+        </tr>
+        <tr>
+          <td colspan="2">Work Alloted</td>
+          <td>{{yearlydata[1].labour_budget}}</td>
+        </tr>
+        <tr>
+          <td colspan="2">Unmet Demand</td>
+          <td>{{yearlydata[2].work_alloted}}</td>
+        </tr>
+        <tr>
+          <td rowspan="2">Unemployment Allowances</td>
+          <td>Due for PDs</td>
+          <td>{{yearlydata[3].payable_days}}</td>
+        </tr>
+        <tr>
+          <td>Amount Payable</td>
+          <td>{{yearlydata[3].payable_amount}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

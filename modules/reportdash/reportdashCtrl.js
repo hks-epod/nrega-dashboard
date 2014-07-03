@@ -3,8 +3,13 @@ var reportdash = angular.module('ReportDash', []);
 reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport', 'Regions',
   function($scope, $rootScope, YearlyReport, Regions) {
 
+
+
     $scope.years = ['2012-13', '2013-14', '2014-15'];
 
+    ///////////////////////
+    //  Region Handelers //
+    ///////////////////////
     Regions.fetch().then(function(data) {
       $scope.regions = data;
       $scope.$watch('selectedState', function() {
@@ -25,15 +30,6 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       if (selectedState) $scope.blocks = $scope.regions[2][selectedState][selectedDistrict];
     };
 
-    $scope.viewResults = function() {
-      codetype = buildCode();
-      // YearlyReport.fetch().then(function(response) {
-      //   $scope.yearlydata = response;
-      // });
-      $scope.yearlydata = YearlyReport.testfetch;
-
-    };
-
     function buildCode() {
       // Only State
       if ($scope.selectedState && !$scope.selectedDistrict && !$scope.selectedBlock) {
@@ -42,14 +38,14 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
           type: 'S'
         };
       };
-      // State+District
+      // State + District
       if ($scope.selectedState && $scope.selectedDistrict && !$scope.selectedBlock) {
         return {
           code: leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2),
           type: 'D'
         };
       };
-      // State+District+Blocks
+      // State + District + Blocks
       if ($scope.selectedState && $scope.selectedDistrict && $scope.selectedBlock) {
         return {
           code: leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2) + leftPad($scope.selectedBlock, 3),
@@ -58,8 +54,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       };
     };
 
-
-    // converting numbers to a generic digit  : leftPad(1, 2)  ---> 01
+    // Generic Number Convertor Function: leftPad(1, 2) ---> 01
 
     function leftPad(number, targetLength) {
       var output = number + '';
@@ -69,7 +64,9 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       return output;
     };
 
-    // Vizulization data
+    //////////////////////////
+    // Vizulization Loading //
+    //////////////////////////
     $scope.vizconfig = {
       bindto: '#chart',
       data: {
@@ -96,7 +93,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: 'x',
         columns: [
                   ['x', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
-                  ['Demand Registered', 300, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
+                  ['Demand Registered', 30, 20, 10, 40, 150, 250, 30, 200, 100, 400, 150, 250],
                   ['Labour Budget', 130, 340, 200, 500, 250, 350, 130, 340, 200, 500, 250, 350],
               ],
       },
@@ -108,7 +105,20 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
           }
         }
       }
-    }
+    };
+
+
+    //////////////////////////
+    //      View Results    //
+    //////////////////////////
+
+    $scope.viewResults = function() {
+      codetype = buildCode();
+      // YearlyReport.fetch().then(function(response) {
+      //   $scope.yearlydata = response;
+      // });
+      $scope.yearlydata = YearlyReport.testfetch;
+    };
 
 
 
