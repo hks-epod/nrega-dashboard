@@ -10,7 +10,7 @@ Imports System.Configuration
 Imports System.IO
 Imports System.Xml
 Imports System.Web.Script.Serialization
-Partial Class nrega_reportdashboard_api_dashboard_report_panchayat
+Partial Class nrega_reportdashboard_api_Dashboard_report_panchayat
     Inherits System.Web.UI.Page
     Dim con, con1 As New SqlConnection
     Dim cmd As New SqlCommand
@@ -19,7 +19,6 @@ Partial Class nrega_reportdashboard_api_dashboard_report_panchayat
     Dim conobj As New ConnectNREGA
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
         If Request.QueryString("fin_year") = "" Then
             Response.Write("Enter fin Year")
             Response.End()
@@ -41,7 +40,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_panchayat
 
         '**************************************************Panchayat
 
-        str = "select panchayat_code code, Panchayat_name name from panchayats_rep" & yr & " where block_code='" & Block_code & "'"
+        str = "select  Panchayat_name,panchayat_code from panchayats_rep" & yr & " where block_code='" & Block_code & "'"
         cmd = New SqlCommand(str, con)
         da = New SqlDataAdapter(cmd)
         da.Fill(ds, "dt")
@@ -56,7 +55,19 @@ Partial Class nrega_reportdashboard_api_dashboard_report_panchayat
         Dim data As New Dictionary(Of String, Object)
         For Each table As DataTable In ds.Tables
             For Each dr1 As DataRow In table.Rows
-                data.Add(dr1(0), dr1(1))
+
+
+                For Each col1 As DataColumn In table.Columns
+
+
+
+                    data.Add(col1.ColumnName & i & "", dr1(col1))
+
+
+
+
+                Next
+                i = i + 1
             Next
             rows.Add(data)
         Next
