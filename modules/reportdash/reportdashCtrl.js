@@ -393,6 +393,9 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
             ['Started in No. of blocks(Admin)', 20],
         ],
         type: 'donut'
+      },
+      donut: {
+        title: "eFMS"
       }
     };
 
@@ -405,6 +408,9 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
             ['Aadhar seeding against total active worker', 30],
         ],
         type: 'donut'
+      },
+      donut: {
+        title: "DBT"
       }
     };
 
@@ -416,10 +422,10 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
 
     $scope.viewResults = function() {
       codetype = buildCode();
-      // YearlyReport.fetch().then(function(response) {
-      //   $scope.yearlydata = response;
-      // });
-      $scope.yearlydata = YearlyReport.testfetch;
+      YearlyReport.fetch().then(function(response) {
+        $scope.yearlydata = response;
+      });
+      // $scope.yearlydata = YearlyReport.testfetch;
     };
 
 
