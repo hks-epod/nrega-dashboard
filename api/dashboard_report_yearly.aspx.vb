@@ -292,30 +292,30 @@ Partial Class nrega_reportdashboard_api_dashboard_report_yearly
             '*******************************************Total number of blocks/Started in No. of blocks (wages)/(Material)/(Admin):
 
 
-            str = ""
-            str = "select count(distinct b.block_code)total_blk,"
-            str = str & " count(distinct case when flag='W' then f.block_code end)blk_wage_efms, "
-            str = str & " count(distinct case when flag='M' then f.block_code end)blk_mat_efms,"
-            str = str & " count(distinct case when flag='A' then f.block_code end)blk_adm_efms"
-            str = str & "  from blocks_rep" & yr & " b left outer join fto_detail" & yr & " f with (nolock) "
-            str = str & "  on b.block_code=f.block_code where b." & cond & ""
-            cmd = New SqlCommand(str, con)
-            cmd.CommandTimeout = 0
-            da = New SqlDataAdapter(cmd)
-            da.Fill(ds, "dt12")
+            'str = ""
+            'str = "select count(distinct b.block_code)total_blk,"
+            'str = str & " count(distinct case when flag='W' then f.block_code end)blk_wage_efms, "
+            'str = str & " count(distinct case when flag='M' then f.block_code end)blk_mat_efms,"
+            'str = str & " count(distinct case when flag='A' then f.block_code end)blk_adm_efms"
+            'str = str & "  from blocks_rep" & yr & " b left outer join fto_detail" & yr & " f with (nolock) "
+            'str = str & "  on b.block_code=f.block_code where b." & cond & ""
+            'cmd = New SqlCommand(str, con)
+            'cmd.CommandTimeout = 0
+            'da = New SqlDataAdapter(cmd)
+            'da.Fill(ds, "dt12")
 
             '*******************************************% of expenditure through eFMS
-            str = ""
-            str = " select round((case when (select isnull(act_lab,0)+isnull((act_mat+act_skilled+act_tax),0)+(isnull(contin,0)+isnull(n_contin,0)))>0 then"
-            str = str & " ((select sum(amount)tot_exp from fto_detail" & yr & " fd with (nolock) "
-            str = str & " inner join fto" & yr & " f with (nolock) on fd.fto_no=f.fto_no "
-            str = str & " where  f." & cond & " and cr_flag='P' and fto_po_signed='Y')*100)/"
-            str = str & " (select isnull(act_lab,0)+isnull((act_mat+act_skilled+act_tax),0)+(isnull(contin,0)+isnull(n_contin,0))) else 0 end),2) tot_exp_efms "
-            str = str & " from " & tbl_fund & " where " & cond & ""
-            cmd = New SqlCommand(str, con)
-            cmd.CommandTimeout = 0
-            da = New SqlDataAdapter(cmd)
-            da.Fill(ds, "dt13")
+            'str = ""
+            'str = " select round((case when (select isnull(act_lab,0)+isnull((act_mat+act_skilled+act_tax),0)+(isnull(contin,0)+isnull(n_contin,0)))>0 then"
+            'str = str & " ((select sum(amount)tot_exp from fto_detail" & yr & " fd with (nolock) "
+            'str = str & " inner join fto" & yr & " f with (nolock) on fd.fto_no=f.fto_no "
+            'str = str & " where  f." & cond & " and cr_flag='P' and fto_po_signed='Y')*100)/"
+            'str = str & " (select isnull(act_lab,0)+isnull((act_mat+act_skilled+act_tax),0)+(isnull(contin,0)+isnull(n_contin,0))) else 0 end),2) tot_exp_efms "
+            'str = str & " from " & tbl_fund & " where " & cond & ""
+            'cmd = New SqlCommand(str, con)
+            'cmd.CommandTimeout = 0
+            'da = New SqlDataAdapter(cmd)
+            'da.Fill(ds, "dt13")
 
 
             '*******************************************% of active workers A/Cs freezed /  % of Aadhaar seeding against total Active worker
