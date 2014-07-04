@@ -23,7 +23,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         fetchBlocks($scope.selectedState, $scope.selectedDistrict);
       });
       $scope.$watch('selectedBlock', function() {
-        fetchGPs($scope.selectedBlock);
+        fetchGPs(leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2) + leftPad($scope.selectedBlock, 3));
       });
     });
 
@@ -40,7 +40,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
     function fetchGPs(selectedBlock) {
       $scope.gps = [];
       if (selectedBlock) {
-        GPRegions.fetch($scope.selectedBlock,$scope.selectedYear).then(function(response) {
+        GPRegions.fetch(selectedBlock,$scope.selectedYear).then(function(response) {
             $scope.gps =response[0];
         });
       };
@@ -76,7 +76,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       if ($scope.selectedState && $scope.selectedDistrict && $scope.selectedBlock && $scope.selectedGP) {
         return {
           code_type: 'panchayat',
-          code: leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2) + leftPad($scope.selectedBlock, 3)+leftPad($scope.selectedGP, 10),
+          code: leftPad($scope.selectedGP, 10),
           type: 'p'
         };
       };
