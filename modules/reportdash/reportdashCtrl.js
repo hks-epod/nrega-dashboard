@@ -457,7 +457,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       });
       MonthlyReport.fetch(params, $scope.selectedYear).then(function(response) {
         $scope.monthlydata = response[0];
-        $scope.demand_labourbudget_chart.data.columns[1] = ['Demand Registered', $scope.monthlydata.april_demand, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250];
+        $scope.demand_labourbudget_chart.data.columns[1] = ['Demand Registered', $scope.monthlydata.april_demand_reg, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250];
       });
     };
 
