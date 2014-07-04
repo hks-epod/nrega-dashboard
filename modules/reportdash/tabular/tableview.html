@@ -1,179 +1,179 @@
 <div class="main-content">
-  <h3>Demand Registration</h3>
-  <br>
-  <div class="table-reponsive">
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th colspan="2">Parameter</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td colspan="2">Demand Registered</td>
-          <td>{{yearlydata.demand_register}}</td>
-        </tr>
-        <tr>
-          <td colspan="2">Work Alloted</td>
-          <td>{{yearlydata.work_alloted}}</td>
-        </tr>
-        <!-- <tr>
+<h3>Demand Registration</h3>
+<br>
+<div class="table-reponsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th colspan="2">Parameter</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="2">Demand Registered</td>
+        <td>{{yearlydata.demand_register}}</td>
+      </tr>
+      <tr>
+        <td colspan="2">Work Alloted</td>
+        <td>{{yearlydata.work_alloted}}</td>
+      </tr>
+      <!-- <tr>
           <td colspan="2">Unmet Demand</td>
           <td>{{yearlydata.work_alloted}}</td>
         </tr> -->
-        <tr>
-          <td rowspan="4">Unemployment Allowances</td>
-          <td>Due for PDs</td>
-          <td>{{yearlydata.payable_days_unemp}}</td>
-        </tr>
-        <tr>
-          <td>Amount Payable</td>
-          <td>{{yearlydata.payable_amount_unemp}}</td>
-        </tr>
-        <tr>
-          <td>Approved Days</td>
-          <td>{{yearlydata.approved_days}}</td>
-        </tr>
-        <tr>
-          <td>Rejected Days</td>
-          <td>{{yearlydata.rejected_days}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+      <tr>
+        <td rowspan="4">Unemployment Allowances</td>
+        <td>Due for PDs</td>
+        <td>{{yearlydata.payable_days_unemp}}</td>
+      </tr>
+      <tr>
+        <td>Amount Payable</td>
+        <td>{{yearlydata.payable_amount_unemp}}</td>
+      </tr>
+      <tr>
+        <td>Approved Days</td>
+        <td>{{yearlydata.approved_days}}</td>
+      </tr>
+      <tr>
+        <td>Rejected Days</td>
+        <td>{{yearlydata.rejected_days}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-  <h3>Physical Progress</h3>
-  <br>
-  <div class="table-reponsive">
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th colspan="2">Parameter</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td colspan="2">Persondays: LB Approved</td>
-          <td>{{yearlydata.labour_budget}}</td>
-        </tr>
-        <tr>
-          <td rowspan="3">PersonDays: PD Generated</td>
-          <td>SC %</td>
-          <td>{{yearlydata.SCper}}</td>
-        </tr>
-        <tr>
-          <td>ST %</td>
-          <td>{{yearlydata.STper}}</td>
-        </tr>
-        <tr>
-          <td>Women %</td>
-          <td>{{yearlydata.Womenper}}</td>
-        </tr>
-        <tr>
-          <td colspan="2">HHs provided employment</td>
-          <td>{{yearlydata.hh_provided_employment}}</td>
-        </tr>
-        <tr>
-          <td colspan="2">Work completion rate</td>
-          <td>{{yearlydata.Work_completion_rate}}</td>
-        </tr>
-        <tr>
-          <td colspan="2">Total GPs</td>
-          <td>{{yearlydata.Tgp}}</td>
-        </tr>
-        <tr>
-          <td colspan="2">GPs with nil expenditure</td>
-          <td>{{yearlydata.NIL_EXP}}</td>
-        </tr>
-        <tr>
-          <td colspan="2">GPs with no employment generation in last month</td>
-          <td>{{yearlydata.lastmon_nilgp}}</td>
-        </tr>
-        <tr>
-          <td colspan="2">GPs with no approved works</td>
-          <td>{{yearlydata.app_panch}}</td>
-        </tr>
-        <tr>
-          <td colspan="2">GPs with no ongoing works</td>
-          <td>{{yearlydata.ong_panch}}</td>
-        </tr>
-        <tr>
-          <td colspan="2">HHS completed 100 days</td>
-          <td>{{yearlydata.hh_completed_100days}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <h3>Financial Progress</h3>
-  <br>
-  <div class="table-reponsive">
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th colspan="2">Parameter</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td colspan="2">Total Expenditure</td>
-          <td>{{yearlydata.tot_exp}}</td>
-        </tr>
-        <tr>
-          <td rowspan="2">Total Expenditure</td>
-          <td>Wage %</td>
-          <td>{{yearlydata.wage_perc}}</td>
-        </tr>
-        <tr>
-          <td>Admin %</td>
-          <td>{{yearlydata.adm_perc}}</td>
-        </tr>
-        <tr>
-          <td rowspan="2">Delayed Payment</td>
-          <td>PDs Payable</td>
-          <td>{{yearlydata.payable_days_delay}}</td>
-        </tr>
-        <tr>
-          <td>Amount payable %</td>
-          <td>{{yearlydata.payable_amount_delay}}</td>
-        </tr>
-        <tr>
-          <td colspan="2">Average wage per PD</td>
-          <td>{{yearlydata.avg_wage_per_PD}}</td>
-        </tr>
-        <tr>
-          <td colspan="2">Average cost per PD</td>
-          <td>{{yearlydata.avg_cost_per_PD}}</td>
-        </tr>
-        <tr>
-          <td rowspan="4">eFMS</td>
-          <td>Total number of blocks %</td>
-          <td>{{yearlydata.total_blk}}</td>
-        </tr>
-        <tr>
-          <td>Started in No. of blocks(wages)</td>
-          <td>{{yearlydata.blk_wage_efms}}</td>
-        </tr>
-        <tr>
-          <td>Started in No. of blocks(Material)</td>
-          <td>{{yearlydata.blk_mat_efms}}</td>
-        </tr>
-        <tr>
-          <td>Started in No. of blocks(Admin)</td>
-          <td>{{yearlydata.blk_adm_efms}}</td>
-        </tr>
-        <tr>
-          <td rowspan="2">DBT</td>
-          <td>% of active workers A/Cs freezed</td>
-          <td>{{yearlydata.frez_act_pers}}</td>
-        </tr>
-        <tr>
-          <td>% of aadhar seeding against total active worker</td>
-          <td>{{yearlydata.aadhaar_seedpers}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<h3>Physical Progress</h3>
+<br>
+<div class="table-reponsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th colspan="2">Parameter</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="2">Persondays: LB Approved</td>
+        <td>{{yearlydata.labour_budget}}</td>
+      </tr>
+      <tr>
+        <td rowspan="3">PersonDays: PD Generated</td>
+        <td>SC %</td>
+        <td>{{yearlydata.SCper}}</td>
+      </tr>
+      <tr>
+        <td>ST %</td>
+        <td>{{yearlydata.STper}}</td>
+      </tr>
+      <tr>
+        <td>Women %</td>
+        <td>{{yearlydata.Womenper}}</td>
+      </tr>
+      <tr>
+        <td colspan="2">HHs provided employment</td>
+        <td>{{yearlydata.hh_provided_employment}}</td>
+      </tr>
+      <tr>
+        <td colspan="2">Work completion rate</td>
+        <td>{{yearlydata.Work_completion_rate}}</td>
+      </tr>
+      <tr>
+        <td colspan="2">Total GPs</td>
+        <td>{{yearlydata.Tgp}}</td>
+      </tr>
+      <tr>
+        <td colspan="2">GPs with nil expenditure</td>
+        <td>{{yearlydata.NIL_EXP}}</td>
+      </tr>
+      <tr>
+        <td colspan="2">GPs with no employment generation in last month</td>
+        <td>{{yearlydata.lastmon_nilgp}}</td>
+      </tr>
+      <tr>
+        <td colspan="2">GPs with no approved works</td>
+        <td>{{yearlydata.app_panch}}</td>
+      </tr>
+      <tr>
+        <td colspan="2">GPs with no ongoing works</td>
+        <td>{{yearlydata.ong_panch}}</td>
+      </tr>
+      <tr>
+        <td colspan="2">HHS completed 100 days</td>
+        <td>{{yearlydata.hh_completed_100days}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h3>Financial Progress</h3>
+<br>
+<div class="table-reponsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th colspan="2">Parameter</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="2">Total Expenditure</td>
+        <td>{{yearlydata.tot_exp}}</td>
+      </tr>
+      <tr>
+        <td rowspan="2">Total Expenditure</td>
+        <td>Wage %</td>
+        <td>{{yearlydata.wage_perc}}</td>
+      </tr>
+      <tr>
+        <td>Admin %</td>
+        <td>{{yearlydata.adm_perc}}</td>
+      </tr>
+      <tr>
+        <td rowspan="2">Delayed Payment</td>
+        <td>PDs Payable</td>
+        <td>{{yearlydata.payable_days_delay}}</td>
+      </tr>
+      <tr>
+        <td>Amount payable %</td>
+        <td>{{yearlydata.payable_amount_delay}}</td>
+      </tr>
+      <tr>
+        <td colspan="2">Average wage per PD</td>
+        <td>{{yearlydata.avg_wage_per_PD}}</td>
+      </tr>
+      <tr>
+        <td colspan="2">Average cost per PD</td>
+        <td>{{yearlydata.avg_cost_per_PD}}</td>
+      </tr>
+      <tr>
+        <td rowspan="4">eFMS</td>
+        <td>Total number of blocks %</td>
+        <td>{{yearlydata.total_blk}}</td>
+      </tr>
+      <tr>
+        <td>Started in No. of blocks(wages)</td>
+        <td>{{yearlydata.blk_wage_efms}}</td>
+      </tr>
+      <tr>
+        <td>Started in No. of blocks(Material)</td>
+        <td>{{yearlydata.blk_mat_efms}}</td>
+      </tr>
+      <tr>
+        <td>Started in No. of blocks(Admin)</td>
+        <td>{{yearlydata.blk_adm_efms}}</td>
+      </tr>
+      <tr>
+        <td rowspan="2">DBT</td>
+        <td>% of active workers A/Cs freezed</td>
+        <td>{{yearlydata.frez_act_pers}}</td>
+      </tr>
+      <tr>
+        <td>% of aadhar seeding against total active worker</td>
+        <td>{{yearlydata.aadhaar_seedpers}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 </div>
