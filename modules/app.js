@@ -1,4 +1,4 @@
-var nregadash = angular.module('Nregadash', ['ngRoute', 'ReportDash','ui.select2']);
+var nregadash = angular.module('Nregadash', ['ngRoute', 'ReportDash','ui.select2','angular-loading-bar']);
 
 nregadash.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
