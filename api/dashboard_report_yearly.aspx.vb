@@ -61,6 +61,13 @@ Partial Class nrega_reportdashboard_api_dashboard_report_yearly
             cond_p = "LEFT(p.panchayat_code,7)='" & Request.QueryString("block_code") & "'"
             cond = "block_code='" & Request.QueryString("block_code") & "'"
             tbl_fund = "pofunds" & yr & ""
+        ElseIf Request.QueryString("type") = "p" Then
+            state_code = Left(Request("panchayat_code").ToString(), 2)
+            val_code = "panchayat_code"
+            val_code_p = "p.panchayat_code"
+            cond_p = "p.panchayat_code='" & Request.QueryString("panchayat_code") & "'"
+            cond = "panchayat_code='" & Request.QueryString("panchayat_code") & "'"
+            tbl_fund = "panfunds" & yr & ""
         End If
 
         Demand_registered_yearly(state_code, fin_year)
@@ -82,7 +89,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_yearly
 
             '***********************************Demand_registered
 
-            cmd = New SqlCommand("select p." & val_code & " code,isnull(SUM(isnull(reghh,0)),0)demand_register  from panchayats_rep" & yr & " p  left outer join demregister_panch" & yr & " pp on p.panchayat_code=pp.panchayat_code where p." & cond & " group by p." & val_code & "", con)
+            cmd = New SqlCommand("select p." & val_code & " code,isnull(SUM(isnull(EDH,0)),0)demand_register  from panchayats_rep" & yr & " p  left outer join demregister_panch" & yr & " pp on p.panchayat_code=pp.panchayat_code where p." & cond & " group by p." & val_code & "", con)
             cmd.CommandTimeout = 0
             da = New SqlDataAdapter(cmd)
             da.Fill(ds, "dt0")
@@ -90,7 +97,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_yearly
 
 
             '***********************************Labour_Budget
-            If Request.QueryString("type") = "b" Then
+            If Request.QueryString("type") = "b" Or Request.QueryString("type") = "p" Then
                 cmd = New SqlCommand("select " & val_code & " code,isnull(SUM(isnull(manday_prj_curryear,0)),0)labour_budget from labour_budget_GP_trans" & yr & " where " & cond & " and month_code='03' group by " & val_code & "", con)
             Else
                 cmd = New SqlCommand("select " & val_code & " code,isnull(SUM(isnull(manday_prj_curryear,0)),0)labour_budget from approved_labour_budget_GP_trans" & yr & " where " & cond & "  and month_code='03' group by " & val_code & "", con)
@@ -102,7 +109,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_yearly
 
             '***********************************Work_Allotted / HHs completed 100 days
 
-            cmd = New SqlCommand("select p." & val_code & " code,isnull(SUM(isnull(eproh,0)),0)work_alloted ,isnull(SUM(isnull(F100Days,0)),0) hh_completed_100days from panchayats_rep" & yr & " p  left outer join demregister_panch" & yr & " pp on p.panchayat_code=pp.panchayat_code where p." & cond & " group by p." & val_code & "", con)
+            cmd = New SqlCommand("select p." & val_code & " code,isnull(SUM(isnull(EofH,0)),0)work_alloted ,isnull(SUM(isnull(F100Days,0)),0) hh_completed_100days from panchayats_rep" & yr & " p  left outer join demregister_panch" & yr & " pp on p.panchayat_code=pp.panchayat_code where p." & cond & " group by p." & val_code & "", con)
             cmd.CommandTimeout = 0
             da = New SqlDataAdapter(cmd)
             da.Fill(ds, "dt2")
@@ -112,7 +119,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_yearly
 
             str = ""
             str = "select p." & val_code & " code, "
-            str = str & " isnull(SUM(case when type='delay' then duedays end ),0)payable_days_delay,"
+            str = str & " isnull(SUM(case when type='delay' then delay end ),0)payable_days_delay,"
             str = str & " isnull(SUM(case when type='delay' then dueamt end ),0)payable_amount_delay,"
             str = str & "  isnull(SUM(case when type='unemp' then duedays end ),0)payable_days_unemp,"
             str = str & " isnull(SUM(case when type='unemp' then dueamt end ),0)payable_amount_unemp"
