@@ -1,6 +1,6 @@
 var reportdash = angular.module('ReportDash', []);
 
-reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport', 'Regions', 'GPRegions','MonthlyReport',
+reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport', 'Regions', 'GPRegions', 'MonthlyReport',
   function($scope, $rootScope, YearlyReport, Regions, GPRegions) {
     $scope.isTable = false;
     $scope.switchview = function() {
@@ -39,8 +39,8 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
     function fetchGPs(selectedBlock) {
       $scope.gps = [];
       if (selectedBlock) {
-        GPRegions.fetch(selectedBlock,$scope.selectedYear).then(function(response) {
-            $scope.gps =response[0];
+        GPRegions.fetch(selectedBlock, $scope.selectedYear).then(function(response) {
+          $scope.gps = response[0];
         });
       };
 
@@ -438,6 +438,12 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
     };
 
 
+    $scope.demand_labourbudget_chart.columns[1] = ['Demand Registered', $scope.monthlydata.april_demand, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250];
+
+
+
+
+
 
     //////////////////////////
     //      View Results    //
@@ -449,7 +455,9 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       YearlyReport.fetch(params, $scope.selectedYear).then(function(response) {
         $scope.yearlydata = response[0];
       });
-      // $scope.yearlydata = YearlyReport.testfetch;
+      MonthlyReport.fetch(params, $scope.selectedYear).then(function(response) {
+        $scope.monthlydata = response[0];
+      });
     };
 
 
