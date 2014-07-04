@@ -33,13 +33,9 @@
       <div class="sidebar-header">
         <span class="glyphicon glyphicon-sound-stereo"></span>&nbsp;FILTERS
       </div>
-      <!-- <h5>Select Year</h5> -->
       <selectyear></selectyear>
-      <!-- <h5>Select State</h5> -->
       <selectstate></selectstate>
-      <!-- <h5>Select District</h5> -->
       <selectdistrict></selectdistrict>
-      <!-- <h5>Select Block</h5> -->
       <selectblock></selectblock>
       <selectgp></selectgp>
       <br>
@@ -67,9 +63,8 @@
         </div>
         <div class="clearfix"></div>
       </div>
-      <div class="main-content">
+      
         <div ng-show="isTable" ng-include="'modules/reportdash/tabular/tableview.html'"></div>
         <div ng-hide="isTable" ng-include="'modules/reportdash/viz/viz.html'"></div>
-      </div>
     </div>
 </section>
