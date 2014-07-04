@@ -1,7 +1,7 @@
 var reportdash = angular.module('ReportDash', []);
 
 reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport', 'Regions', 'GPRegions', 'MonthlyReport',
-  function($scope, $rootScope, YearlyReport, Regions, GPRegions) {
+  function($scope, $rootScope, YearlyReport, Regions, GPRegions,MonthlyReport) {
     $scope.isTable = false;
     $scope.switchview = function() {
       $scope.isTable = !$scope.isTable;
