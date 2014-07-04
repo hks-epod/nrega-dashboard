@@ -11,12 +11,16 @@
     </thead>
     <tbody>
       <tr>
-        <td colspan="2">Demand Registered</td>
+        <td colspan="2">Employment Demanded</td>
         <td>{{yearlydata.demand_register}}</td>
       </tr>
       <tr>
-        <td colspan="2">Work Alloted</td>
+        <td colspan="2">Employment Offered</td>
         <td>{{yearlydata.work_alloted}}</td>
+      </tr>
+      <tr>
+        <td colspan="2">HHs provided employment</td>
+        <td>{{yearlydata.hh_provided_employment}}</td>
       </tr>
       <!-- <tr>
           <td colspan="2">Unmet Demand</td>
@@ -70,10 +74,6 @@
       <tr>
         <td>Women %</td>
         <td>{{yearlydata.Womenper}}</td>
-      </tr>
-      <tr>
-        <td colspan="2">HHs provided employment</td>
-        <td>{{yearlydata.hh_provided_employment}}</td>
       </tr>
       <tr>
         <td colspan="2">Work completion rate</td>
@@ -131,8 +131,8 @@
         <td>{{yearlydata.adm_perc}}</td>
       </tr>
       <tr>
-        <td rowspan="2">Delayed Payment</td>
-        <td>PDs Payable</td>
+        <td rowspan="2">Delayed Compensation</td>
+        <td>Payable (In Delay Days)</td>
         <td>{{yearlydata.payable_days_delay}}</td>
       </tr>
       <tr>
@@ -143,11 +143,11 @@
         <td colspan="2">Average wage per PD</td>
         <td>{{yearlydata.avg_wage_per_PD}}</td>
       </tr>
-      <tr>
+     <!-- <tr>
         <td colspan="2">Average cost per PD</td>
         <td>{{yearlydata.avg_cost_per_PD}}</td>
-      </tr>
-      <tr>
+      </tr>-->
+      <!--<tr>
         <td rowspan="4">eFMS</td>
         <td>Total number of blocks %</td>
         <td>{{yearlydata.total_blk}}</td>
@@ -164,7 +164,7 @@
         <td>Started in No. of blocks(Admin)</td>
         <td>{{yearlydata.blk_adm_efms}}</td>
       </tr>
-      <tr>
+      <tr>-->
         <td rowspan="2">DBT</td>
         <td>% of active workers A/Cs freezed</td>
         <td>{{yearlydata.frez_act_pers}}</td>
