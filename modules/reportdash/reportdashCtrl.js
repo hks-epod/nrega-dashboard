@@ -457,7 +457,20 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       });
       MonthlyReport.fetch(params, $scope.selectedYear).then(function(response) {
         $scope.monthlydata = response[0];
-        $scope.demand_labourbudget_chart.data.columns[1] = ['Demand Registered', $scope.monthlydata.april_demand_reg, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250];
+        $scope.demand_labourbudget_chart.data.columns[1] = [
+          'Demand Registered', 
+          $scope.monthlydata.april_demand_reg, 
+          $scope.monthlydata.may_demand_reg,
+          $scope.monthlydata.june_demand_reg, 
+          $scope.monthlydata.july_demand_reg, 
+          $scope.monthlydata.aug_demand_reg,
+          $scope.monthlydata.sep_demand_reg,       
+          $scope.monthlydata.oct_demand_reg, 
+          $scope.monthlydata.nov_demand_reg, 
+          $scope.monthlydata.dec_demand_reg, 
+          $scope.monthlydata.jan_demand_reg,
+          $scope.monthlydata.feb_demand_reg, 
+          $scope.monthlydata.mar_demand_reg];
       });
     };
 
