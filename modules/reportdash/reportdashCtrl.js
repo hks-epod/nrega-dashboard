@@ -48,15 +48,15 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
 
     function buildCode() {
       // Only State
-      if ($scope.selectedState && !$scope.selectedDistrict && !$scope.selectedBlock) {
+      if ($scope.selectedState && !$scope.selectedDistrict && !$scope.selectedBlock && !$scope.selectedGP) {
         return {
           code_type: 'state',
-          code: leftPad($scope.selectedState),
+          code: leftPad($scope.selectedState , 2),
           type: 's'
         };
       };
       // State + District
-      if ($scope.selectedState && $scope.selectedDistrict && !$scope.selectedBlock) {
+      if ($scope.selectedState && $scope.selectedDistrict && !$scope.selectedBlock && !$scope.selectedGP) {
         return {
           code_type: 'district',
           code: leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2),
@@ -100,8 +100,8 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: 'x',
         columns: [
                   ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-                  ['Demand Registered', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
-                  ['Labour Budget', 130, 340, 200, 500, 250, 350, 130, 340, 200, 500, 250, 350],
+                  ['Persondays Generated', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                  ['Projected Persondays', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
               ],
       },
       axis: {
@@ -114,45 +114,6 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       },
     };
 
-    $scope.work_alloted_chart = {
-      bindto: '#work_alloted_chart',
-      data: {
-        x: 'x',
-        columns: [
-                  ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-                  ['Demand Registered', 30, 20, 10, 40, 150, 250, 30, 200, 100, 400, 150, 250],
-                  ['Labour Budget', 130, 340, 200, 500, 250, 350, 130, 340, 200, 500, 250, 350],
-              ],
-      },
-      axis: {
-        x: {
-          type: 'timeseries',
-          tick: {
-            format: '%m'
-          }
-        }
-      }
-    };
-
-    $scope.unmet_demand_chart = {
-      bindto: '#unmet_demand_chart',
-      data: {
-        x: 'x',
-        columns: [
-            ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-            ['Unmet Demand', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250]
-        ],
-        // type: 'spline'
-      },
-      axis: {
-        x: {
-          type: 'timeseries',
-          tick: {
-            format: '%m'
-          }
-        }
-      }
-    };
 
     $scope.unemployment_allowances_chart = {
       bindto: '#unemployment_allowances_chart',
@@ -181,46 +142,34 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
     };
 
 
-    $scope.persondays_yearly_chart = {
-      bindto: '#persondays_yearly_chart',
-      data: {
-        x: 'x',
-        columns: [
-            ['x', '2012', '2013', '2014'],
-            ['Persondays : LB Approved Yearly', 30, 200, 100],
-        ],
-        type: 'bar'
-      },
-      bar: {
-        width: {
-          ratio: 0.5
-        }
-      }
-    };
 
     $scope.gps_by_expenditure_chart = {
       bindto: '#gps_by_expenditure_chart',
       data: {
 
         columns: [
-            ['GPs with nil expenditure', 20],
-            ['GPs with no employment generation in last month)', 30],
-            ['GPs with no approved works', 10],
-            ['GPs with no ongoing works', 40],
+            ['GPs with niFGTHl expenditure', 20],
+            ['GPs wiGHFGth no employment generation in last month)', 30],
+            ['GPs wiMNHth no approved works', 10],
+            ['GPs wiZDFth no ongoing works', 40],
+            ['GPs witMNh no ongoing works', 40],
+            ['GPs wit5HGh no ongoing works', 40],
+            ['GPs witHFGHh no ongoing works', 40],
+            ['GPs wiV CBNth no ongoing works', 40],
+            ['GPs withGFG no ongoing works', 40],
+            ['GPs wiASth no ongoing works', 40],
+            ['GPs wiFth no ongoing works', 40],
+            ['GPs wiNth no ongoing works', 40],
+            ['GPs withGB no ongoing works', 40],
+            ['GPs with DnAo ongoing works', 40],
+            ['GPs with nAo ongoing works', 40],
+            ['GPs with FnoA ongoing works', 40],
+            ['GPs withFH noA ongoing works', 40]
         ],
         type: 'donut'
       },
       donut: {
         title: "Total GPs",
-        onclick: function(d, i) {
-          console.log(d, i);
-        },
-        onmouseover: function(d, i) {
-          console.log(d, i);
-        },
-        onmouseout: function(d, i) {
-          console.log(d, i);
-        }
       }
     };
 
@@ -458,19 +407,40 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       MonthlyReport.fetch(params, $scope.selectedYear).then(function(response) {
         $scope.monthlydata = response[0];
         $scope.demand_labourbudget_chart.data.columns[1] = [
-          'Demand Registered', 
-          $scope.monthlydata.april_demand_reg, 
-          $scope.monthlydata.may_demand_reg,
-          $scope.monthlydata.june_demand_reg, 
-          $scope.monthlydata.july_demand_reg, 
-          $scope.monthlydata.aug_demand_reg,
-          $scope.monthlydata.sep_demand_reg,       
-          $scope.monthlydata.oct_demand_reg, 
-          $scope.monthlydata.nov_demand_reg, 
-          $scope.monthlydata.dec_demand_reg, 
-          $scope.monthlydata.jan_demand_reg,
-          $scope.monthlydata.feb_demand_reg, 
-          $scope.monthlydata.mar_demand_reg];
+          'Persondays Generated', 
+          $scope.monthlydata.april_work_allot, 
+          $scope.monthlydata.may_work_allot,
+          $scope.monthlydata.june_work_allot, 
+          $scope.monthlydata.july_work_allot, 
+          $scope.monthlydata.aug_work_allot,
+          $scope.monthlydata.sep_work_allot,       
+          $scope.monthlydata.oct_work_allot, 
+          $scope.monthlydata.nov_work_allot, 
+          $scope.monthlydata.dec_work_allot, 
+          $scope.monthlydata.jan_work_allot,
+          $scope.monthlydata.feb_work_allot, 
+          $scope.monthlydata.march_work_allot
+        ];
+        $scope.demand_labourbudget_chart.data.columns[2] = [
+          'Projected Persondays', 
+          $scope.monthlydata.april_lb, 
+          $scope.monthlydata.may_lb-$scope.monthlydata.april_lb,
+          $scope.monthlydata.june_lb-$scope.monthlydata.may_lb, 
+          $scope.monthlydata.july_lb-$scope.monthlydata.june_lb, 
+          $scope.monthlydata.aug_lb-$scope.monthlydata.july_lb,
+          $scope.monthlydata.sep_lb-$scope.monthlydata.aug_lb,       
+          $scope.monthlydata.oct_lb-$scope.monthlydata.sep_lb, 
+          $scope.monthlydata.nov_lb-$scope.monthlydata.oct_lb, 
+          $scope.monthlydata.dec_lb-$scope.monthlydata.nov_lb, 
+          $scope.monthlydata.jan_lb-$scope.monthlydata.dec_lb,
+          $scope.monthlydata.feb_lb-$scope.monthlydata.jan_lb, 
+          $scope.monthlydata.march_lb-$scope.monthlydata.feb_lb
+        ];
+
+
+
+
+
       });
     };
 

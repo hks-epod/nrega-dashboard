@@ -46,6 +46,12 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
             val_code_p = "Left(p.panchayat_code, 7)"
             cond_p = "LEFT(p.panchayat_code,7)='" & Request.QueryString("block_code") & "'"
             cond = "block_code='" & Request.QueryString("block_code") & "'"
+        ElseIf Request.QueryString("type") = "p" Then
+            state_code = Left(Request("panchayat_code").ToString(), 2)
+            val_code = "panchayat_code"
+            val_code_p = "p.panchayat_code"
+            cond_p = "p.panchayat_code='" & Request.QueryString("panchayat_code") & "'"
+            cond = "panchayat_code='" & Request.QueryString("panchayat_code") & "'"
         End If
 
 
@@ -74,11 +80,6 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
         cmd = New SqlCommand(str, con)
         da = New SqlDataAdapter(cmd)
         da.Fill(ds, "dt")
-
-
-
-
-
         cmd.Dispose()
 
         str = ""
@@ -107,16 +108,18 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
         da.Fill(ds, "dt1")
         cmd.Dispose()
 
+        str = ""
+
 
         '***********************************Work_Allotted
 
         str = "select " & val_code_p & ","
-        str = str & "     isnull(SUM(isnull(aprilreg,0)),0)april_work_allot, isnull(SUM(isnull(mayreg,0)),0)may_work_allot,"
-        str = str & "     isnull(SUM(isnull(junereg,0)),0)june_work_allot,isnull(SUM(isnull(julyreg,0)),0)july_work_allot,"
-        str = str & "      isnull(SUM(isnull(augreg,0)),0)aug_work_allot, isnull(SUM(isnull(sepreg,0)),0)sep_work_allot, "
-        str = str & "      isnull(SUM(isnull(octreg,0)),0)oct_work_allot,isnull(SUM(isnull(novreg,0)),0)nov_work_allot,"
-        str = str & "      isnull(SUM(isnull(decreg,0)),0)dec_work_allot,  isnull(SUM(isnull(janreg,0)),0)jan_work_allot,"
-        str = str & "     isnull(SUM(isnull(febreg,0)),0)feb_work_allot,isnull(SUM(isnull(marchreg,0)),0)march_work_allot "
+        str = str & "     isnull(SUM(isnull(aprilAPP,0)),0)april_work_allot, isnull(SUM(isnull(mayAPP,0)),0)may_work_allot,"
+        str = str & "     isnull(SUM(isnull(juneAPP,0)),0)june_work_allot,isnull(SUM(isnull(julyAPP,0)),0)july_work_allot,"
+        str = str & "      isnull(SUM(isnull(augAPP,0)),0)aug_work_allot, isnull(SUM(isnull(sepAPP,0)),0)sep_work_allot, "
+        str = str & "      isnull(SUM(isnull(octAPP,0)),0)oct_work_allot,isnull(SUM(isnull(novAPP,0)),0)nov_work_allot,"
+        str = str & "      isnull(SUM(isnull(decAPP,0)),0)dec_work_allot,  isnull(SUM(isnull(janAPP,0)),0)jan_work_allot,"
+        str = str & "     isnull(SUM(isnull(febAPP,0)),0)feb_work_allot,isnull(SUM(isnull(marchAPP,0)),0)march_work_allot "
         str = str & "    from panchayats_rep" & yr & " p  left outer join mon_wise_empprov" & yr & "  pp on p.panchayat_code=pp.panchayat_code"
         str = str & "  where " & cond_p & " group by " & val_code_p & ""
         cmd = New SqlCommand(str, con)
@@ -124,6 +127,131 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
         da.Fill(ds, "dt2")
         cmd.Dispose()
 
+        str = ""
+
+        '***********************************Unemployment Allowance
+        str = " select p." & val_code & ","
+        str = str & " isnull(SUM(case when mon='april' and type='unemp' then  isnull(duedays,0) end),0) april_unemp,"
+        str = str & " isnull(SUM(case when mon='may' and type='unemp' then  isnull(duedays,0) end),0) may_unemp ,"
+        str = str & " isnull(SUM(case when mon='june' and type='unemp' then  isnull(duedays,0) end),0) june_unemp , "
+        str = str & " isnull(SUM(case when mon='july' and type='unemp' then  isnull(duedays,0) end),0) july_unemp ,"
+        str = str & " isnull(SUM(case when mon='August' and type='unemp' then  isnull(duedays,0) end),0) aug_unemp,"
+        str = str & " isnull(SUM(case when mon='September' and type='unemp' then  isnull(duedays,0) end),0) sep_unemp ,"
+        str = str & " isnull(SUM(case when mon='October' and type='unemp' then  isnull(duedays,0) end),0) oct_unemp ,"
+        str = str & " isnull(SUM(case when mon='November' and type='unemp' then  isnull(duedays,0) end),0) nov_unemp ,"
+        str = str & " isnull(SUM(case when mon='December' and type='unemp' then  isnull(duedays,0) end),0) dec_unemp,"
+        str = str & " isnull(SUM(case when mon='January' and type='unemp' then  isnull(duedays,0) end),0) jan_unemp ,"
+        str = str & " isnull(SUM(case when mon='February' and type='unemp' then  isnull(duedays,0) end),0) feb_unemp ,"
+        str = str & " isnull(SUM(case when mon='March' and type='unemp' then  isnull(duedays,0) end),0) march_unemp "
+        str = str & " from panchayats_rep" & yr & "  p  "
+        str = str & " left outer join nrega_unemp_allow" & yr & "  pp on p.panchayat_code=pp.panchayat_code"
+        str = str & " where p." & cond & " group by p." & val_code & ""
+        cmd = New SqlCommand(str, con)
+        da = New SqlDataAdapter(cmd)
+        da.Fill(ds, "dt3")
+        cmd.Dispose()
+
+        str = ""
+        '***********************************Delay Compensation
+
+        str = "select p." & val_code & ","
+        str = str & "  isnull(SUM(case when mon='april' and type='delay' then  isnull(delay,0) end),0) april_delay,"
+        str = str & "  isnull(SUM(case when mon='may' and type='delay' then  isnull(delay,0) end),0) may_delay ,"
+        str = str & "  isnull(SUM(case when mon='june' and type='delay' then  isnull(delay,0) end),0) june_delay , "
+        str = str & "  isnull(SUM(case when mon='july' and type='delay' then  isnull(delay,0) end),0) july_delay ,"
+        str = str & "  isnull(SUM(case when mon='August' and type='delay' then  isnull(delay,0) end),0) aug_delay,"
+        str = str & "  isnull(SUM(case when mon='September' and type='delay' then  isnull(delay,0) end),0) sep_delay ,"
+        str = str & "  isnull(SUM(case when mon='October' and type='delay' then  isnull(delay,0) end),0) oct_delay ,"
+        str = str & "  isnull(SUM(case when mon='November' and type='delay' then  isnull(delay,0) end),0) nov_delay ,"
+        str = str & "  isnull(SUM(case when mon='December' and type='delay' then  isnull(delay,0) end),0) dec_delay,"
+        str = str & "  isnull(SUM(case when mon='January' and type='delay' then  isnull(delay,0) end),0) jan_delay ,"
+        str = str & "  isnull(SUM(case when mon='February' and type='delay' then  isnull(delay,0) end),0) feb_delay ,"
+        str = str & "  isnull(SUM(case when mon='March' and type='delay' then  isnull(delay,0) end),0) march_delay "
+        str = str & " from panchayats_rep" & yr & "  p  "
+        str = str & " left outer join nrega_unemp_allow" & yr & "  pp on p.panchayat_code=pp.panchayat_code"
+        str = str & " where p." & cond & " group by p." & val_code & ""
+        cmd = New SqlCommand(str, con)
+        da = New SqlDataAdapter(cmd)
+        da.Fill(ds, "dt4")
+        cmd.Dispose()
+        str = ""
+
+        '***********************************Unpaid Delay
+
+        str = "select p." & val_code & ","
+        str = str & "  isnull(SUM(case when mon='april' and type='unpaid_delay' then  isnull(delay,0) end),0) april_unpaid_delay,"
+        str = str & "  isnull(SUM(case when mon='may' and type='unpaid_delay' then  isnull(delay,0) end),0) may_unpaid_delay ,"
+        str = str & "  isnull(SUM(case when mon='june' and type='unpaid_delay' then  isnull(delay,0) end),0) june_unpaid_delay , "
+        str = str & "  isnull(SUM(case when mon='july' and type='unpaid_delay' then  isnull(delay,0) end),0) july_unpaid_delay ,"
+        str = str & "  isnull(SUM(case when mon='August' and type='unpaid_delay' then  isnull(delay,0) end),0) aug_unpaid_delay,"
+        str = str & "  isnull(SUM(case when mon='September' and type='unpaid_delay' then  isnull(delay,0) end),0) sep_unpaid_delay ,"
+        str = str & "  isnull(SUM(case when mon='October' and type='unpaid_delay' then  isnull(delay,0) end),0) oct_unpaid_delay ,"
+        str = str & "  isnull(SUM(case when mon='November' and type='unpaid_delay' then  isnull(delay,0) end),0) nov_unpaid_delay ,"
+        str = str & "  isnull(SUM(case when mon='December' and type='unpaid_delay' then  isnull(delay,0) end),0) dec_unpaid_delay,"
+        str = str & "  isnull(SUM(case when mon='January' and type='unpaid_delay' then  isnull(delay,0) end),0) jan_unpaid_delay ,"
+        str = str & "  isnull(SUM(case when mon='February' and type='unpaid_delay' then  isnull(delay,0) end),0) feb_unpaid_delay ,"
+        str = str & " isnull(SUM(case when mon='March' and type='unpaid_delay' then  isnull(delay,0) end),0) march_unpaid_delay "
+        str = str & " from panchayats_rep" & yr & "  p  "
+        str = str & " left outer join nrega_unemp_allow" & yr & "  pp on p.panchayat_code=pp.panchayat_code"
+        str = str & " where p." & cond & " group by p." & val_code & ""
+        cmd = New SqlCommand(str, con)
+        da = New SqlDataAdapter(cmd)
+        da.Fill(ds, "dt5")
+        cmd.Dispose()
+        str = ""
+
+        '***********************************Total Works CategoryWise
+
+        str = "select p." & val_code & ",isnull(SUM(case when wrkcat='AV' then totworks end),0)AV_work, "
+        str = str & "  isnull(SUM(case when wrkcat='CA' then totworks end),0)CA_work,  "
+        str = str & "  isnull(SUM(case when wrkcat='DP' then totworks end),0)DP_work,  "
+        str = str & "  isnull(SUM(case when wrkcat='DW' then totworks end),0)DW_work,  "
+        str = str & "  isnull(SUM(case when wrkcat='FP' then totworks end),0)FP_work,  "
+        str = str & "  isnull(SUM(case when wrkcat='FR' then totworks end),0)FR_work,  "
+        str = str & "  isnull(SUM(case when wrkcat='IC' then totworks end),0)IC_work,  "
+        str = str & "  isnull(SUM(case when wrkcat='IF' then totworks end),0)IFf_work,  "
+        str = str & "  isnull(SUM(case when wrkcat='LD' then totworks end),0)LD_work,  "
+        str = str & "  isnull(SUM(case when wrkcat='OP' then totworks end),0)OP_work,  "
+        str = str & "  isnull(SUM(case when wrkcat='RC' then totworks end),0)RC_work,  "
+        str = str & "  isnull(SUM(case when wrkcat='RS' then totworks end),0)RS_work,  "
+        str = str & "  isnull(SUM(case when wrkcat='SK' then totworks end),0)SK_work,  "
+        str = str & "  isnull(SUM(case when wrkcat='WC' then totworks end),0)WC_work,  "
+        str = str & "  isnull(SUM(case when wrkcat='WH' then totworks end),0)WH_work,  "
+        str = str & "  isnull(SUM(case when wrkcat='PG' then totworks end),0)PG_work "
+        str = str & "  from panchayats_rep" & yr & " p  left outer join wrkexpnpanch" & yr & " pp on p.panchayat_code=pp.panchayat_code"
+        str = str & "  where p." & cond & " and status in ('03','04','05') group by p." & val_code & ""
+        cmd = New SqlCommand(str, con)
+        da = New SqlDataAdapter(cmd)
+        da.Fill(ds, "dt6")
+        cmd.Dispose()
+        str = ""
+
+        '***********************************Expenditure CategoryWise
+
+        str = "select p." & val_code & ",round(isnull(SUM(case when wrkcat='AV' then ( isnull(act_lab,0)+isnull(act_mat,0) +isnull(act_skilled,0) +isnull(act_tax,0)) end),0),2)AV_exp, "
+        str = str & "  round(isnull(SUM(case when wrkcat='CA' then ( isnull(act_lab,0)+isnull(act_mat,0) +isnull(act_skilled,0) +isnull(act_tax,0)) end),0),2)CA_exp,  "
+        str = str & "  round(isnull(SUM(case when wrkcat='DP' then ( isnull(act_lab,0)+isnull(act_mat,0) +isnull(act_skilled,0) +isnull(act_tax,0)) end),0),2)DP_exp,  "
+        str = str & "  round(isnull(SUM(case when wrkcat='DW' then ( isnull(act_lab,0)+isnull(act_mat,0) +isnull(act_skilled,0) +isnull(act_tax,0)) end),0),2)DW_exp,  "
+        str = str & "  round(isnull(SUM(case when wrkcat='FP' then ( isnull(act_lab,0)+isnull(act_mat,0) +isnull(act_skilled,0) +isnull(act_tax,0)) end),0),2)FP_exp,  "
+        str = str & "  round(isnull(SUM(case when wrkcat='FR' then ( isnull(act_lab,0)+isnull(act_mat,0) +isnull(act_skilled,0) +isnull(act_tax,0)) end),0),2)FR_exp,  "
+        str = str & "  round(isnull(SUM(case when wrkcat='IC' then ( isnull(act_lab,0)+isnull(act_mat,0) +isnull(act_skilled,0) +isnull(act_tax,0)) end),0),2)IC_exp,  "
+        str = str & "  round(isnull(SUM(case when wrkcat='IF' then ( isnull(act_lab,0)+isnull(act_mat,0) +isnull(act_skilled,0) +isnull(act_tax,0)) end),0),2)IFf_exp,  "
+        str = str & "  round(isnull(SUM(case when wrkcat='LD' then ( isnull(act_lab,0)+isnull(act_mat,0) +isnull(act_skilled,0) +isnull(act_tax,0)) end),0),2)LD_exp,  "
+        str = str & "  round(isnull(SUM(case when wrkcat='OP' then ( isnull(act_lab,0)+isnull(act_mat,0) +isnull(act_skilled,0) +isnull(act_tax,0)) end),0),2)OP_exp,  "
+        str = str & "  round(isnull(SUM(case when wrkcat='RC' then ( isnull(act_lab,0)+isnull(act_mat,0) +isnull(act_skilled,0) +isnull(act_tax,0)) end),0),2)RC_exp,  "
+        str = str & "  round(isnull(SUM(case when wrkcat='RS' then ( isnull(act_lab,0)+isnull(act_mat,0) +isnull(act_skilled,0) +isnull(act_tax,0)) end),0),2)RS_exp,  "
+        str = str & "  round(isnull(SUM(case when wrkcat='SK' then ( isnull(act_lab,0)+isnull(act_mat,0) +isnull(act_skilled,0) +isnull(act_tax,0)) end),0),2)SK_exp,  "
+        str = str & "  round(isnull(SUM(case when wrkcat='WC' then ( isnull(act_lab,0)+isnull(act_mat,0) +isnull(act_skilled,0) +isnull(act_tax,0)) end),0),2)WC_exp,  "
+        str = str & "  round(isnull(SUM(case when wrkcat='WH' then ( isnull(act_lab,0)+isnull(act_mat,0) +isnull(act_skilled,0) +isnull(act_tax,0)) end),0),2)WH_exp,  "
+        str = str & "  round(isnull(SUM(case when wrkcat='PG' then ( isnull(act_lab,0)+isnull(act_mat,0) +isnull(act_skilled,0) +isnull(act_tax,0)) end),0),2)PG_exp "
+        str = str & "  from panchayats_rep" & yr & " p  left outer join wrkexpnpanch" & yr & " pp on p.panchayat_code=pp.panchayat_code"
+        str = str & "  where p." & cond & " and status in ('03','04','05') group by p." & val_code & ""
+        cmd = New SqlCommand(str, con)
+        da = New SqlDataAdapter(cmd)
+        da.Fill(ds, "dt7")
+        cmd.Dispose()
+
+        str = ""
         con.Close()
         '******************************************//////////////////////////////////////////////////////////////////////*********************************************************************
         ''******************************************//////////////////////////////////////////////////////////////////////*********************************************************************
