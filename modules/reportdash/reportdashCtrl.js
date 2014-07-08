@@ -94,6 +94,26 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
     //////////////////////////
     // Vizulization Loading //
     //////////////////////////
+    $scope.demand_reg_chart = {
+      bindto: '#demand_reg_chart',
+      data: {
+        x: 'x',
+        columns: [
+                  ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
+                  ['Demand Registered', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              ],
+      },
+      axis: {
+        x: {
+          type: 'timeseries',
+          tick: {
+            format: '%B'
+          }
+        }
+      },
+    };
+
+
     $scope.demand_labourbudget_chart = {
       bindto: '#demand_labourbudget_chart',
       data: {
@@ -121,8 +141,8 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: 'x',
         columns: [
             ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-            ['Unemployment Allowances - Due for PDs', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
-            ['Amount payable', 130, 340, 200, 500, 250, 350, 130, 340, 200, 500, 250, 350],
+            ['Unemployment Allowances - Due for PDs',  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ['Amount payable',  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
         ],
         type: 'bar',
@@ -143,76 +163,63 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
 
 
 
-    $scope.gps_by_expenditure_chart = {
-      bindto: '#gps_by_expenditure_chart',
+    $scope.work_category_wise_chart = {
+      bindto: '#work_category_wise_chart',
       data: {
 
         columns: [
-            ['GPs with niFGTHl expenditure', 20],
-            ['GPs wiGHFGth no employment generation in last month)', 30],
-            ['GPs wiMNHth no approved works', 10],
-            ['GPs wiZDFth no ongoing works', 40],
-            ['GPs witMNh no ongoing works', 40],
-            ['GPs wit5HGh no ongoing works', 40],
-            ['GPs witHFGHh no ongoing works', 40],
-            ['GPs wiV CBNth no ongoing works', 40],
-            ['GPs withGFG no ongoing works', 40],
-            ['GPs wiASth no ongoing works', 40],
-            ['GPs wiFth no ongoing works', 40],
-            ['GPs wiNth no ongoing works', 40],
-            ['GPs withGB no ongoing works', 40],
-            ['GPs with DnAo ongoing works', 40],
-            ['GPs with nAo ongoing works', 40],
-            ['GPs with FnoA ongoing works', 40],
-            ['GPs withFH noA ongoing works', 40]
+            ['Aanganbadi', 0],
+            ['Coastal Areas',0],
+            ['Dourght Proofing', 0],
+            ['Rural Drinking Water', 0],
+            ['Food Grain', 0],
+            ['Flood Control and Protection', 0],
+            ['Fishries', 0],
+            ['Micro Irrigation Works', 0],
+            ['Works on individuals land(Cat 4)', 0],
+            ['Land Development', 0],
+            ['Other Works', 0],
+            ['Playground', 0],
+            ['Rural Connectivity', 0],
+            ['Rural Sanitation', 0],
+            ['Bharat Nirman Rajiv Gandhi Seva Kendra', 0],
+            ['Water Conservation and Harvesting', 0],
+            ['Renovation of traditional Water Bodies', 0]
         ],
         type: 'donut'
       },
       donut: {
-        title: "Total GPs",
+        title: "Total Work",
       }
     };
 
-    $scope.persondays_monthly_chart = {
-      bindto: '#persondays_monthly_chart',
+    $scope.expenditure_category_wise_chart = {
+      bindto: '#expenditure_category_wise_chart',
       data: {
-        x: 'x',
-        columns: [
-            ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-            ['Persondays : LB Approved Monthly', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250]
-        ],
-        // type: 'spline'
-      },
-      axis: {
-        x: {
-          type: 'timeseries',
-          tick: {
-            format: '%m'
-          }
-        }
-      }
-    };
 
-    $scope.persondays_pd_caste_chart = {
-      bindto: '#persondays_pd_caste_chart',
-      data: {
-        x: 'x',
         columns: [
-            ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-            ['Persondays:PD Generated for SC', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
-            ['ST', 130, 340, 200, 500, 250, 350, 130, 340, 200, 500, 250, 350],
-            ['Women', 110, 300, 120, 300, 350, 250, 100, 240, 230, 300, 230, 310],
-
+            ['Aanganbadi', 0],
+            ['Coastal Areas',0],
+            ['Dourght Proofing', 0],
+            ['Rural Drinking Water', 0],
+            ['Food Grain', 0],
+            ['Flood Control and Protection', 0],
+            ['Fishries', 0],
+            ['Micro Irrigation Works', 0],
+            ['Works on individuals land(Cat 4)', 0],
+            ['Land Development', 0],
+            ['Other Works', 0],
+            ['Playground', 0],
+            ['Rural Connectivity', 0],
+            ['Rural Sanitation', 0],
+            ['Bharat Nirman Rajiv Gandhi Seva Kendra', 0],
+            ['Water Conservation and Harvesting', 0],
+            ['Renovation of traditional Water Bodies', 0]
         ],
-        type: 'bar',
+        type: 'donut'
       },
-      axis: {
-        x: {
-          type: 'timeseries',
-          tick: {
-            format: '%m'
-          }
-        }
+      donut: {
+        title: "Total Expenditure",
       }
     };
 
@@ -237,63 +244,42 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       }
     };
 
-    $scope.workcompletion_chart = {
-      bindto: '#workcompletion_chart',
+    $scope.wage_expenditure_chart = {
+      bindto: '#wage_expenditure_chart',
       data: {
         x: 'x',
         columns: [
             ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-            ['Work Completion Rate', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250]
-        ],
-        // type: 'spline'
-      },
-      axis: {
-        x: {
-          type: 'timeseries',
-          tick: {
-            format: '%m'
-          }
-        }
-      }
-    };
-
-
-
-    $scope.hhscompleted100days_chart = {
-      bindto: '#hhscompleted100days_chart',
-      data: {
-        x: 'x',
-        columns: [
-            ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-            ['HHs completed 100 days', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250]
-        ],
-        // type: 'spline'
-      },
-      axis: {
-        x: {
-          type: 'timeseries',
-          tick: {
-            format: '%m'
-          }
-        }
-      }
-    };
-
-
-    $scope.wage_chart = {
-      bindto: '#wage_chart',
-      data: {
-        x: 'x',
-        columns: [
-            ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-            ['Total', 130, 340, 200, 500, 250, 350, 130, 340, 200, 500, 250, 350],
-            ['Wage %', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
+            ['Wage Expenditure (In Lacs)', 130, 340, 200, 500, 250, 350, 130, 340, 200, 500, 250, 350],
 
         ],
         type: 'bar',
         types: {
           'Total': 'bar',
           'Wage %': 'line',
+        },
+      },
+      axis: {
+        x: {
+          type: 'timeseries',
+          tick: {
+            format: '%m'
+          }
+        }
+      }
+    };
+
+    $scope.unpaid_delay_chart = {
+      bindto: '#unpaid_delay_chart',
+      data: {
+        x: 'x',
+        columns: [
+            ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
+            ['Unpaid Delay', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        ],
+        type: 'bar',
+        types: {
+          'Unpaid Delay': 'bar'
         },
       },
       axis: {
@@ -332,52 +318,13 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       }
     };
 
-
-    $scope.wageperPD_chart = {
-      bindto: '#wageperPD_chart',
-      data: {
-        x: 'x',
-        columns: [
-            ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-            ['Average wage per PD', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
-            ['Cost per PD', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
-        ],
-
-      },
-      axis: {
-        x: {
-          type: 'timeseries',
-          tick: {
-            format: '%m'
-          }
-        }
-      }
-    };
-
-
-    $scope.efms_chart = {
-      bindto: '#efms_chart',
-      data: {
-
-        columns: [
-            ['Started in No. of blocks(wages)', 50],
-            ['Started in No. of blocks(Material)', 30],
-            ['Started in No. of blocks(Admin)', 20],
-        ],
-        type: 'donut'
-      },
-      donut: {
-        title: "eFMS"
-      }
-    };
-
     $scope.DBT_chart = {
       bindto: '#DBT_chart',
       data: {
 
         columns: [
-            ['Active workers A/Cs freezed', 70],
-            ['Aadhar seeding against total active worker', 30],
+            ['Active workers A/Cs freezed', 0],
+            ['Aadhar seeding against total active worker', 0],
         ],
         type: 'donut'
       },
@@ -406,6 +353,24 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       });
       MonthlyReport.fetch(params, $scope.selectedYear).then(function(response) {
         $scope.monthlydata = response[0];
+
+        $scope.demand_reg_chart.data.columns[1] = [
+          'Demand Registered', 
+          $scope.monthlydata.april_demand_reg, 
+          $scope.monthlydata.may_demand_reg,
+          $scope.monthlydata.june_demand_reg, 
+          $scope.monthlydata.july_demand_reg, 
+          $scope.monthlydata.aug_demand_reg,
+          $scope.monthlydata.sep_demand_reg,       
+          $scope.monthlydata.oct_demand_reg, 
+          $scope.monthlydata.nov_demand_reg, 
+          $scope.monthlydata.dec_demand_reg, 
+          $scope.monthlydata.jan_demand_reg,
+          $scope.monthlydata.feb_demand_reg, 
+          $scope.monthlydata.march_demand_reg
+        ];
+
+
         $scope.demand_labourbudget_chart.data.columns[1] = [
           'Persondays Generated', 
           $scope.monthlydata.april_work_allot, 
@@ -436,6 +401,72 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
           $scope.monthlydata.feb_lb-$scope.monthlydata.jan_lb, 
           $scope.monthlydata.march_lb-$scope.monthlydata.feb_lb
         ];
+
+
+        // Chart 2
+        $scope.unemployment_allowances_chart.data.columns[1] = [
+          'Unemployment Allowances - Due for PDs', 
+          $scope.monthlydata.april_unemp, 
+          $scope.monthlydata.may_unemp,
+          $scope.monthlydata.june_unemp, 
+          $scope.monthlydata.july_unemp, 
+          $scope.monthlydata.aug_unemp,
+          $scope.monthlydata.sep_unemp,       
+          $scope.monthlydata.oct_unemp, 
+          $scope.monthlydata.nov_unemp, 
+          $scope.monthlydata.dec_unemp, 
+          $scope.monthlydata.jan_unemp,
+          $scope.monthlydata.feb_unemp, 
+          $scope.monthlydata.march_unemp
+        ];   
+
+
+        $scope.work_category_wise_chart.data.columns= [
+            ['Aanganbadi', $scope.monthlydata.AV_work],
+            ['Coastal Areas',$scope.monthlydata.CA_work],
+            ['Dourght Proofing', $scope.monthlydata.DP_work],
+            ['Rural Drinking Water', $scope.monthlydata.DW_work],
+            ['Food Grain', $scope.monthlydata.FG_work],
+            ['Flood Control and Protection', $scope.monthlydata.FP_work],
+            ['Fishries', $scope.monthlydata.FR_work],
+            ['Micro Irrigation Works', $scope.monthlydata.IC_work],
+            ['Works on individuals land(Cat 4)', $scope.monthlydata.IF_work],
+            ['Land Development', $scope.monthlydata.LD_work],
+            ['Other Works', $scope.monthlydata.OP_work],
+            ['Playground', $scope.monthlydata.PG_work],
+            ['Rural Connectivity', $scope.monthlydata.RC_work],
+            ['Rural Sanitation', $scope.monthlydata.RS_work],
+            ['Bharat Nirman Rajiv Gandhi Seva Kendra', $scope.monthlydata.SK_work],
+            ['Water Conservation and Harvesting', $scope.monthlydata.WC_work],
+            ['Renovation of traditional Water Bodies', $scope.monthlydata.WH_work]
+        ]; 
+
+
+        $scope.expenditure_category_wise_chart.data.columns= [
+            ['Aanganbadi', $scope.monthlydata.AV_exp],
+            ['Coastal Areas',$scope.monthlydata.CA_exp],
+            ['Dourght Proofing', $scope.monthlydata.DP_exp],
+            ['Rural Drinking Water', $scope.monthlydata.DW_exp],
+            ['Food Grain', $scope.monthlydata.FG_exp],
+            ['Flood Control and Protection', $scope.monthlydata.FP_exp],
+            ['Fishries', $scope.monthlydata.FR_exp],
+            ['Micro Irrigation Works', $scope.monthlydata.IC_exp],
+            ['Works on individuals land(Cat 4)', $scope.monthlydata.IF_exp],
+            ['Land Development', $scope.monthlydata.LD_exp],
+            ['Other Works', $scope.monthlydata.OP_exp],
+            ['Playground', $scope.monthlydata.PG_exp],
+            ['Rural Connectivity', $scope.monthlydata.RC_exp],
+            ['Rural Sanitation', $scope.monthlydata.RS_exp],
+            ['Bharat Nirman Rajiv Gandhi Seva Kendra', $scope.monthlydata.SK_exp],
+            ['Water Conservation and Harvesting', $scope.monthlydata.WC_exp],
+            ['Renovation of traditional Water Bodies', $scope.monthlydata.WH_exp]
+        ];
+
+        $scope.DBT_chart.data.columns= [
+            ['Active workers A/Cs freezed',  $scope.yearlydata.frez_act_pers],
+            ['Aadhar seeding against total active worker',  $scope.yearlydata.yearlydata.aadhaar_seedpers],
+        ];
+
 
 
 
