@@ -504,6 +504,54 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
         cmd.Dispose()
 
         str = ""
+
+
+        '***********************Average No. of Persondays per Houshold 
+        str = "select " & val_code_p & ","
+        str = str & "  (case when sum(isnull(aprilreg,0))>0 then sum(isnull(aprilapp,0))/sum(isnull(aprilreg,0)) else 0 end)apr_PD_per_hh, "
+        str = str & "  (case when sum(isnull(mayreg,0))>0 then sum(isnull(mayapp,0))/sum(isnull(mayreg,0)) else 0 end)may_PD_per_hh ,"
+        str = str & " (case when sum(isnull(junereg,0))>0 then sum(isnull(juneapp,0))/sum(isnull(junereg,0)) else 0 end)jun_PD_per_hh ,"
+        str = str & " (case when sum(isnull(julyreg,0))>0 then sum(isnull(julyapp,0))/sum(isnull(julyreg,0)) else 0 end)jul_PD_per_hh ,"
+        str = str & "  (case when sum(isnull(augreg,0))>0 then sum(isnull(augapp,0))/sum(isnull(augreg,0)) else 0 end)aug_PD_per_hh ,"
+        str = str & "  (case when sum(isnull(sepreg,0))>0 then sum(isnull(sepapp,0))/sum(isnull(sepreg,0)) else 0 end)sep_PD_per_hh ,"
+        str = str & "  (case when sum(isnull(octreg,0))>0 then sum(isnull(octapp,0))/sum(isnull(octreg,0)) else 0 end)oct_PD_per_hh ,"
+        str = str & "  (case when sum(isnull(novreg,0))>0 then sum(isnull(novapp,0))/sum(isnull(novreg,0)) else 0 end)nov_PD_per_hh ,"
+        str = str & "  (case when sum(isnull(decreg,0))>0 then sum(isnull(decapp,0))/sum(isnull(decreg,0)) else 0 end)dec_PD_per_hh ,"
+        str = str & "  (case when sum(isnull(janreg,0))>0 then sum(isnull(janapp,0))/sum(isnull(janreg,0)) else 0 end)jan_PD_per_hh ,"
+        str = str & " (case when sum(isnull(febreg,0))>0 then sum(isnull(febapp,0))/sum(isnull(febreg,0)) else 0 end)feb_PD_per_hh ,"
+        str = str & "  (case when sum(isnull(marchreg,0))>0 then sum(isnull(marchapp,0))/sum(isnull(marchreg,0)) else 0 end)mar_PD_per_hh "
+        str = str & "    from panchayats_rep" & yr & " p  left outer join mon_wise_empprov" & yr & "  pp on p.panchayat_code=pp.panchayat_code"
+        str = str & "  where " & cond_p & " group by " & val_code_p & ""
+        cmd = New SqlCommand(str, con)
+        da = New SqlDataAdapter(cmd)
+        da.Fill(ds, "dt12")
+        cmd.Dispose()
+
+        str = ""
+
+
+        '***********************Average No. of Persondays per Houshold Previous year
+        str = "select " & val_code_p & ","
+        str = str & "  (case when sum(isnull(aprilreg,0))>0 then sum(isnull(aprilapp,0))/sum(isnull(aprilreg,0)) else 0 end)apr_PD_per_hh_preyr, "
+        str = str & "  (case when sum(isnull(mayreg,0))>0 then sum(isnull(mayapp,0))/sum(isnull(mayreg,0)) else 0 end)may_PD_per_hh_preyr,"
+        str = str & " (case when sum(isnull(junereg,0))>0 then sum(isnull(juneapp,0))/sum(isnull(junereg,0)) else 0 end)jun_PD_per_hh_preyr,"
+        str = str & " (case when sum(isnull(julyreg,0))>0 then sum(isnull(julyapp,0))/sum(isnull(julyreg,0)) else 0 end)jul_PD_per_hh_preyr,"
+        str = str & "  (case when sum(isnull(augreg,0))>0 then sum(isnull(augapp,0))/sum(isnull(augreg,0)) else 0 end)aug_PD_per_hh_preyr,"
+        str = str & "  (case when sum(isnull(sepreg,0))>0 then sum(isnull(sepapp,0))/sum(isnull(sepreg,0)) else 0 end)sep_PD_per_hh_preyr,"
+        str = str & "  (case when sum(isnull(octreg,0))>0 then sum(isnull(octapp,0))/sum(isnull(octreg,0)) else 0 end)oct_PD_per_hh_preyr,"
+        str = str & "  (case when sum(isnull(novreg,0))>0 then sum(isnull(novapp,0))/sum(isnull(novreg,0)) else 0 end)nov_PD_per_hh_preyr,"
+        str = str & "  (case when sum(isnull(decreg,0))>0 then sum(isnull(decapp,0))/sum(isnull(decreg,0)) else 0 end)dec_PD_per_hh_preyr,"
+        str = str & "  (case when sum(isnull(janreg,0))>0 then sum(isnull(janapp,0))/sum(isnull(janreg,0)) else 0 end)jan_PD_per_hh_preyr,"
+        str = str & " (case when sum(isnull(febreg,0))>0 then sum(isnull(febapp,0))/sum(isnull(febreg,0)) else 0 end)feb_PD_per_hh_preyr,"
+        str = str & "  (case when sum(isnull(marchreg,0))>0 then sum(isnull(marchapp,0))/sum(isnull(marchreg,0)) else 0 end)mar_PD_per_hh_preyr "
+        str = str & "    from panchayats_rep" & pre_yr & " p  left outer join mon_wise_empprov" & pre_yr & "  pp on p.panchayat_code=pp.panchayat_code"
+        str = str & "  where " & cond_p & " group by " & val_code_p & ""
+        cmd = New SqlCommand(str, con)
+        da = New SqlDataAdapter(cmd)
+        da.Fill(ds, "dt13")
+        cmd.Dispose()
+
+        str = ""
         con.Close()
         '******************************************//////////////////////////////////////////////////////////////////////*********************************************************************
         ''******************************************//////////////////////////////////////////////////////////////////////*********************************************************************

@@ -252,6 +252,27 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         }
       }
     };
+    $scope.persondays_per_hh_chart = {
+      bindto: '#persondays_per_hh_chart',
+      data: {
+        x: 'x',
+        columns: [
+            ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
+            ['Prev Year', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ['Avg. No. of Persondays per HH', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        ],
+        type: 'bar',
+      },
+      
+      axis: {
+        x: {
+          type: 'timeseries',
+          tick: {
+            format: '%B'
+          }
+        }
+      }
+    };
 
     $scope.wage_expenditure_chart = {
       bindto: '#wage_expenditure_chart',
@@ -406,7 +427,39 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
           $scope.monthlydata.jan_hh_P_emp,
           $scope.monthlydata.feb_hh_P_emp, 
           $scope.monthlydata.march_hh_P_emp
+        ];
+
+         $scope.persondays_per_hh_chart.data.columns[1] = [
+          'Prev Year', 
+          $scope.monthlydata.april_PD_per_hh_preyr, 
+          $scope.monthlydata.may_PD_per_hh_preyr,
+          $scope.monthlydata.jun_PD_per_hh_preyr, 
+          $scope.monthlydata.jul_PD_per_hh_preyr, 
+          $scope.monthlydata.aug_PD_per_hh_preyr,
+          $scope.monthlydata.sep_PD_per_hh_preyr,       
+          $scope.monthlydata.oct_PD_per_hh_preyr, 
+          $scope.monthlydata.nov_PD_per_hh_preyr, 
+          $scope.monthlydata.dec_PD_per_hh_preyr, 
+          $scope.monthlydata.jan_PD_per_hh_preyr,
+          $scope.monthlydata.feb_PD_per_hh_preyr, 
+          $scope.monthlydata.march_PD_per_hh_preyr
         ]; 
+        $scope.persondays_per_hh_chart.data.columns[2] = [
+          'Avg. No. of Persondays per HH', 
+          $scope.monthlydata.april_PD_per_hh, 
+          $scope.monthlydata.may_PD_per_hh,
+          $scope.monthlydata.jun_PD_per_hh, 
+          $scope.monthlydata.jul_PD_per_hh, 
+          $scope.monthlydata.aug_PD_per_hh,
+          $scope.monthlydata.sep_PD_per_hh,       
+          $scope.monthlydata.oct_PD_per_hh, 
+          $scope.monthlydata.nov_PD_per_hh, 
+          $scope.monthlydata.dec_PD_per_hh, 
+          $scope.monthlydata.jan_PD_per_hh,
+          $scope.monthlydata.feb_PD_per_hh, 
+          $scope.monthlydata.march_PD_per_hh
+        ]; 
+
 
 
         $scope.demand_labourbudget_chart.data.columns[1] = [
