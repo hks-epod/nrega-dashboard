@@ -15,7 +15,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
     Dim con, con1 As New SqlConnection
     Dim cmd As New SqlCommand
     Dim myreader, myreader1 As SqlDataReader
-    Public str, yr, cond, val_code, val_code_p, cond_p, state_code As String
+    Public str, yr, cond, val_code, val_code_p, cond_p, state_code, pre_yr As String
     Dim conobj As New ConnectNREGA
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -60,6 +60,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
     End Sub
     Public Function Demand_registered_monthly(ByVal state_code As String, ByVal fin_year As String) As String
         yr = Mid(fin_year, 3, 2) & Mid(fin_year, 8, 2)
+        pre_yr = Mid(fin_year, 3, 2) - 1 & Mid(fin_year, 8, 2) - 1
         Dim dt As New DataTable()
         Dim ds As New DataSet()
         Dim da As SqlDataAdapter
@@ -317,7 +318,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
         str = ""
 
         '**********************************Monthwise Wage Expenditure
-        Dim strr, str1, str2 As String
+        Dim strr, str1, str2, str3, str_1 As String
 
 
         str = " round(isnull(sum(case when datename(month,dt_paid) ='april' then lab end),0)/100000,2)  apr_lab,"
@@ -333,6 +334,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
         str = str & " round(isnull(sum(case when datename(month,dt_paid) ='february' then lab end),0)/100000,2)  feb_lab,"
         str = str & " round(isnull(sum(case when datename(month,dt_paid) ='march' then lab end),0)/100000,2)  mar_lab   "
         str = str & " from("
+
         If Request.QueryString("type") = "s" Then
             str1 = "select s.state_code code,state_name name,"
 
@@ -350,6 +352,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
             str2 = str2 & " and p." & cond & ""
             str2 = str2 & " group by p.state_code ,dt_paid )#cc inner join states s on #cc.state_code=s.state_code"
             str2 = str2 & " group by s.state_code,state_name"
+
         ElseIf Request.QueryString("type") = "d" Then
             str1 = "select s.district_code code,district_name name,"
 
@@ -367,6 +370,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
             str2 = str2 & " and p." & cond & ""
             str2 = str2 & " group by p.district_code ,dt_paid )#cc inner join districts_rep" & yr & " s on #cc.district_code=s.district_code"
             str2 = str2 & " group by  s.district_code,district_name"
+
         ElseIf Request.QueryString("type") = "b" Then
             str1 = "select s.block_code code,block_name name,"
 
@@ -380,6 +384,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
             str2 = str2 & " group by p.block_code ,dt_paid"
             str2 = str2 & " )#cc inner join blocks_rep" & yr & " s on #cc.block_code=s.block_code where s." & cond & ""
             str2 = str2 & " group by s.block_code,block_name"
+
         ElseIf Request.QueryString("type") = "p" Then
             str1 = "select s.panchayat_code code,panchayat_name name,"
 
@@ -388,6 +393,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
             str2 = str2 & " group by p.panchayat_code ,dt_paid"
             str2 = str2 & " )#cc inner join panchayats_rep" & yr & " s on #cc.panchayat_code=s.panchayat_code where s." & cond & ""
             str2 = str2 & " group by s.panchayat_code,panchayat_name"
+
         End If
 
 
@@ -396,6 +402,105 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
         cmd = New SqlCommand(strr, con)
         da = New SqlDataAdapter(cmd)
         da.Fill(ds, "dt9")
+        cmd.Dispose()
+        strr = ""
+
+        '**********************************Monthwise Wage Expenditure Previous year
+
+        str_1 = " round(isnull(sum(case when datename(month,dt_paid) ='april' then lab end),0)/100000,2)  apr_lab_pre,"
+        str_1 = str_1 & " round(isnull(sum(case when datename(month,dt_paid) ='may' then lab end),0)/100000,2)  may_lab_pre,"
+        str_1 = str_1 & " round(isnull(sum(case when datename(month,dt_paid) ='june' then lab end),0)/100000,2)  jun_lab_pre,"
+        str_1 = str_1 & " round(isnull(sum(case when datename(month,dt_paid) ='july' then lab end),0)/100000,2)  jul_lab_pre,"
+        str_1 = str_1 & " round(isnull(sum(case when datename(month,dt_paid) ='august' then lab end),0)/100000,2)  aug_lab_pre,"
+        str_1 = str_1 & " round(isnull(sum(case when datename(month,dt_paid) ='september' then lab end),0)/100000,2)  sep_lab_pre,"
+        str_1 = str_1 & " round(isnull(sum(case when datename(month,dt_paid) ='october' then lab end),0)/100000,2)  oct_lab_pre,"
+        str_1 = str_1 & " round(isnull(sum(case when datename(month,dt_paid) ='november' then lab end),0)/100000,2)  nov_lab_pre,"
+        str_1 = str_1 & " round(isnull(sum(case when datename(month,dt_paid) ='december' then lab end),0)/100000,2)  dec_lab_pre,"
+        str_1 = str_1 & " round(isnull(sum(case when datename(month,dt_paid) ='january' then lab end),0)/100000,2)  jan_lab_pre,"
+        str_1 = str_1 & " round(isnull(sum(case when datename(month,dt_paid) ='february' then lab end),0)/100000,2)  feb_lab_pre,"
+        str_1 = str_1 & " round(isnull(sum(case when datename(month,dt_paid) ='march' then lab end),0)/100000,2)  mar_lab_pre   "
+        str_1 = str_1 & " from("
+        If Request.QueryString("type") = "s" Then
+            str1 = "select s.state_code code,state_name name,"
+
+            str3 = "SELECT p.state_code,dt_paid,SUM(exp_lab)lab FROM DAYEXPN" & pre_yr & " a inner join panchayats_rep" & pre_yr & " p on p.panchayat_code=a.panchayat_code"
+            str3 = str3 & " where p." & cond & ""
+            str3 = str3 & " group by p.state_code ,dt_paid"
+            str3 = str3 & "  union all"
+            str3 = str3 & " SELECT p.state_code,dt_paid,SUM(exp_lab)lab FROM DAYEXPN" & pre_yr & " a inner join blocks_rep" & pre_yr & " p on p.block_code=left(a.panchayat_code,7) "
+            str3 = str3 & "  where right(a.panchayat_code,3) ='000'"
+            str3 = str3 & " and p." & cond & ""
+            str3 = str3 & " group by p.state_code ,dt_paid"
+            str3 = str3 & "   union all"
+            str3 = str3 & " SELECT p.state_code,dt_paid,SUM(exp_lab)lab FROM DAYEXPN" & pre_yr & " a inner join districts_rep" & pre_yr & " p on p.district_code=left(a.panchayat_code,4) "
+            str3 = str3 & " where right(a.panchayat_code,6) ='000000'"
+            str3 = str3 & " and p." & cond & ""
+            str3 = str3 & " group by p.state_code ,dt_paid )#cc inner join states s on #cc.state_code=s.state_code"
+            str3 = str3 & " group by s.state_code,state_name"
+        ElseIf Request.QueryString("type") = "d" Then
+            str1 = "select s.district_code code,district_name name,"
+
+            str3 = "SELECT p.district_code,dt_paid,SUM(exp_lab)lab FROM DAYEXPN" & pre_yr & " a inner join panchayats_rep" & pre_yr & " p on p.panchayat_code=a.panchayat_code"
+            str3 = str3 & " where p." & cond & ""
+            str3 = str3 & " group by p.district_code ,dt_paid"
+            str3 = str3 & "  union all"
+            str3 = str3 & " SELECT p.district_code,dt_paid,SUM(exp_lab)lab FROM DAYEXPN" & pre_yr & " a inner join blocks_rep" & pre_yr & " p on p.block_code=left(a.panchayat_code,7) "
+            str3 = str3 & " where right(a.panchayat_code,3) ='000'"
+            str3 = str3 & " and p." & cond & ""
+            str3 = str3 & " group by p.district_code ,dt_paid"
+            str3 = str3 & "    union all"
+            str3 = str3 & " SELECT p.district_code,dt_paid,SUM(exp_lab)lab FROM DAYEXPN" & pre_yr & " a inner join districts_rep" & pre_yr & " p on p.district_code=left(a.panchayat_code,4) "
+            str3 = str3 & " where right(a.panchayat_code,6) ='000000'"
+            str3 = str3 & " and p." & cond & ""
+            str3 = str3 & " group by p.district_code ,dt_paid )#cc inner join districts_rep" & pre_yr & " s on #cc.district_code=s.district_code"
+            str3 = str3 & " group by  s.district_code,district_name"
+        ElseIf Request.QueryString("type") = "b" Then
+            str1 = "select s.block_code code,block_name name,"
+
+            str3 = "SELECT p.block_code,dt_paid,SUM(exp_lab)lab FROM DAYEXPN" & pre_yr & " a inner join panchayats_rep" & pre_yr & " p on p.panchayat_code=a.panchayat_code"
+            str3 = str3 & " where p." & cond & ""
+            str3 = str3 & " group by p.block_code ,dt_paid"
+            str3 = str3 & "    union all"
+            str3 = str3 & " SELECT p.block_code,dt_paid,SUM(exp_lab)lab FROM DAYEXPN" & yr & " a inner join blocks_rep" & pre_yr & " p on p.block_code=left(a.panchayat_code,7) "
+            str3 = str3 & " where right(a.panchayat_code,3) ='000'"
+            str3 = str3 & "  and p." & cond & ""
+            str3 = str3 & " group by p.block_code ,dt_paid"
+            str3 = str3 & " )#cc inner join blocks_rep" & pre_yr & " s on #cc.block_code=s.block_code where s." & cond & ""
+            str3 = str3 & " group by s.block_code,block_name"
+        ElseIf Request.QueryString("type") = "p" Then
+            str1 = "select s.panchayat_code code,panchayat_name name,"
+
+            str3 = "SELECT p.panchayat_code,dt_paid,SUM(exp_lab)lab FROM DAYEXPN" & pre_yr & " a inner join panchayats_rep" & pre_yr & " p on p.panchayat_code=a.panchayat_code"
+            str3 = str3 & " where p." & cond & ""
+            str3 = str3 & " group by p.panchayat_code ,dt_paid"
+            str3 = str3 & " )#cc inner join panchayats_rep" & pre_yr & " s on #cc.panchayat_code=s.panchayat_code where s." & cond & ""
+            str3 = str3 & " group by s.panchayat_code,panchayat_name"
+        End If
+
+
+        strr = str1 & str_1 & str3
+
+        cmd = New SqlCommand(strr, con)
+        da = New SqlDataAdapter(cmd)
+        da.Fill(ds, "dt10")
+        cmd.Dispose()
+
+        str = ""
+
+
+        '***********************HH provided Employement Previous Year
+        str = "select " & val_code_p & ","
+        str = str & "     isnull(SUM(isnull(aprilreg,0)),0)april_hh_P_emp_pre, isnull(SUM(isnull(mayreg,0)),0)may_hh_P_emp_pre,"
+        str = str & "     isnull(SUM(isnull(junereg,0)),0)june_hh_P_emp_pre,isnull(SUM(isnull(julyreg,0)),0)july_hh_P_emp_pre,"
+        str = str & "      isnull(SUM(isnull(augreg,0)),0)aug_hh_P_emp_pre, isnull(SUM(isnull(sepreg,0)),0)sep_hh_P_emp_pre, "
+        str = str & "      isnull(SUM(isnull(octreg,0)),0)oct_hh_P_emp_pre,isnull(SUM(isnull(novreg,0)),0)nov_hh_P_emp_pre,"
+        str = str & "      isnull(SUM(isnull(decreg,0)),0)dec_hh_P_emp_pre,  isnull(SUM(isnull(janreg,0)),0)jan_hh_P_emp_pre,"
+        str = str & "     isnull(SUM(isnull(febreg,0)),0)feb_hh_P_emp_pre,isnull(SUM(isnull(marchreg,0)),0)march_hh_P_emp_pre "
+        str = str & "    from panchayats_rep" & pre_yr & " p  left outer join mon_wise_empprov" & pre_yr & "  pp on p.panchayat_code=pp.panchayat_code"
+        str = str & "  where " & cond_p & " group by " & val_code_p & ""
+        cmd = New SqlCommand(str, con)
+        da = New SqlDataAdapter(cmd)
+        da.Fill(ds, "dt11")
         cmd.Dispose()
 
         str = ""
