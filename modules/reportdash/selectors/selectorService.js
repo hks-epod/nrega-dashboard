@@ -6,7 +6,7 @@ reportdash.factory('Regions', ['$http',
     };
 
     Regions.fetch = function(id) {
-      return $http.get('api/geography.json')
+      return $http.get('api/geography.txt')
         .then(function(response) {
           return response.data;
         });
