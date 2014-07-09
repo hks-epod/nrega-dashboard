@@ -105,6 +105,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         columns: [
                   ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
                   ['Demand Registered', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                  ['HH provided employment', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
               ],
       },
       axis: {
@@ -388,6 +389,22 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
           $scope.monthlydata.march_demand_reg
         ];
 
+        $scope.demand_reg_chart.data.columns[2] = [
+          'HH provided employment', 
+          $scope.monthlydata.april_hh_P_emp, 
+          $scope.monthlydata.may_hh_P_emp,
+          $scope.monthlydata.june_hh_P_emp, 
+          $scope.monthlydata.july_hh_P_emp, 
+          $scope.monthlydata.aug_hh_P_emp,
+          $scope.monthlydata.sep_hh_P_emp,       
+          $scope.monthlydata.oct_hh_P_emp, 
+          $scope.monthlydata.nov_hh_P_emp, 
+          $scope.monthlydata.dec_hh_P_emp, 
+          $scope.monthlydata.jan_hh_P_emp,
+          $scope.monthlydata.feb_hh_P_emp, 
+          $scope.monthlydata.march_hh_P_emp
+        ]; 
+
 
         $scope.demand_labourbudget_chart.data.columns[1] = [
           'Persondays Generated', 
@@ -547,8 +564,8 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
           'Delay in Days', 
           $scope.monthlydata.april_delay, 
           $scope.monthlydata.may_delay,
-          $scope.monthlydata.jun_delay, 
-          $scope.monthlydata.jul_delay, 
+          $scope.monthlydata.june_delay, 
+          $scope.monthlydata.july_delay, 
           $scope.monthlydata.aug_delay,
           $scope.monthlydata.sep_delay,       
           $scope.monthlydata.oct_delay, 
@@ -562,8 +579,8 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
           'Amount payable', 
           $scope.monthlydata.april_delay_amt, 
           $scope.monthlydata.may_delay_amt,
-          $scope.monthlydata.jun_delay_amt, 
-          $scope.monthlydata.jul_delay_amt, 
+          $scope.monthlydata.june_delay_amt, 
+          $scope.monthlydata.july_delay_amt, 
           $scope.monthlydata.aug_delay_amt,
           $scope.monthlydata.sep_delay_amt,       
           $scope.monthlydata.oct_delay_amt, 
