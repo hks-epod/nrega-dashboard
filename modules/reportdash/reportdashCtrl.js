@@ -353,7 +353,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       data: {
 
         columns: [
-            ['Active workers A/Cs freezed', 0],
+            ['Confirmed', 0],
         ],
         type: 'donut'
       },
@@ -678,16 +678,11 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         ];
 
         $scope.DBT_chart.data.columns= [
-            ['Active workers A/Cs freezed',  $scope.yearlydata.frez_act_pers],
-             ['Non freezed',  100-$scope.yearlydata.frez_act_pers]];
+            ['Confirmed',  $scope.yearlydata.frez_act_pers],
+             ['Unconfirmed',  100-$scope.yearlydata.frez_act_pers]];
          $scope.DBT_aa_chart.data.columns= [
             ['Aadhar seeding against total active worker',  $scope.yearlydata.aadhaar_seedpers],
             ['Non Aadhar',  100-$scope.yearlydata.aadhaar_seedpers]];
-
-
-
-
-
 
       });
     };
