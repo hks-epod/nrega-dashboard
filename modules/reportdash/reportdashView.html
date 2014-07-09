@@ -5,19 +5,15 @@
         <ul class="nav nav-pills">
           <li>
             <a href="#">
-              <span class="glyphicon glyphicon-home"></span>Home</a>
+              <span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
           </li>
           <li class="active">
             <a href="#">
               <span class="glyphicon glyphicon-dashboard"></span>&nbsp;Report Dashboard</a>
           </li>
           <li>
-            <a href="#">
+            <a target="_blank" href="http://mnregaweb4.nic.in/netnrega/dynamic2/dynamicreport_new4.aspx">
               <span class="glyphicon glyphicon-tasks"></span>&nbsp;Public Data Portal</a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="glyphicon glyphicon-stats"></span>&nbsp;Data Analyzer</a>
           </li>
         </ul>
 
@@ -47,6 +43,7 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
       <div class="status-bar btselector warning">
         <span class="brcrumb">
+          {{selectedYear}} | 
           {{regions[0][selectedState]}}
           <span ng-show="selectedDistrict" class="glyphicon glyphicon-chevron-right"></span>{{regions[1][selectedState][selectedDistrict]}}
           <span ng-show="selectedBlock" style="font-weight:lighter" class="glyphicon glyphicon-chevron-right"></span>
@@ -67,6 +64,9 @@
       </div>
       
         <div ng-show="isTable" ng-include="'modules/reportdash/tabular/tableview.html'"></div>
-        <div ng-hide="isTable" ng-include="'modules/reportdash/viz/viz.html'"></div>
-    </div>
+        <div class="main-content">
+          <div style="width:100%">
+            <div ng-hide="isTable" ng-include="'modules/reportdash/viz/viz.html'"></div>
+          </div>
+        </div>
 </section>
