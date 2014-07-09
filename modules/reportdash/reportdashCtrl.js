@@ -28,17 +28,20 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
 
     function fetchDistricts(selectedState) {
       $scope.districts = [];
+      $scope.selectedDistrict='';
       $scope.districts = $scope.regions[1][selectedState];
     };
 
     function fetchBlocks(selectedState, selectedDistrict) {
       $scope.blocks = [];
+      $scope.selectedBlock='';
       if (selectedState) $scope.blocks = $scope.regions[2][selectedState][selectedDistrict];
     };
 
     function fetchGPs(selectedBlock) {
       $scope.gps = [];
-      if (selectedBlock) {
+      $scope.selectedGP='';
+      if (selectedBlock && $scope.selectedYear) {
         GPRegions.fetch(selectedBlock, $scope.selectedYear).then(function(response) {
           $scope.gps = response[0];
         });
@@ -155,7 +158,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: {
           type: 'timeseries',
           tick: {
-            format: '%m'
+            format: '%B'
           }
         }
       }
@@ -230,7 +233,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: 'x',
         columns: [
             ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-            ['HH provided employment', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250]
+            ['HH provided employment', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         ],
         // type: 'spline'
       },
@@ -238,7 +241,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: {
           type: 'timeseries',
           tick: {
-            format: '%m'
+            format: '%B'
           }
         }
       }
@@ -250,20 +253,19 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: 'x',
         columns: [
             ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-            ['Wage Expenditure (In Lacs)', 130, 340, 200, 500, 250, 350, 130, 340, 200, 500, 250, 350],
+            ['Wage Expenditure (In Lacs)', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
         ],
         type: 'bar',
         types: {
-          'Total': 'bar',
-          'Wage %': 'line',
+          'Wage Expenditure (In Lacs)': 'bar',
         },
       },
       axis: {
         x: {
           type: 'timeseries',
           tick: {
-            format: '%m'
+            format: '%B'
           }
         }
       }
@@ -286,7 +288,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: {
           type: 'timeseries',
           tick: {
-            format: '%m'
+            format: '%B'
           }
         }
       }
@@ -299,12 +301,12 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: 'x',
         columns: [
             ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-            ['Delayed payment :PDs Payable', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
-            ['Amount payable', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
+            ['Delay in Days',  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ['Amount payable',  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         ],
         type: 'bar',
         types: {
-          'Delayed payment :PDs Payable': 'bar',
+          'Delay in Days': 'bar',
           'Amount payable': 'line',
         },
       },
@@ -312,7 +314,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: {
           type: 'timeseries',
           tick: {
-            format: '%m'
+            format: '%B'
           }
         }
       }
@@ -418,6 +420,21 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
           $scope.monthlydata.jan_unemp,
           $scope.monthlydata.feb_unemp, 
           $scope.monthlydata.march_unemp
+        ]; 
+        $scope.unemployment_allowances_chart.data.columns[2] = [
+          'Amount payable', 
+          $scope.monthlydata.april_unemp_amt, 
+          $scope.monthlydata.may_unemp_amt,
+          $scope.monthlydata.june_unemp_amt, 
+          $scope.monthlydata.july_unemp_amt, 
+          $scope.monthlydata.aug_unemp_amt,
+          $scope.monthlydata.sep_unemp_amt,       
+          $scope.monthlydata.oct_unemp_amt, 
+          $scope.monthlydata.nov_unemp_amt, 
+          $scope.monthlydata.dec_unemp_amt, 
+          $scope.monthlydata.jan_unemp_amt,
+          $scope.monthlydata.feb_unemp_amt, 
+          $scope.monthlydata.march_unemp_amt
         ];   
 
 
@@ -462,9 +479,88 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
             ['Renovation of traditional Water Bodies', $scope.monthlydata.WH_exp]
         ];
 
+        $scope.hh_providedemployment_chart.data.columns[1] = [
+          'HH provided employment', 
+          $scope.monthlydata.april_hh_P_emp, 
+          $scope.monthlydata.may_hh_P_emp,
+          $scope.monthlydata.june_hh_P_emp, 
+          $scope.monthlydata.july_hh_P_emp, 
+          $scope.monthlydata.aug_hh_P_emp,
+          $scope.monthlydata.sep_hh_P_emp,       
+          $scope.monthlydata.oct_hh_P_emp, 
+          $scope.monthlydata.nov_hh_P_emp, 
+          $scope.monthlydata.dec_hh_P_emp, 
+          $scope.monthlydata.jan_hh_P_emp,
+          $scope.monthlydata.feb_hh_P_emp, 
+          $scope.monthlydata.march_hh_P_emp
+        ]; 
+
+        $scope.wage_expenditure_chart.data.columns[1] = [
+          'Wage Expenditure (In Lacs)', 
+          $scope.monthlydata.april_lab, 
+          $scope.monthlydata.may_lab,
+          $scope.monthlydata.jun_lab, 
+          $scope.monthlydata.jul_lab, 
+          $scope.monthlydata.aug_lab,
+          $scope.monthlydata.sep_lab,       
+          $scope.monthlydata.oct_lab, 
+          $scope.monthlydata.nov_lab, 
+          $scope.monthlydata.dec_lab, 
+          $scope.monthlydata.jan_lab,
+          $scope.monthlydata.feb_lab, 
+          $scope.monthlydata.march_lab
+        ];
+        $scope.unpaid_delay_chart.data.columns[1] = [
+          'Unpaid Delay', 
+          $scope.monthlydata.april_unpaid_delay, 
+          $scope.monthlydata.may_unpaid_delay,
+          $scope.monthlydata.jun_unpaid_delay, 
+          $scope.monthlydata.jul_unpaid_delay, 
+          $scope.monthlydata.aug_unpaid_delay,
+          $scope.monthlydata.sep_unpaid_delay,       
+          $scope.monthlydata.oct_unpaid_delay, 
+          $scope.monthlydata.nov_unpaid_delay, 
+          $scope.monthlydata.dec_unpaid_delay, 
+          $scope.monthlydata.jan_unpaid_delay,
+          $scope.monthlydata.feb_unpaid_delay, 
+          $scope.monthlydata.march_unpaid_delay
+        ];
+
+
+         $scope.delayedpayment_chart.data.columns[1] = [
+          'Delay in Days', 
+          $scope.monthlydata.april_delay, 
+          $scope.monthlydata.may_delay,
+          $scope.monthlydata.jun_delay, 
+          $scope.monthlydata.jul_delay, 
+          $scope.monthlydata.aug_delay,
+          $scope.monthlydata.sep_delay,       
+          $scope.monthlydata.oct_delay, 
+          $scope.monthlydata.nov_delay, 
+          $scope.monthlydata.dec_delay, 
+          $scope.monthlydata.jan_delay,
+          $scope.monthlydata.feb_delay, 
+          $scope.monthlydata.march_delay
+        ];
+         $scope.delayedpayment_chart.data.columns[2] = [
+          'Amount payable', 
+          $scope.monthlydata.april_delay_amt, 
+          $scope.monthlydata.may_delay_amt,
+          $scope.monthlydata.jun_delay_amt, 
+          $scope.monthlydata.jul_delay_amt, 
+          $scope.monthlydata.aug_delay_amt,
+          $scope.monthlydata.sep_delay_amt,       
+          $scope.monthlydata.oct_delay_amt, 
+          $scope.monthlydata.nov_delay_amt, 
+          $scope.monthlydata.dec_delay_amt, 
+          $scope.monthlydata.jan_delay_amt,
+          $scope.monthlydata.feb_delay_amt, 
+          $scope.monthlydata.march_delay_amt
+        ];
+
         $scope.DBT_chart.data.columns= [
             ['Active workers A/Cs freezed',  $scope.yearlydata.frez_act_pers],
-            ['Aadhar seeding against total active worker',  $scope.yearlydata.yearlydata.aadhaar_seedpers],
+            ['Aadhar seeding against total active worker',  $scope.yearlydata.aadhaar_seedpers],
         ];
 
 
