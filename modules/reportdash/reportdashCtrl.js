@@ -12,7 +12,8 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
     //  Region Handelers //
     ///////////////////////
 
-    $scope.years = ['2012-2013', '2013-2014', '2014-2015'];
+    $scope.years = [ '2014-2015','2013-2014','2012-2013', ];
+    $scope.selectedYear='2014-2015';
     Regions.fetch().then(function(data) {
       $scope.regions = data;
       $scope.$watch('selectedState', function() {
@@ -193,7 +194,8 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       },
       donut: {
         title: "Total Work",
-      }
+      },
+      size:{'height':400}
     };
 
     $scope.expenditure_category_wise_chart = {
@@ -223,7 +225,8 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       },
       donut: {
         title: "Total Expenditure",
-      }
+      },
+      size:{'height':400}
     };
 
 
@@ -326,6 +329,18 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
 
         columns: [
             ['Active workers A/Cs freezed', 0],
+        ],
+        type: 'donut'
+      },
+      donut: {
+        title: "DBT"
+      }
+    };
+
+    $scope.DBT_aa_chart = {
+      bindto: '#DBT_aa_chart',
+      data: {
+        columns: [
             ['Aadhar seeding against total active worker', 0],
         ],
         type: 'donut'
@@ -334,6 +349,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         title: "DBT"
       }
     };
+
 
 
 
@@ -514,8 +530,8 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
           'Unpaid Delay', 
           $scope.monthlydata.april_unpaid_delay, 
           $scope.monthlydata.may_unpaid_delay,
-          $scope.monthlydata.jun_unpaid_delay, 
-          $scope.monthlydata.jul_unpaid_delay, 
+          $scope.monthlydata.june_unpaid_delay, 
+          $scope.monthlydata.july_unpaid_delay, 
           $scope.monthlydata.aug_unpaid_delay,
           $scope.monthlydata.sep_unpaid_delay,       
           $scope.monthlydata.oct_unpaid_delay, 
@@ -560,8 +576,10 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
 
         $scope.DBT_chart.data.columns= [
             ['Active workers A/Cs freezed',  $scope.yearlydata.frez_act_pers],
+             ['Non freezed',  100-$scope.yearlydata.frez_act_pers]];
+         $scope.DBT_aa_chart.data.columns= [
             ['Aadhar seeding against total active worker',  $scope.yearlydata.aadhaar_seedpers],
-        ];
+            ['Non Aadhar',  100-$scope.yearlydata.aadhaar_seedpers]];
 
 
 
