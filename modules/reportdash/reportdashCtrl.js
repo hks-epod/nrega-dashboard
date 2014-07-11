@@ -431,7 +431,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
 
          $scope.persondays_per_hh_chart.data.columns[1] = [
           'Prev Year', 
-          $scope.monthlydata.april_PD_per_hh_preyr, 
+          $scope.monthlydata.apr_PD_per_hh_preyr, 
           $scope.monthlydata.may_PD_per_hh_preyr,
           $scope.monthlydata.jun_PD_per_hh_preyr, 
           $scope.monthlydata.jul_PD_per_hh_preyr, 
@@ -446,7 +446,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         ]; 
         $scope.persondays_per_hh_chart.data.columns[2] = [
           'Avg. No. of Persondays per HH', 
-          $scope.monthlydata.april_PD_per_hh, 
+          $scope.monthlydata.apr_PD_per_hh, 
           $scope.monthlydata.may_PD_per_hh,
           $scope.monthlydata.jun_PD_per_hh, 
           $scope.monthlydata.jul_PD_per_hh, 
@@ -601,7 +601,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
 
         $scope.wage_expenditure_chart.data.columns[1] = [
           'Prev Year', 
-          $scope.monthlydata.april_lab_pre, 
+          $scope.monthlydata.apr_lab_pre, 
           $scope.monthlydata.may_lab_pre,
           $scope.monthlydata.jun_lab_pre, 
           $scope.monthlydata.jul_lab_pre, 
@@ -616,7 +616,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         ];
         $scope.wage_expenditure_chart.data.columns[2] = [
           'Wage Expenditure (In Lacs)', 
-          $scope.monthlydata.april_lab, 
+          $scope.monthlydata.apr_lab, 
           $scope.monthlydata.may_lab,
           $scope.monthlydata.jun_lab, 
           $scope.monthlydata.jul_lab, 
