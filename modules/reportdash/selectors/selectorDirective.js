@@ -28,7 +28,7 @@ reportdash.directive('selectstate', function() {
 reportdash.directive('selectdistrict', function() {
   return {
     restrict: 'AE',
-    template: '<select class="selector" ui-select2 ng-model="selectedDistrict" data-placeholder="Select District"><option value=""></option><option ng-repeat="(key, value) in districts" value="{{key}}">{{value}}</option></select>',
+    template: '<select class="selector" ui-select2 ng-model="selectedDistrict" data-placeholder="Select District"><option value=""></option><option ng-repeat="(key,val) in districts" value="{{key}}">{{val}}</option></select>',
     replace: true,
     controller: ['$rootScope', '$scope',
       function($rootScope, $scope) {
