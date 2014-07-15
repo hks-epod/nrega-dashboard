@@ -13,21 +13,22 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
     $scope.years = ['2014-2015', '2013-2014', '2012-2013'];
     $scope.selectedYear = $scope.years[0];
     $scope.$watch('selectedYear', function() {
+      $scope.selectedState = null;
       Regions.fetch().then(function(data) {
         $scope.regions = data;
-        $scope.selectedState = null;
+        
       });
     });
 
-    // $scope.$watch('selectedState', function() {
-    //   fetchDistricts($scope.selectedState);
-    // });
-    // $scope.$watch('selectedDistrict', function() {
-    //   fetchBlocks($scope.selectedState, $scope.selectedDistrict);
-    // });
-    // $scope.$watch('selectedBlock', function() {
-    //   fetchGPs(leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2) + leftPad($scope.selectedBlock, 3));
-    // });
+    $scope.$watch('selectedState', function() {
+      if($scope.regions) fetchDistricts($scope.selectedState);
+    });
+    $scope.$watch('selectedDistrict', function() {
+       if($scope.regions) fetchBlocks($scope.selectedState, $scope.selectedDistrict);
+    });
+    $scope.$watch('selectedBlock', function() {
+       if($scope.regions) fetchGPs(leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2) + leftPad($scope.selectedBlock, 3));
+    });
 
 
 
