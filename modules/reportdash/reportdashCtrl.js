@@ -7,54 +7,48 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       $scope.isTable = !$scope.isTable;
     };
 
-    ///////////////////////
-    //  Region Handelers //
-    ///////////////////////
+    //*****************[ Region Handelers ]*******************//
+
     $scope.years = ['2014-2015', '2013-2014', '2012-2013'];
     $scope.selectedYear = $scope.years[0];
     $scope.$watch('selectedYear', function() {
       $scope.selectedState = null;
       Regions.fetch().then(function(data) {
         $scope.regions = data;
-        
+
       });
     });
 
     $scope.$watch('selectedState', function() {
-      if($scope.regions) fetchDistricts($scope.selectedState);
+      if ($scope.regions) fetchDistricts($scope.selectedState);
     });
     $scope.$watch('selectedDistrict', function() {
-       if($scope.regions) fetchBlocks($scope.selectedState, $scope.selectedDistrict);
+      if ($scope.regions) fetchBlocks($scope.selectedState, $scope.selectedDistrict);
     });
     $scope.$watch('selectedBlock', function() {
-       if($scope.regions) fetchGPs(leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2) + leftPad($scope.selectedBlock, 3));
+      if ($scope.regions) fetchGPs(leftPad($scope.selectedState, 2) + leftPad($scope.selectedDistrict, 2) + leftPad($scope.selectedBlock, 3));
     });
-
-
-
-
 
     function fetchDistricts(selectedState) {
       $scope.districts = [];
-      $scope.selectedDistrict = '';
+      $scope.selectedDistrict = null;
       $scope.districts = $scope.regions[1][selectedState];
     };
 
     function fetchBlocks(selectedState, selectedDistrict) {
       $scope.blocks = [];
-      $scope.selectedBlock = '';
+      $scope.selectedBlock = null;
       if (selectedState) $scope.blocks = $scope.regions[2][selectedState][selectedDistrict];
     };
 
     function fetchGPs(selectedBlock) {
       $scope.gps = [];
-      $scope.selectedGP = '';
+      $scope.selectedGP = null;
       if (selectedBlock && $scope.selectedYear) {
         GPRegions.fetch(selectedBlock, $scope.selectedYear).then(function(response) {
           $scope.gps = response[0];
         });
       };
-
     };
 
     function buildCode() {
@@ -93,7 +87,6 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
     };
 
     // Generic Number Convertor Function: leftPad(1, 2) ---> 01
-
     function leftPad(number, targetLength) {
       var output = number + '';
       while (output.length < targetLength) {
@@ -625,20 +618,3 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
 
   }
 ]);
-
-
-
-
-reportdash.filter("toArray", function() {
-  return function(obj) {
-    var result = [];
-    angular.forEach(obj, function(val, key) {
-      var x = {
-        'code': key,
-        'val': val
-      };
-      result.push(x);
-    });
-    return result;
-  };
-});

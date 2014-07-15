@@ -4,8 +4,6 @@ nregadash.run(['uiSelect2Config', function(uiSelect2Config) {
     uiSelect2Config.allowClear= true;
 }]);
 
-
-
 nregadash.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(false);
