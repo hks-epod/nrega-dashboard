@@ -154,12 +154,12 @@ Partial Class nrega_reportdashboard_api_dashboard_report_yearly
             '*********************************** SC % / ST%  / Women%  /  HHs provided Employment / Average wage per PD/ Average Cost per PD 
             str = ""
             str = "select  p." & val_code & " code,"
-            str = str & "    (case when (isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))>0"
-            str = str & "   then (sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)) *100)/((isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))) else 0 end )SCper,"
-            str = str & "   (case when (isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))>0"
-            str = str & "   then (sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)) *100)/((isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))) else 0 end ) STper,"
-            str = str & "   (case when (isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))>0"
-            str = str & "   then (sum(isnull(cast(emp_gen_women as bigint),0)) *100)/((isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))) else 0 end ) Womenper,"
+            str = str & "   round( (case when (isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))>0"
+            str = str & "   then (sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)) *100)/((isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))) else 0 end ),2)SCper,"
+            str = str & "  round( (case when (isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))>0"
+            str = str & "   then (sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)) *100)/((isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))) else 0 end ),2) STper,"
+            str = str & "   round((case when (isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))>0"
+            str = str & "   then (sum(isnull(cast(emp_gen_women as bigint),0)) *100)/((isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))) else 0 end ),2) Womenper,"
             str = str & "   (isnull(sum(isnull(cast(emp_gen_hh_sc as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_hh_st as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_hh_oth as bigint),0)),0)) hh_provided_employment,"
             str = str & "    round(isnull(case when (sum(wage_persondays))>0 then (sum(tot_wage_paid))/(sum(wage_persondays)) else 0 end,0),0)avg_wage_per_PD ,"
             str = str & "   round((case when (select isnull(act_lab,0)+isnull((act_mat+act_skilled+act_tax),0)+(isnull(contin,0)+isnull(n_contin,0)) from " & tbl_fund & " where " & cond & ")>0 then"
@@ -176,7 +176,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_yearly
 
             str = ""
             str = "select"
-            str = str & "    (case when ( select count(*) as cnt  from wrkdtlcmp w     "
+            str = str & "    round((case when ( select count(*) as cnt  from wrkdtlcmp w     "
             str = str & "    left outer join " & short_name & "work_sanction b on w.work_code=b.work_code "
             str = str & "    and left(w.panchayat_code,7)=b.block_code       "
             str = str & "    inner join panchayats_rep" & yr & " p on p.panchayat_code=w.panchayat_code    "
@@ -196,7 +196,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_yearly
             str = str & "     where    p." & cond & " and    "
             str = str & "     ( ( datediff(d,dateadd(m,est_mon_complete,w.Dt_Work_Start),getdate())>0   "
             str = str & "    and workstatus in ('03','04','05') )   "
-            str = str & "    or (workstatus='05') )) else 0 end)	Work_completion_rate"
+            str = str & "    or (workstatus='05') )) else 0 end),2)	Work_completion_rate"
             cmd = New SqlCommand("select p." & val_code & " code,isnull(SUM(isnull(reghh,0)),0)demand_register  from panchayats_rep" & yr & " p  left outer join demregister_panch" & yr & " pp on p.panchayat_code=pp.panchayat_code where p." & cond & " group by p." & val_code & "", con)
             da = New SqlDataAdapter(cmd)
             da.Fill(ds, "dt0")
@@ -328,10 +328,10 @@ Partial Class nrega_reportdashboard_api_dashboard_report_yearly
             '*******************************************% of active workers A/Cs freezed /  % of Aadhaar seeding against total Active worker
 
             str = ""
-            str = "select (case when isnull(SUM( case when active='y' then worker end),0)>0 then "
-            str = str & "  (isnull(SUM( case when active='Y' and ac_freezed='Y' and modepay is not null then worker end),0) *100)/(isnull(SUM( case when active='y' then worker end),0)) else 0 end) frez_act_pers,"
-            str = str & " (case when isnull(SUM( case when active='y' then worker end),0)>0 then "
-            str = str & " (isnull(SUM( case when active='Y' and uid='Y' then worker end),0) *100)/(isnull(SUM( case when active='y' then worker end),0) )else 0 end ) aadhaar_seedpers"
+            str = "select round((case when isnull(SUM( case when active='y' then worker end),0)>0 then "
+            str = str & "  (isnull(SUM( case when active='Y' and ac_freezed='Y' and modepay is not null then worker end),0) *100)/(isnull(SUM( case when active='y' then worker end),0)) else 0 end),2) frez_act_pers,"
+            str = str & " round((case when isnull(SUM( case when active='y' then worker end),0)>0 then "
+            str = str & " (isnull(SUM( case when active='Y' and uid='Y' then worker end),0) *100)/(isnull(SUM( case when active='y' then worker end),0) )else 0 end ),2) aadhaar_seedpers"
             str = str & "  from panchayats_rep" & yr & " p inner join nrega_worker_detail w on"
             str = str & "     p.panchayat_code = w.panchayat_code"
             str = str & "  where active='Y' and p." & cond & " and"
@@ -361,7 +361,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_yearly
                 For Each col1 As DataColumn In table.Columns
 
                     If Not data.ContainsKey(col1.ColumnName) Then
-                        data.Add(col1.ColumnName, dr1(col1))
+                        data.Add(col1.ColumnName, Round(Convert.ToDecimal(dr1(col1)), 2))
                     End If
 
                 Next
