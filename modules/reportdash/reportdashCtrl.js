@@ -174,7 +174,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
 
         columns: [
         ],
-        type: 'pie'
+        type: 'donut'
       },
       donut: {
         title: "Total Work",
@@ -188,8 +188,25 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       bindto: '#expenditure_category_wise_chart',
       data: {
         columns: [
+          ['Aanganbadi', 10],
+          ['Coastal Areas', 10],
+          ['Dourght Proofing', 10],
+          ['Rural Drinking Water', 10],
+          ['Food Grain', 10],
+          ['Flood Control and Protection', 10],
+          ['Fishries', 10],
+          ['Micro Irrigation Works', 10],
+          ['Works on individuals land(Cat 4)', 10],
+          ['Land Development', 10],
+          ['Other Works', 10],
+          ['Playground',10],
+          ['Rural Connectivity',10],
+          ['Rural Sanitation', 10],
+          ['Bharat Nirman Rajiv Gandhi Seva Kendra', 10],
+          ['Water Conservation and Harvesting', 10],
+          ['Renovation of traditional Water Bodies', 10]
         ],
-        type: 'pie'
+        type: 'donut'
       },
       donut: {
         title: "Total Expenditure",

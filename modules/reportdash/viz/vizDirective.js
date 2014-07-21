@@ -11,7 +11,6 @@ reportdash.directive('c3chart', function() {
     link: function(scope, el, attrs) {
       var chart=c3.generate(scope.vizconfig);
       scope.$watch('vizconfig', function(newVizconfig, oldVizconfig) {
-        console.log('watching');
         chart.load({columns:newVizconfig.data.columns});
       }, true);
     }
