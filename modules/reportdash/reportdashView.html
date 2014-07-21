@@ -29,17 +29,7 @@
       <div class="sidebar-header">
         <span class="glyphicon glyphicon-sound-stereo"></span>&nbsp;FILTERS
       </div>
-     <!--  <input class="selector" ui-select2="selectyear" ng-model="selectedYear"> -->
-
-      <select class="selector" ui-select2 ng-model="selectedYear" data-placeholder="Select Year">
-        <option value=""></option>
-        <option ng-repeat="year in years" value="{{year}}">{{year}}</option>
-      </select>
-
-
-
-
-
+      <selectyear></selectyear>
       <selectstate></selectstate>
       <selectdistrict></selectdistrict>
       <selectblock></selectblock>
@@ -52,7 +42,6 @@
 
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
       <div class="status-bar btselector warning">
-
         <span class="brcrumb">
           {{selectedYear}} | {{regions[0][selectedState]}}
           <span ng-show="selectedDistrict" class="glyphicon glyphicon-chevron-right"></span>{{regions[1][selectedState][selectedDistrict]}}
@@ -64,10 +53,10 @@
         <div class="btn-group pull-right">
 
           <button type="button" class="btn btn-default" ng-click="switchview()" ng-class="{'active disabled': isTable==true}">
-            <span class="glyphicon glyphicon-th"></span>&nbsp; Table View</a>
+            <span class="glyphicon glyphicon-th"></span>&nbsp; Table View
           </button>
           <button type="button" class="btn btn-default" ng-click="switchview()" ng-class="{'active disabled': isTable==false}">
-            <span class="glyphicon glyphicon-stats"></span>&nbsp; Graph View</a>
+            <span class="glyphicon glyphicon-stats"></span>&nbsp; Graph View
           </button>
         </div>
         <div class="clearfix"></div>
@@ -78,4 +67,9 @@
           <div ng-hide="isTable" ng-include="'modules/reportdash/viz/viz.html'"></div>
         </div>
       </div>
+
+      <div ng-include="'modules/global/views/footer.html'"></div>
+
+    </div>
+  </div>
 </section>

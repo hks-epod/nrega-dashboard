@@ -214,6 +214,17 @@
 
 
 
-
+.footer{
+  padding: 20px;
+  background-color: #f3ede1;
+  border-top: 1px solid #cAc3b4
+}
+.text-box{
+  width: 300px;
+  display: inline;
+}
+.footer img{
+  padding: 0 20px;
+}
 
 
