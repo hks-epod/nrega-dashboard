@@ -173,6 +173,23 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       data: {
 
         columns: [
+          ['Aanganbadi', 10],
+          ['Coastal areas', 10],
+          ['Drought proofing', 10],
+          ['Rural drinking water', 10],
+          ['Food grain', 10],
+          ['Flood control protection', 10],
+          ['Fisheries', 10],
+          ['Micro irrigation works', 10],
+          ["Works on individuals' land (Cat 4)", 10],
+          ['Land development', 10],
+          ['Other works', 10],
+          ['Playground',10],
+          ['Rural connectivity',10],
+          ['Rural sanitation', 10],
+          ['Bharat Nirman Rajiv Gandhi Seva Kendra', 10],
+          ['Water conservation and harvesting', 10],
+          ['Renovation of traditional water bodies', 10]
         ],
         type: 'donut'
       },
