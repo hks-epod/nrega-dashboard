@@ -104,8 +104,8 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: 'x',
         columns: [
                   ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-                  ['Demand Registered', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                  ['HH provided employment', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                  ['Households registered demand', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                  ['Households provided employment', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
               ],
       },
       axis: {
@@ -125,8 +125,8 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: 'x',
         columns: [
                   ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-                  ['Persondays Generated', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                  ['Projected Persondays', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                  ['Person-days generated', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                  ['Person-days projected', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
               ],
       },
       axis: {
@@ -146,14 +146,14 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: 'x',
         columns: [
             ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-            ['Unemployment Allowances - Due for PDs', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ['Amount payable', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ['Person-days of unemployment due', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ['Amount payable (Rs.)', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
         ],
         type: 'bar',
         types: {
-          'Unemployment Allowances - Due for PDs': 'line',
-          'Amount payable': 'bar',
+          'Person-days of unemployment due': 'line',
+          'Amount payable (Rs.)': 'bar',
         },
       },
       axis: {
@@ -189,22 +189,22 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       data: {
         columns: [
           ['Aanganbadi', 10],
-          ['Coastal Areas', 10],
-          ['Dourght Proofing', 10],
-          ['Rural Drinking Water', 10],
-          ['Food Grain', 10],
-          ['Flood Control and Protection', 10],
-          ['Fishries', 10],
-          ['Micro Irrigation Works', 10],
-          ['Works on individuals land(Cat 4)', 10],
-          ['Land Development', 10],
-          ['Other Works', 10],
+          ['Coastal areas', 10],
+          ['Drought proofing', 10],
+          ['Rural drinking water', 10],
+          ['Food grain', 10],
+          ['Flood control protection', 10],
+          ['Fisheries', 10],
+          ['Micro irrigation works', 10],
+          ["Works on individuals' land (Cat 4)", 10],
+          ['Land development', 10],
+          ['Other works', 10],
           ['Playground',10],
-          ['Rural Connectivity',10],
-          ['Rural Sanitation', 10],
+          ['Rural connectivity',10],
+          ['Rural sanitation', 10],
           ['Bharat Nirman Rajiv Gandhi Seva Kendra', 10],
-          ['Water Conservation and Harvesting', 10],
-          ['Renovation of traditional Water Bodies', 10]
+          ['Water conservation and harvesting', 10],
+          ['Renovation of traditional water bodies', 10]
         ],
         type: 'donut'
       },
@@ -223,8 +223,8 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: 'x',
         columns: [
             ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-            ['Prev Year', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ['HH provided employment', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            ['Previous year', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ['Households provided employment', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         ],
         type: 'bar',
       },
@@ -244,8 +244,8 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: 'x',
         columns: [
             ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-            ['Prev Year', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ['Avg. No. of Persondays per HH', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            ['Previous year', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ['Average person-days per household', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         ],
         type: 'bar',
       },
@@ -266,13 +266,13 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: 'x',
         columns: [
             ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-            ['Prev Year', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ['Wage Expenditure (In Lacs)', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            ['Previous year', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ['Wage expenditure (in lacs of Rs.)', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
         ],
         type: 'bar',
         types: {
-          'Wage Expenditure (In Lacs)': 'bar',
+          'Wage expenditure (in lacs of Rs.)': 'bar',
         },
       },
       axis: {
@@ -291,11 +291,11 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: 'x',
         columns: [
             ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-            ['Unpaid Delay', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ['Muster rolls with delayed payment', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         ],
         type: 'bar',
         types: {
-          'Unpaid Delay': 'bar'
+          'Muster rolls with delayed payment': 'bar'
         },
       },
       axis: {
@@ -315,13 +315,13 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: 'x',
         columns: [
             ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-            ['Delay in Days', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ['Amount payable', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ['Delay in days', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ['Amount payable (Rs.)', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         ],
         type: 'bar',
         types: {
-          'Delay in Days': 'bar',
-          'Amount payable': 'line',
+          'Delay in days': 'bar',
+          'Amount payable (Rs.)': 'line',
         },
       },
       axis: {
@@ -349,7 +349,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         $scope.monthlydata = response[0];
 
         $scope.demand_reg_chart.data.columns[1] = [
-          'Demand Registered',
+          'Households registered demand',
           $scope.monthlydata.april_demand_reg,
           $scope.monthlydata.may_demand_reg,
           $scope.monthlydata.june_demand_reg,
@@ -365,7 +365,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         ];
 
         $scope.demand_reg_chart.data.columns[2] = [
-          'HH provided employment',
+          'Households provided employment',
           $scope.monthlydata.april_hh_P_emp,
           $scope.monthlydata.may_hh_P_emp,
           $scope.monthlydata.june_hh_P_emp,
@@ -381,7 +381,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         ];
 
         $scope.persondays_per_hh_chart.data.columns[1] = [
-          'Prev Year',
+          'Previous year',
           $scope.monthlydata.apr_PD_per_hh_preyr,
           $scope.monthlydata.may_PD_per_hh_preyr,
           $scope.monthlydata.jun_PD_per_hh_preyr,
@@ -396,7 +396,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
           $scope.monthlydata.march_PD_per_hh_preyr
         ];
         $scope.persondays_per_hh_chart.data.columns[2] = [
-          'Avg. No. of Persondays per HH',
+          'Average person-days per household',
           $scope.monthlydata.apr_PD_per_hh,
           $scope.monthlydata.may_PD_per_hh,
           $scope.monthlydata.jun_PD_per_hh,
@@ -414,7 +414,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
 
 
         $scope.demand_labourbudget_chart.data.columns[1] = [
-          'Persondays Generated',
+          'Person-days generated',
           $scope.monthlydata.april_work_allot,
           $scope.monthlydata.may_work_allot,
           $scope.monthlydata.june_work_allot,
@@ -429,7 +429,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
           $scope.monthlydata.march_work_allot
         ];
         $scope.demand_labourbudget_chart.data.columns[2] = [
-          'Projected Persondays',
+          'Person-days projected',
           $scope.monthlydata.april_lb,
           $scope.monthlydata.may_lb - $scope.monthlydata.april_lb,
           $scope.monthlydata.june_lb - $scope.monthlydata.may_lb,
@@ -447,7 +447,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
 
         // Chart 2
         $scope.unemployment_allowances_chart.data.columns[1] = [
-          'Unemployment Allowances - Due for PDs',
+          'Person-days of unemployment due',
           $scope.monthlydata.april_unemp,
           $scope.monthlydata.may_unemp,
           $scope.monthlydata.june_unemp,
@@ -462,7 +462,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
           $scope.monthlydata.march_unemp
         ];
         $scope.unemployment_allowances_chart.data.columns[2] = [
-          'Amount payable',
+          'Amount payable (Rs.)',
           $scope.monthlydata.april_unemp_amt,
           $scope.monthlydata.may_unemp_amt,
           $scope.monthlydata.june_unemp_amt,
@@ -480,43 +480,43 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
 
         $scope.work_category_wise_chart.data.columns = [
             ['Aanganbadi', $scope.monthlydata.AV_work],
-            ['Coastal Areas', $scope.monthlydata.CA_work],
-            ['Dourght Proofing', $scope.monthlydata.DP_work],
-            ['Rural Drinking Water', $scope.monthlydata.DW_work],
-            ['Food Grain', $scope.monthlydata.FG_work],
-            ['Flood Control and Protection', $scope.monthlydata.FP_work],
-            ['Fishries', $scope.monthlydata.FR_work],
-            ['Micro Irrigation Works', $scope.monthlydata.IC_work],
-            ['Works on individuals land(Cat 4)', $scope.monthlydata.IF_work],
-            ['Land Development', $scope.monthlydata.LD_work],
-            ['Other Works', $scope.monthlydata.OP_work],
+            ['Coastal areas', $scope.monthlydata.CA_work],
+            ['Drought proofing', $scope.monthlydata.DP_work],
+            ['Rural drinking water', $scope.monthlydata.DW_work],
+            ['Food grain', $scope.monthlydata.FG_work],
+            ['Flood control protection', $scope.monthlydata.FP_work],
+            ['Fisheries', $scope.monthlydata.FR_work],
+            ['Micro irrigation works', $scope.monthlydata.IC_work],
+            ["Works on individuals' land (Cat 4)", $scope.monthlydata.IF_work],
+            ['Land development', $scope.monthlydata.LD_work],
+            ['Other works', $scope.monthlydata.OP_work],
             ['Playground', $scope.monthlydata.PG_work],
-            ['Rural Connectivity', $scope.monthlydata.RC_work],
-            ['Rural Sanitation', $scope.monthlydata.RS_work],
+            ['Rural connectivity', $scope.monthlydata.RC_work],
+            ['Rural sanitation', $scope.monthlydata.RS_work],
             ['Bharat Nirman Rajiv Gandhi Seva Kendra', $scope.monthlydata.SK_work],
-            ['Water Conservation and Harvesting', $scope.monthlydata.WC_work],
-            ['Renovation of traditional Water Bodies', $scope.monthlydata.WH_work]
+            ['Water conservation and harvesting', $scope.monthlydata.WC_work],
+            ['Renovation of traditional water bodies', $scope.monthlydata.WH_work]
         ];
 
 
         $scope.expenditure_category_wise_chart.data.columns = [
             ['Aanganbadi', $scope.monthlydata.AV_exp],
-            ['Coastal Areas', $scope.monthlydata.CA_exp],
-            ['Dourght Proofing', $scope.monthlydata.DP_exp],
-            ['Rural Drinking Water', $scope.monthlydata.DW_exp],
-            ['Food Grain', $scope.monthlydata.FG_exp],
-            ['Flood Control and Protection', $scope.monthlydata.FP_exp],
-            ['Fishries', $scope.monthlydata.FR_exp],
-            ['Micro Irrigation Works', $scope.monthlydata.IC_exp],
-            ['Works on individuals land(Cat 4)', $scope.monthlydata.IF_exp],
-            ['Land Development', $scope.monthlydata.LD_exp],
-            ['Other Works', $scope.monthlydata.OP_exp],
+            ['Coastal areas', $scope.monthlydata.CA_exp],
+            ['Drought proofing', $scope.monthlydata.DP_exp],
+            ['Rural drinking water', $scope.monthlydata.DW_exp],
+            ['Food grain', $scope.monthlydata.FG_exp],
+            ['Flood control protection', $scope.monthlydata.FP_exp],
+            ['Fisheries', $scope.monthlydata.FR_exp],
+            ['Micro irrigation works', $scope.monthlydata.IC_exp],
+            ["Works on individuals' land (Cat 4)", $scope.monthlydata.IF_exp],
+            ['Land development', $scope.monthlydata.LD_exp],
+            ['Other works', $scope.monthlydata.OP_exp],
             ['Playground', $scope.monthlydata.PG_exp],
-            ['Rural Connectivity', $scope.monthlydata.RC_exp],
-            ['Rural Sanitation', $scope.monthlydata.RS_exp],
+            ['Rural connectivity', $scope.monthlydata.RC_exp],
+            ['Rural sanitation', $scope.monthlydata.RS_exp],
             ['Bharat Nirman Rajiv Gandhi Seva Kendra', $scope.monthlydata.SK_exp],
-            ['Water Conservation and Harvesting', $scope.monthlydata.WC_exp],
-            ['Renovation of traditional Water Bodies', $scope.monthlydata.WH_exp]
+            ['Water conservation and harvesting', $scope.monthlydata.WC_exp],
+            ['Renovation of traditional water bodies', $scope.monthlydata.WH_exp]
         ];
 
         $scope.hh_providedemployment_chart.data.columns[1] = [
@@ -535,7 +535,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
           $scope.monthlydata.march_hh_P_emp_pre
         ];
         $scope.hh_providedemployment_chart.data.columns[2] = [
-          'HH provided employment',
+          'Households provided employment',
           $scope.monthlydata.april_hh_P_emp,
           $scope.monthlydata.may_hh_P_emp,
           $scope.monthlydata.june_hh_P_emp,
@@ -566,7 +566,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
           $scope.monthlydata.march_lab_pre
         ];
         $scope.wage_expenditure_chart.data.columns[2] = [
-          'Wage Expenditure (In Lacs)',
+          'Wage expenditure (in lacs of Rs.)',
           $scope.monthlydata.apr_lab,
           $scope.monthlydata.may_lab,
           $scope.monthlydata.jun_lab,
@@ -581,7 +581,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
           $scope.monthlydata.march_lab
         ];
         $scope.unpaid_delay_chart.data.columns[1] = [
-          'Unpaid Delay',
+          'Muster rolls with delayed payment',
           $scope.monthlydata.april_unpaid_delay,
           $scope.monthlydata.may_unpaid_delay,
           $scope.monthlydata.june_unpaid_delay,
@@ -598,7 +598,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
 
 
         $scope.delayedpayment_chart.data.columns[1] = [
-          'Delay in Days',
+          'Delay in days',
           $scope.monthlydata.april_delay,
           $scope.monthlydata.may_delay,
           $scope.monthlydata.june_delay,
@@ -613,7 +613,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
           $scope.monthlydata.march_delay
         ];
         $scope.delayedpayment_chart.data.columns[2] = [
-          'Amount payable',
+          'Amount payable (Rs.)',
           $scope.monthlydata.april_delay_amt,
           $scope.monthlydata.may_delay_amt,
           $scope.monthlydata.june_delay_amt,
