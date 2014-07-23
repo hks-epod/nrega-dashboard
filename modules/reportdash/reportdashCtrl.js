@@ -13,7 +13,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
     $scope.selectedYear = $scope.years[0];
     $scope.$watch('selectedYear', function() {
       $scope.selectedState = null;
-      Regions.fetch().then(function(data) {
+      Regions.fetch($scope.selectedYear).then(function(data) {
         $scope.regions = data;
 
       });
