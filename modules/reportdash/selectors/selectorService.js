@@ -5,8 +5,8 @@ reportdash.factory('Regions', ['$http',
       angular.extend(this, data);
     };
 
-    Regions.fetch = function(id) {
-      return $http.get('api/geography.txt')
+    Regions.fetch = function(year) {
+      return $http.get('api/sdb'+ year +'.txt')
         .then(function(response) {
           return response.data;
         });
