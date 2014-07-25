@@ -96,6 +96,8 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       return output;
     };
 
+    
+
     //////////////////////////
     // Vizulization Loading //
     //////////////////////////
