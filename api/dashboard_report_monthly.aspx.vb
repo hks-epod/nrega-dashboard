@@ -17,6 +17,7 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
     Dim myreader, myreader1 As SqlDataReader
     Public str, yr, cond, val_code, val_code_p, cond_p, state_code, pre_yr As String
     Dim conobj As New ConnectNREGA
+    Public file1, fin_year, curr_finyear, mon As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Request.QueryString("fin_year") = "" Then
@@ -69,13 +70,57 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
 
         '**************************************************Demand_registered
 
-        str = "select  " & val_code_p & ","
-        str = str & "     isnull(SUM(isnull(aprilreg,0)),0)april_demand_reg, isnull(SUM(isnull(mayreg,0)),0)may_demand_reg,"
-        str = str & "     isnull(SUM(isnull(junereg,0)),0)june_demand_reg,isnull(SUM(isnull(julyreg,0)),0)july_demand_reg,"
-        str = str & "      isnull(SUM(isnull(augreg,0)),0)aug_demand_reg, isnull(SUM(isnull(sepreg,0)),0)sep_demand_reg, "
-        str = str & "      isnull(SUM(isnull(octreg,0)),0)oct_demand_reg,isnull(SUM(isnull(novreg,0)),0)nov_demand_reg,"
-        str = str & "      isnull(SUM(isnull(decreg,0)),0)dec_demand_reg,  isnull(SUM(isnull(janreg,0)),0)jan_demand_reg,"
-        str = str & "     isnull(SUM(isnull(febreg,0)),0)feb_demand_reg,isnull(SUM(isnull(marchreg,0)),0)march_demand_reg "
+        If Month(Date.Now) > 3 Then
+            curr_finyear = Year(Date.Now) & "-" & Year(Date.Now) + 1
+        Else
+            curr_finyear = Year(Date.Now) - 1 & "-" & Year(Date.Now)
+        End If
+        If HttpContext.Current.Request("fin_year") = curr_finyear Then
+            mon = Month(Date.Now)
+        Else
+            mon = "15"
+        End If
+        If mon >= 1 And mon < 4 Then
+            mon = mon + 9
+        Else
+            mon = mon - 3
+        End If
+
+        str = "select  " & val_code_p & ""
+        str = str & "    , isnull(SUM(isnull(aprilreg,0)),0)april_demand_reg "
+        If mon >= 2 Then
+            str = str & "   , isnull(SUM(isnull(mayreg,0)),0)may_demand_reg"
+        End If
+        If mon >= 3 Then
+            str = str & "    ,  isnull(SUM(isnull(junereg,0)),0)june_demand_reg"
+        End If
+        If mon >= 4 Then
+            str = str & "    , isnull(SUM(isnull(julyreg,0)),0)july_demand_reg"
+        End If
+        If mon >= 5 Then
+            str = str & "     , isnull(SUM(isnull(augreg,0)),0)aug_demand_reg"
+        End If
+        If mon >= 6 Then
+            str = str & "    , isnull(SUM(isnull(sepreg,0)),0)sep_demand_reg "
+        End If
+        If mon >= 7 Then
+            str = str & "     , isnull(SUM(isnull(octreg,0)),0)oct_demand_reg"
+        End If
+        If mon >= 8 Then
+            str = str & "     ,isnull(SUM(isnull(novreg,0)),0)nov_demand_reg"
+        End If
+        If mon >= 9 Then
+            str = str & "     , isnull(SUM(isnull(decreg,0)),0)dec_demand_reg"
+        End If
+        If mon >= 10 Then
+            str = str & "     , isnull(SUM(isnull(janreg,0)),0)jan_demand_reg "
+        End If
+        If mon >= 11 Then
+            str = str & "     , isnull(SUM(isnull(febreg,0)),0)feb_demand_reg "
+        End If
+        If mon >= 12 Then
+            str = str & "     ,isnull(SUM(isnull(marchreg,0)),0)march_demand_reg"
+        End If
         str = str & "    from panchayats_rep" & yr & " p  left outer join mon_wise_dmd" & yr & "  pp on p.panchayat_code=pp.panchayat_code"
         str = str & "  where " & cond_p & " group by " & val_code_p & ""
         cmd = New SqlCommand(str, con)
@@ -115,12 +160,40 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
         '***********************************Work_Allotted
 
         str = "select " & val_code_p & ","
-        str = str & "     isnull(SUM(isnull(aprilAPP,0)),0)april_work_allot, isnull(SUM(isnull(mayAPP,0)),0)may_work_allot,"
-        str = str & "     isnull(SUM(isnull(juneAPP,0)),0)june_work_allot,isnull(SUM(isnull(julyAPP,0)),0)july_work_allot,"
-        str = str & "      isnull(SUM(isnull(augAPP,0)),0)aug_work_allot, isnull(SUM(isnull(sepAPP,0)),0)sep_work_allot, "
-        str = str & "      isnull(SUM(isnull(octAPP,0)),0)oct_work_allot,isnull(SUM(isnull(novAPP,0)),0)nov_work_allot,"
-        str = str & "      isnull(SUM(isnull(decAPP,0)),0)dec_work_allot,  isnull(SUM(isnull(janAPP,0)),0)jan_work_allot,"
-        str = str & "     isnull(SUM(isnull(febAPP,0)),0)feb_work_allot,isnull(SUM(isnull(marchAPP,0)),0)march_work_allot "
+        str = str & "     isnull(SUM(isnull(aprilAPP,0)),0)april_work_allot"
+        If mon >= 2 Then
+            str = str & "     , isnull(SUM(isnull(mayAPP,0)),0)may_work_allot"
+        End If
+        If mon >= 3 Then
+            str = str & "    , isnull(SUM(isnull(juneAPP,0)),0)june_work_allot"
+        End If
+        If mon >= 4 Then
+            str = str & "    ,isnull(SUM(isnull(julyAPP,0)),0)july_work_allot"
+        End If
+        If mon >= 5 Then
+            str = str & "     , isnull(SUM(isnull(augAPP,0)),0)aug_work_allot"
+        End If
+        If mon >= 6 Then
+            str = str & "        ,  isnull(SUM(isnull(sepAPP,0)),0)sep_work_allot "
+        End If
+        If mon >= 7 Then
+            str = str & "     , isnull(SUM(isnull(octAPP,0)),0)oct_work_allot"
+        End If
+        If mon >= 8 Then
+            str = str & "    ,isnull(SUM(isnull(novAPP,0)),0)nov_work_allot"
+        End If
+        If mon >= 9 Then
+            str = str & "    ,  isnull(SUM(isnull(decAPP,0)),0)dec_work_allot"
+        End If
+        If mon >= 10 Then
+            str = str & "     ,  isnull(SUM(isnull(janAPP,0)),0)jan_work_allot"
+        End If
+        If mon >= 11 Then
+            str = str & "    , isnull(SUM(isnull(febAPP,0)),0)feb_work_allot"
+        End If
+        If mon >= 12 Then
+            str = str & "     ,isnull(SUM(isnull(marchAPP,0)),0)march_work_allot "
+        End If
         str = str & "    from panchayats_rep" & yr & " p  left outer join mon_wise_empprov" & yr & "  pp on p.panchayat_code=pp.panchayat_code"
         str = str & "  where " & cond_p & " group by " & val_code_p & ""
         cmd = New SqlCommand(str, con)
@@ -133,13 +206,41 @@ Partial Class nrega_reportdashboard_api_dashboard_report_monthly
 
         '***********************************HH provided employement
 
-        str = "select " & val_code_p & ","
-        str = str & "     isnull(SUM(isnull(aprilreg,0)),0)april_hh_P_emp, isnull(SUM(isnull(mayreg,0)),0)may_hh_P_emp,"
-        str = str & "     isnull(SUM(isnull(junereg,0)),0)june_hh_P_emp,isnull(SUM(isnull(julyreg,0)),0)july_hh_P_emp,"
-        str = str & "      isnull(SUM(isnull(augreg,0)),0)aug_hh_P_emp, isnull(SUM(isnull(sepreg,0)),0)sep_hh_P_emp, "
-        str = str & "      isnull(SUM(isnull(octreg,0)),0)oct_hh_P_emp,isnull(SUM(isnull(novreg,0)),0)nov_hh_P_emp,"
-        str = str & "      isnull(SUM(isnull(decreg,0)),0)dec_hh_P_emp,  isnull(SUM(isnull(janreg,0)),0)jan_hh_P_emp,"
-        str = str & "     isnull(SUM(isnull(febreg,0)),0)feb_hh_P_emp,isnull(SUM(isnull(marchreg,0)),0)march_hh_P_emp "
+        str = "select " & val_code_p & ""
+        str = str & "     ,isnull(SUM(isnull(aprilreg,0)),0)april_hh_P_emp"
+        If mon >= 2 Then
+            str = str & "     ,isnull(SUM(isnull(mayreg,0)),0)may_hh_P_emp"
+        End If
+        If mon >= 3 Then
+            str = str & "    , isnull(SUM(isnull(junereg,0)),0)june_hh_P_emp "
+        End If
+        If mon >= 4 Then
+            str = str & "    , isnull(SUM(isnull(julyreg,0)),0)july_hh_P_emp"
+        End If
+        If mon >= 5 Then
+            str = str & "     , isnull(SUM(isnull(augreg,0)),0)aug_hh_P_emp "
+        End If
+        If mon >= 6 Then
+            str = str & "    , isnull(SUM(isnull(sepreg,0)),0)sep_hh_P_emp "
+        End If
+        If mon >= 7 Then
+            str = str & "    ,  isnull(SUM(isnull(octreg,0)),0)oct_hh_P_emp"
+        End If
+        If mon >= 8 Then
+            str = str & "    ,isnull(SUM(isnull(novreg,0)),0)nov_hh_P_emp"
+        End If
+        If mon >= 9 Then
+            str = str & "     , isnull(SUM(isnull(decreg,0)),0)dec_hh_P_emp"
+        End If
+        If mon >= 10 Then
+            str = str & "     ,  isnull(SUM(isnull(janreg,0)),0)jan_hh_P_emp"
+        End If
+        If mon >= 11 Then
+            str = str & "    , isnull(SUM(isnull(febreg,0)),0)feb_hh_P_emp "
+        End If
+        If mon >= 12 Then
+            str = str & "    , isnull(SUM(isnull(marchreg,0)),0)march_hh_P_emp "
+        End If
         str = str & "    from panchayats_rep" & yr & " p  left outer join mon_wise_empprov" & yr & "  pp on p.panchayat_code=pp.panchayat_code"
         str = str & "  where " & cond_p & " group by " & val_code_p & ""
         cmd = New SqlCommand(str, con)
