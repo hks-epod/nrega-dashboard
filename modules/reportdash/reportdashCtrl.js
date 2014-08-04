@@ -107,8 +107,8 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         x: 'x',
         columns: [
                   ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
-                  ['Households registered demand', 20, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000],
-                  ['Households provided employment', 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000],
+                  ['Households registered demand', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                  ['Households provided employment', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
               ],
       },
       axis: {
