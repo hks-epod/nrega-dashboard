@@ -580,7 +580,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         ];
 
         $scope.hh_providedemployment_chart.data.columns[1] = [
-          'Prev Year',
+          'Previous Year',
           $scope.monthlydata.april_hh_P_emp_pre,
           $scope.monthlydata.may_hh_P_emp_pre,
           $scope.monthlydata.june_hh_P_emp_pre,
@@ -611,7 +611,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         ];
 
         $scope.wage_expenditure_chart.data.columns[1] = [
-          'Prev Year',
+          'Previous Year',
           $scope.monthlydata.apr_lab_pre,
           $scope.monthlydata.may_lab_pre,
           $scope.monthlydata.jun_lab_pre,
