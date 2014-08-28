@@ -55,7 +55,7 @@ reportdash.factory('YearlyReportNational', ['$http',
     };
 
     YearlyReportNational.fetch = function(code, year) {
-      return $http.get('api/dashboard_report_yearly.aspx?'+'fin_year='+ year)
+      return $http.get('api/dashboard_report_yearly_national.aspx?'+'fin_year='+ year)
         .then(function(response) {
           return response.data;
         });
@@ -71,7 +71,7 @@ reportdash.factory('MonthlyReportNational', ['$http',
     };
 
     MonthlyReportNational.fetch = function(code, year) {
-      return $http.get('api/test.txt?'+'fin_year='+ year)
+      return $http.get('api/dashboard_report_national.aspx?'+'fin_year='+ year)
         .then(function(response) {
           return response.data;
         });
