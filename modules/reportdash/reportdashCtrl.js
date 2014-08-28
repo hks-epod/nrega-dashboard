@@ -30,6 +30,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
     });
 
     function fetchDistricts(selectedState) {
+       console.log(selectedState);
       $scope.districts = [];
       $scope.selectedDistrict = null;
       $scope.districts = $scope.regions[1][selectedState];

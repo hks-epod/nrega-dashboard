@@ -9,7 +9,7 @@ reportdash.directive('selectyear', function() {
 reportdash.directive('selectstate', function() {
   return {
     restrict: 'AE',
-    template: '<select class="selector" ui-select2 ng-model="selectedState" data-placeholder="Select State"><option value=""></option><option ng-repeat="(key, value) in regions[0]" value="{{selectState.code=key}}">{{key}}</option></select>',
+    template: '<select class="selector" ui-select2 ng-model="selectedState" data-placeholder="Select State"><option value=""></option><option ng-repeat="(key, value) in regions[0]" value="{{value}}">{{key}}</option></select>',
     replace: true
   };
 });
