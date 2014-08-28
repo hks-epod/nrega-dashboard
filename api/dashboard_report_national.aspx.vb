@@ -674,14 +674,12 @@ Partial Class dashboard_report_national
 
     End Sub
     Public Function serialize_json() As String
-
-
         Dim serializer As New System.Web.Script.Serialization.JavaScriptSerializer()
         Dim rows As New List(Of Dictionary(Of String, Object))()
 
         Dim data As New Dictionary(Of String, Object)
         For Each table As DataTable In ds.Tables
-            For Each dr1 As DataRow In table.Rows
+         '   For Each dr1 As DataRow In table.Rows
                 Dim dd As Double = 0
                 Dim i As Integer
                 For Each col1 As DataColumn In table.Columns
@@ -701,8 +699,7 @@ Partial Class dashboard_report_national
                     End If
                     dd = 0
                 Next
-            Next
-
+           ' Next
         Next
         rows.Add(data)
 
