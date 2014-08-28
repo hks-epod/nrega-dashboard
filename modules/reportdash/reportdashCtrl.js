@@ -97,6 +97,16 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       return output;
     };
 
+    $scope.getKeyByValue = function(obje,  value ) {
+        for( var prop in obje ) {
+            if( obje.hasOwnProperty( prop ) ) {
+                 if( obje[ prop ] == value ){
+                     return prop;
+                 }
+            }
+        }
+    }
+
 
 
     //////////////////////////

@@ -43,10 +43,10 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
       <div class="status-bar btselector warning">
         <span class="brcrumb">
-          {{selectedYear}} | {{selectedState}}
-          <span ng-show="selectedDistrict" class="glyphicon glyphicon-chevron-right"></span>{{regions[1][selectedState][selectedDistrict]}}
+          {{selectedYear}} | {{getKeyByValue(regions[0], selectedState)}}
+          <span ng-show="selectedDistrict" class="glyphicon glyphicon-chevron-right"></span> {{getKeyByValue(regions[1][selectedState], selectedDistrict)}}
           <span ng-show="selectedBlock" style="font-weight:lighter" class="glyphicon glyphicon-chevron-right"></span>
-          {{regions[2][selectedState][selectedDistrict][selectedBlock]}}
+           {{getKeyByValue(regions[2][selectedState][selectedDistrict], selectedBlock)}}
           <span ng-show="selectedGP" style="font-weight:lighter" class="glyphicon glyphicon-chevron-right"></span>
           {{gps[selectedGP]}}
         </span>
