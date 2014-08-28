@@ -43,8 +43,8 @@ Partial Class dashboard_report_yearly_national
         Dim fin_year As String = Request("fin_year").ToString()
         yr = Mid(fin_year, 3, 2) & Mid(fin_year, 8, 2)
 
-        f_name = "dashboard_report_yearly_national_" + yr + ".xml"
-        f_schema = "dashboard_report_yearly_national_scheme_" + yr + ".xml"
+        f_name = "dashboard_report_yearly2_national_" + yr + ".xml"
+        f_schema = "dashboard_report_yearly2_national_scheme_" + yr + ".xml"
 
         path1 = Server.MapPath("~\writereaddata\state_out\" + f_name)
         path2 = Server.MapPath("~\writereaddata\state_out\" + f_schema)
@@ -67,8 +67,8 @@ Partial Class dashboard_report_yearly_national
             Try
 
 
-                'str = "select state_name as name,state_code as code from states where state_code in ('17','18')  order by state_address5 ,state_name "
-                str = "select state_name as name,state_code as code from states  order by state_address5 ,state_name "
+                str = "select state_name as name,state_code as code from states where state_code in ('17','15')  order by state_address5 ,state_name "
+                ' str = "select state_name as name,state_code as code from states  order by state_address5 ,state_name "
                 con = conobj.connectCitizen("24")
                 If con.State = ConnectionState.Closed Then
                     con.Open()
@@ -230,6 +230,7 @@ Partial Class dashboard_report_yearly_national
             str = str & "    and workstatus in ('03','04','05') )   "
             str = str & "    or (workstatus='05') )) else 0 end),2)	Work_completion_rate"
             cmd = New SqlCommand("select p." & val_code & " state_code,isnull(SUM(isnull(reghh,0)),0)demand_register  from panchayats_rep" & yr & " p  left outer join demregister_panch" & yr & " pp on p.panchayat_code=pp.panchayat_code where p." & cond & " group by p." & val_code & "", con)
+            cmd.CommandTimeout = 0
             da = New SqlDataAdapter(cmd)
             da.Fill(ds, "dt0")
             cmd.Dispose()
@@ -396,27 +397,27 @@ Partial Class dashboard_report_yearly_national
 
         Dim data As New Dictionary(Of String, Object)
         For Each table As DataTable In ds.Tables
-            For Each dr1 As DataRow In table.Rows
-                Dim dd As Double = 0
-                Dim i As Integer
-                For Each col1 As DataColumn In table.Columns
-                    If col1.ColumnName <> "state_code" Then
-                        For Each dr2 As DataRow In table.Rows()
-                            If dr2(col1).ToString = "" Then
-                                dr2(col1) = 0
-                            End If
-                            If dr2(col1).ToString <> "" Then
-                                dd = dd + dr2(col1)
-                            End If
-                            'dr2(col1) = 0
-                        Next
-                    End If
-                    If Not data.ContainsKey(col1.ColumnName) Then
-                        data.Add(col1.ColumnName, Round(Convert.ToDecimal(dd), 2))
-                    End If
-                    dd = 0
-                Next
+            'For Each dr1 As DataRow In table.Rows
+            Dim dd As Double = 0
+            Dim i As Integer
+            For Each col1 As DataColumn In table.Columns
+                If col1.ColumnName <> "state_code" Then
+                    For Each dr2 As DataRow In table.Rows()
+                        If dr2(col1).ToString = "" Then
+                            dr2(col1) = 0
+                        End If
+                        If dr2(col1).ToString <> "" Then
+                            dd = dd + dr2(col1)
+                        End If
+                        'dr2(col1) = 0
+                    Next
+                End If
+                If Not data.ContainsKey(col1.ColumnName) Then
+                    data.Add(col1.ColumnName, Round(Convert.ToDecimal(dd), 2))
+                End If
+                dd = 0
             Next
+            ' Next
         Next
         rows.Add(data)
 
