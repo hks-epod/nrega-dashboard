@@ -4,7 +4,7 @@ reportdash.factory('YearlyReport', ['$http',
       angular.extend(this, data);
     };
 
-    YearlyReport.fetch = function(code, year) {
+    YearlyReport.fetch = function(params, year) {
       return $http.get('api/dashboard_report_yearly.aspx?'+params.code_type+'_code='  + params.code+'&' +'fin_year='+ year +'&type='+params.type)
         .then(function(response) {
           return response.data;
@@ -16,18 +16,18 @@ reportdash.factory('YearlyReport', ['$http',
 
 reportdash.factory('MonthlyReport', ['$http',
   function($http) {
-    var YearlyReport = function(data) {
+    var MonthlyReport = function(data) {
       angular.extend(this, data);
     };
 
-    YearlyReport.fetch = function(code, year) {
+    MonthlyReport.fetch = function(params, year) {
       return $http.get('api/dashboard_report_monthly.aspx?'+params.code_type+'_code='  + params.code+'&' +'fin_year='+ year +'&type='+params.type)
         .then(function(response) {
           return response.data;
         });
     };
 
-    return YearlyReport;
+    return MonthlyReport;
 }]);
 
 
@@ -45,4 +45,37 @@ reportdash.factory('GPRegions', ['$http',
     };
 
     return GPRegions;
+}]);
+
+
+reportdash.factory('YearlyReportNational', ['$http',
+  function($http) {
+    var YearlyReportNational = function(data) {
+      angular.extend(this, data);
+    };
+
+    YearlyReportNational.fetch = function(code, year) {
+      return $http.get('api/dashboard_report_yearly.aspx?'+'fin_year='+ year)
+        .then(function(response) {
+          return response.data;
+        });
+    };
+
+    return YearlyReportNational;
+}]);
+
+reportdash.factory('MonthlyReportNational', ['$http',
+  function($http) {
+    var MonthlyReportNational = function(data) {
+      angular.extend(this, data);
+    };
+
+    MonthlyReportNational.fetch = function(code, year) {
+      return $http.get('api/test.txt?'+'fin_year='+ year)
+        .then(function(response) {
+          return response.data;
+        });
+    };
+
+    return MonthlyReportNational;
 }]);
