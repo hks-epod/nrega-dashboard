@@ -1,7 +1,7 @@
 var reportdash = angular.module('ReportDash', []);
 
-reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport', 'Regions', 'GPRegions', 'MonthlyReport',
-  function($scope, $rootScope, YearlyReport, Regions, GPRegions, MonthlyReport) {
+reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport', 'Regions', 'GPRegions', 'MonthlyReport', 'YearlyReportNational', 'MonthlyReportNational',
+  function($scope, $rootScope, YearlyReport, Regions, GPRegions, MonthlyReport, YearlyReportNational, MonthlyReportNational) {
     $scope.isTable = false;
     $scope.switchview = function() {
       $scope.isTable = !$scope.isTable;
@@ -96,7 +96,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       return output;
     };
 
-    
+
 
     //////////////////////////
     // Vizulization Loading //
@@ -399,6 +399,14 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
     //      View Results    //
     //////////////////////////
 
+    YearlyReportNational.fetch($scope.selectedYear).then(function(response) {
+      $scope.yearlydata = response[0];
+    });
+    MonthlyReportNational.fetch($scope.selectedYear).then(function(response) {
+      $scope.monthlydata = response[0];
+      loadGraph();
+    });
+
     $scope.viewResults = function() {
       params = buildCode();
 
@@ -407,291 +415,294 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
       });
       MonthlyReport.fetch(params, $scope.selectedYear).then(function(response) {
         $scope.monthlydata = response[0];
-
-        $scope.demand_reg_chart.data.columns[1] = [
-          'Households registered demand',
-          $scope.monthlydata.april_demand_reg,
-          $scope.monthlydata.may_demand_reg,
-          $scope.monthlydata.june_demand_reg,
-          $scope.monthlydata.july_demand_reg,
-          $scope.monthlydata.aug_demand_reg,
-          $scope.monthlydata.sep_demand_reg,
-          $scope.monthlydata.oct_demand_reg,
-          $scope.monthlydata.nov_demand_reg,
-          $scope.monthlydata.dec_demand_reg,
-          $scope.monthlydata.jan_demand_reg,
-          $scope.monthlydata.feb_demand_reg,
-          $scope.monthlydata.march_demand_reg
-        ];
-
-        $scope.demand_reg_chart.data.columns[2] = [
-          'Households provided employment',
-          $scope.monthlydata.april_hh_P_emp,
-          $scope.monthlydata.may_hh_P_emp,
-          $scope.monthlydata.june_hh_P_emp,
-          $scope.monthlydata.july_hh_P_emp,
-          $scope.monthlydata.aug_hh_P_emp,
-          $scope.monthlydata.sep_hh_P_emp,
-          $scope.monthlydata.oct_hh_P_emp,
-          $scope.monthlydata.nov_hh_P_emp,
-          $scope.monthlydata.dec_hh_P_emp,
-          $scope.monthlydata.jan_hh_P_emp,
-          $scope.monthlydata.feb_hh_P_emp,
-          $scope.monthlydata.march_hh_P_emp
-        ];
-
-        $scope.persondays_per_hh_chart.data.columns[1] = [
-          'Previous year',
-          $scope.monthlydata.apr_PD_per_hh_preyr,
-          $scope.monthlydata.may_PD_per_hh_preyr,
-          $scope.monthlydata.jun_PD_per_hh_preyr,
-          $scope.monthlydata.jul_PD_per_hh_preyr,
-          $scope.monthlydata.aug_PD_per_hh_preyr,
-          $scope.monthlydata.sep_PD_per_hh_preyr,
-          $scope.monthlydata.oct_PD_per_hh_preyr,
-          $scope.monthlydata.nov_PD_per_hh_preyr,
-          $scope.monthlydata.dec_PD_per_hh_preyr,
-          $scope.monthlydata.jan_PD_per_hh_preyr,
-          $scope.monthlydata.feb_PD_per_hh_preyr,
-          $scope.monthlydata.march_PD_per_hh_preyr
-        ];
-        $scope.persondays_per_hh_chart.data.columns[2] = [
-          'Average person-days per household',
-          $scope.monthlydata.apr_PD_per_hh,
-          $scope.monthlydata.may_PD_per_hh,
-          $scope.monthlydata.jun_PD_per_hh,
-          $scope.monthlydata.jul_PD_per_hh,
-          $scope.monthlydata.aug_PD_per_hh,
-          $scope.monthlydata.sep_PD_per_hh,
-          $scope.monthlydata.oct_PD_per_hh,
-          $scope.monthlydata.nov_PD_per_hh,
-          $scope.monthlydata.dec_PD_per_hh,
-          $scope.monthlydata.jan_PD_per_hh,
-          $scope.monthlydata.feb_PD_per_hh,
-          $scope.monthlydata.march_PD_per_hh
-        ];
-
-
-
-        $scope.demand_labourbudget_chart.data.columns[1] = [
-          'Person-days generated',
-          $scope.monthlydata.april_work_allot,
-          $scope.monthlydata.may_work_allot,
-          $scope.monthlydata.june_work_allot,
-          $scope.monthlydata.july_work_allot,
-          $scope.monthlydata.aug_work_allot,
-          $scope.monthlydata.sep_work_allot,
-          $scope.monthlydata.oct_work_allot,
-          $scope.monthlydata.nov_work_allot,
-          $scope.monthlydata.dec_work_allot,
-          $scope.monthlydata.jan_work_allot,
-          $scope.monthlydata.feb_work_allot,
-          $scope.monthlydata.march_work_allot
-        ];
-        $scope.demand_labourbudget_chart.data.columns[2] = [
-          'Person-days projected',
-          $scope.monthlydata.april_lb,
-          $scope.monthlydata.may_lb - $scope.monthlydata.april_lb,
-          $scope.monthlydata.june_lb - $scope.monthlydata.may_lb,
-          $scope.monthlydata.july_lb - $scope.monthlydata.june_lb,
-          $scope.monthlydata.aug_lb - $scope.monthlydata.july_lb,
-          $scope.monthlydata.sep_lb - $scope.monthlydata.aug_lb,
-          $scope.monthlydata.oct_lb - $scope.monthlydata.sep_lb,
-          $scope.monthlydata.nov_lb - $scope.monthlydata.oct_lb,
-          $scope.monthlydata.dec_lb - $scope.monthlydata.nov_lb,
-          $scope.monthlydata.jan_lb - $scope.monthlydata.dec_lb,
-          $scope.monthlydata.feb_lb - $scope.monthlydata.jan_lb,
-          $scope.monthlydata.march_lb - $scope.monthlydata.feb_lb
-        ];
-
-
-        // Chart 2
-        $scope.unemployment_allowances_chart.data.columns[1] = [
-          'Person-days of unemployment due',
-          $scope.monthlydata.april_unemp,
-          $scope.monthlydata.may_unemp,
-          $scope.monthlydata.june_unemp,
-          $scope.monthlydata.july_unemp,
-          $scope.monthlydata.aug_unemp,
-          $scope.monthlydata.sep_unemp,
-          $scope.monthlydata.oct_unemp,
-          $scope.monthlydata.nov_unemp,
-          $scope.monthlydata.dec_unemp,
-          $scope.monthlydata.jan_unemp,
-          $scope.monthlydata.feb_unemp,
-          $scope.monthlydata.march_unemp
-        ];
-        $scope.unemployment_allowances_chart.data.columns[2] = [
-          'Amount payable (Rs.)',
-          $scope.monthlydata.april_unemp_amt,
-          $scope.monthlydata.may_unemp_amt,
-          $scope.monthlydata.june_unemp_amt,
-          $scope.monthlydata.july_unemp_amt,
-          $scope.monthlydata.aug_unemp_amt,
-          $scope.monthlydata.sep_unemp_amt,
-          $scope.monthlydata.oct_unemp_amt,
-          $scope.monthlydata.nov_unemp_amt,
-          $scope.monthlydata.dec_unemp_amt,
-          $scope.monthlydata.jan_unemp_amt,
-          $scope.monthlydata.feb_unemp_amt,
-          $scope.monthlydata.march_unemp_amt
-        ];
-
-
-        $scope.work_category_wise_chart.data.columns = [
-            ['Aanganbadi', $scope.monthlydata.AV_work],
-            ['Coastal areas', $scope.monthlydata.CA_work],
-            ['Drought proofing', $scope.monthlydata.DP_work],
-            ['Rural drinking water', $scope.monthlydata.DW_work],
-            ['Food grain', $scope.monthlydata.FG_work],
-            ['Flood control protection', $scope.monthlydata.FP_work],
-            ['Fisheries', $scope.monthlydata.FR_work],
-            ['Micro irrigation works', $scope.monthlydata.IC_work],
-            ["Works on individuals' land (Cat 4)", $scope.monthlydata.IF_work],
-            ['Land development', $scope.monthlydata.LD_work],
-            ['Other works', $scope.monthlydata.OP_work],
-            ['Playground', $scope.monthlydata.PG_work],
-            ['Rural connectivity', $scope.monthlydata.RC_work],
-            ['Rural sanitation', $scope.monthlydata.RS_work],
-            ['Bharat Nirman Rajiv Gandhi Seva Kendra', $scope.monthlydata.SK_work],
-            ['Water conservation and harvesting', $scope.monthlydata.WC_work],
-            ['Renovation of traditional water bodies', $scope.monthlydata.WH_work]
-        ];
-
-
-        $scope.expenditure_category_wise_chart.data.columns = [
-            ['Aanganbadi', $scope.monthlydata.AV_exp],
-            ['Coastal areas', $scope.monthlydata.CA_exp],
-            ['Drought proofing', $scope.monthlydata.DP_exp],
-            ['Rural drinking water', $scope.monthlydata.DW_exp],
-            ['Food grain', $scope.monthlydata.FG_exp],
-            ['Flood control protection', $scope.monthlydata.FP_exp],
-            ['Fisheries', $scope.monthlydata.FR_exp],
-            ['Micro irrigation works', $scope.monthlydata.IC_exp],
-            ["Works on individuals' land (Cat 4)", $scope.monthlydata.IF_exp],
-            ['Land development', $scope.monthlydata.LD_exp],
-            ['Other works', $scope.monthlydata.OP_exp],
-            ['Playground', $scope.monthlydata.PG_exp],
-            ['Rural connectivity', $scope.monthlydata.RC_exp],
-            ['Rural sanitation', $scope.monthlydata.RS_exp],
-            ['Bharat Nirman Rajiv Gandhi Seva Kendra', $scope.monthlydata.SK_exp],
-            ['Water conservation and harvesting', $scope.monthlydata.WC_exp],
-            ['Renovation of traditional water bodies', $scope.monthlydata.WH_exp]
-        ];
-
-        $scope.hh_providedemployment_chart.data.columns[1] = [
-          'Previous Year',
-          $scope.monthlydata.april_hh_P_emp_pre,
-          $scope.monthlydata.may_hh_P_emp_pre,
-          $scope.monthlydata.june_hh_P_emp_pre,
-          $scope.monthlydata.july_hh_P_emp_pre,
-          $scope.monthlydata.aug_hh_P_emp_pre,
-          $scope.monthlydata.sep_hh_P_emp_pre,
-          $scope.monthlydata.oct_hh_P_emp_pre,
-          $scope.monthlydata.nov_hh_P_emp_pre,
-          $scope.monthlydata.dec_hh_P_emp_pre,
-          $scope.monthlydata.jan_hh_P_emp_pre,
-          $scope.monthlydata.feb_hh_P_emp_pre,
-          $scope.monthlydata.march_hh_P_emp_pre
-        ];
-        $scope.hh_providedemployment_chart.data.columns[2] = [
-          'Households provided employment',
-          $scope.monthlydata.april_hh_P_emp,
-          $scope.monthlydata.may_hh_P_emp,
-          $scope.monthlydata.june_hh_P_emp,
-          $scope.monthlydata.july_hh_P_emp,
-          $scope.monthlydata.aug_hh_P_emp,
-          $scope.monthlydata.sep_hh_P_emp,
-          $scope.monthlydata.oct_hh_P_emp,
-          $scope.monthlydata.nov_hh_P_emp,
-          $scope.monthlydata.dec_hh_P_emp,
-          $scope.monthlydata.jan_hh_P_emp,
-          $scope.monthlydata.feb_hh_P_emp,
-          $scope.monthlydata.march_hh_P_emp
-        ];
-
-        $scope.wage_expenditure_chart.data.columns[1] = [
-          'Previous Year',
-          $scope.monthlydata.apr_lab_pre,
-          $scope.monthlydata.may_lab_pre,
-          $scope.monthlydata.jun_lab_pre,
-          $scope.monthlydata.jul_lab_pre,
-          $scope.monthlydata.aug_lab_pre,
-          $scope.monthlydata.sep_lab_pre,
-          $scope.monthlydata.oct_lab_pre,
-          $scope.monthlydata.nov_lab_pre,
-          $scope.monthlydata.dec_lab_pre,
-          $scope.monthlydata.jan_lab_pre,
-          $scope.monthlydata.feb_lab_pre,
-          $scope.monthlydata.march_lab_pre
-        ];
-        $scope.wage_expenditure_chart.data.columns[2] = [
-          'Wage expenditure (in lacs of Rs.)',
-          $scope.monthlydata.apr_lab,
-          $scope.monthlydata.may_lab,
-          $scope.monthlydata.jun_lab,
-          $scope.monthlydata.jul_lab,
-          $scope.monthlydata.aug_lab,
-          $scope.monthlydata.sep_lab,
-          $scope.monthlydata.oct_lab,
-          $scope.monthlydata.nov_lab,
-          $scope.monthlydata.dec_lab,
-          $scope.monthlydata.jan_lab,
-          $scope.monthlydata.feb_lab,
-          $scope.monthlydata.march_lab
-        ];
-        $scope.unpaid_delay_chart.data.columns[1] = [
-          'Muster rolls with delayed payment',
-          $scope.monthlydata.april_unpaid_delay,
-          $scope.monthlydata.may_unpaid_delay,
-          $scope.monthlydata.june_unpaid_delay,
-          $scope.monthlydata.july_unpaid_delay,
-          $scope.monthlydata.aug_unpaid_delay,
-          $scope.monthlydata.sep_unpaid_delay,
-          $scope.monthlydata.oct_unpaid_delay,
-          $scope.monthlydata.nov_unpaid_delay,
-          $scope.monthlydata.dec_unpaid_delay,
-          $scope.monthlydata.jan_unpaid_delay,
-          $scope.monthlydata.feb_unpaid_delay,
-          $scope.monthlydata.march_unpaid_delay
-        ];
-
-
-        $scope.delayedpayment_chart.data.columns[1] = [
-          'Delay in days',
-          $scope.monthlydata.april_delay,
-          $scope.monthlydata.may_delay,
-          $scope.monthlydata.june_delay,
-          $scope.monthlydata.july_delay,
-          $scope.monthlydata.aug_delay,
-          $scope.monthlydata.sep_delay,
-          $scope.monthlydata.oct_delay,
-          $scope.monthlydata.nov_delay,
-          $scope.monthlydata.dec_delay,
-          $scope.monthlydata.jan_delay,
-          $scope.monthlydata.feb_delay,
-          $scope.monthlydata.march_delay
-        ];
-        $scope.delayedpayment_chart.data.columns[2] = [
-          'Amount payable (Rs.)',
-          $scope.monthlydata.april_delay_amt,
-          $scope.monthlydata.may_delay_amt,
-          $scope.monthlydata.june_delay_amt,
-          $scope.monthlydata.july_delay_amt,
-          $scope.monthlydata.aug_delay_amt,
-          $scope.monthlydata.sep_delay_amt,
-          $scope.monthlydata.oct_delay_amt,
-          $scope.monthlydata.nov_delay_amt,
-          $scope.monthlydata.dec_delay_amt,
-          $scope.monthlydata.jan_delay_amt,
-          $scope.monthlydata.feb_delay_amt,
-          $scope.monthlydata.march_delay_amt
-        ];
-
+        loadGraph();
       });
     };
 
+    function loadGraph() {
+
+      $scope.demand_reg_chart.data.columns[1] = [
+            'Households registered demand',
+            $scope.monthlydata.april_demand_reg,
+            $scope.monthlydata.may_demand_reg,
+            $scope.monthlydata.june_demand_reg,
+            $scope.monthlydata.july_demand_reg,
+            $scope.monthlydata.aug_demand_reg,
+            $scope.monthlydata.sep_demand_reg,
+            $scope.monthlydata.oct_demand_reg,
+            $scope.monthlydata.nov_demand_reg,
+            $scope.monthlydata.dec_demand_reg,
+            $scope.monthlydata.jan_demand_reg,
+            $scope.monthlydata.feb_demand_reg,
+            $scope.monthlydata.march_demand_reg
+          ];
+
+      $scope.demand_reg_chart.data.columns[2] = [
+            'Households provided employment',
+            $scope.monthlydata.april_hh_P_emp,
+            $scope.monthlydata.may_hh_P_emp,
+            $scope.monthlydata.june_hh_P_emp,
+            $scope.monthlydata.july_hh_P_emp,
+            $scope.monthlydata.aug_hh_P_emp,
+            $scope.monthlydata.sep_hh_P_emp,
+            $scope.monthlydata.oct_hh_P_emp,
+            $scope.monthlydata.nov_hh_P_emp,
+            $scope.monthlydata.dec_hh_P_emp,
+            $scope.monthlydata.jan_hh_P_emp,
+            $scope.monthlydata.feb_hh_P_emp,
+            $scope.monthlydata.march_hh_P_emp
+          ];
+
+      $scope.persondays_per_hh_chart.data.columns[1] = [
+            'Previous year',
+            $scope.monthlydata.apr_PD_per_hh_preyr,
+            $scope.monthlydata.may_PD_per_hh_preyr,
+            $scope.monthlydata.jun_PD_per_hh_preyr,
+            $scope.monthlydata.jul_PD_per_hh_preyr,
+            $scope.monthlydata.aug_PD_per_hh_preyr,
+            $scope.monthlydata.sep_PD_per_hh_preyr,
+            $scope.monthlydata.oct_PD_per_hh_preyr,
+            $scope.monthlydata.nov_PD_per_hh_preyr,
+            $scope.monthlydata.dec_PD_per_hh_preyr,
+            $scope.monthlydata.jan_PD_per_hh_preyr,
+            $scope.monthlydata.feb_PD_per_hh_preyr,
+            $scope.monthlydata.march_PD_per_hh_preyr
+          ];
+      $scope.persondays_per_hh_chart.data.columns[2] = [
+            'Average person-days per household',
+            $scope.monthlydata.apr_PD_per_hh,
+            $scope.monthlydata.may_PD_per_hh,
+            $scope.monthlydata.jun_PD_per_hh,
+            $scope.monthlydata.jul_PD_per_hh,
+            $scope.monthlydata.aug_PD_per_hh,
+            $scope.monthlydata.sep_PD_per_hh,
+            $scope.monthlydata.oct_PD_per_hh,
+            $scope.monthlydata.nov_PD_per_hh,
+            $scope.monthlydata.dec_PD_per_hh,
+            $scope.monthlydata.jan_PD_per_hh,
+            $scope.monthlydata.feb_PD_per_hh,
+            $scope.monthlydata.march_PD_per_hh
+          ];
 
 
-  }
-]);
+
+      $scope.demand_labourbudget_chart.data.columns[1] = [
+            'Person-days generated',
+            $scope.monthlydata.april_work_allot,
+            $scope.monthlydata.may_work_allot,
+            $scope.monthlydata.june_work_allot,
+            $scope.monthlydata.july_work_allot,
+            $scope.monthlydata.aug_work_allot,
+            $scope.monthlydata.sep_work_allot,
+            $scope.monthlydata.oct_work_allot,
+            $scope.monthlydata.nov_work_allot,
+            $scope.monthlydata.dec_work_allot,
+            $scope.monthlydata.jan_work_allot,
+            $scope.monthlydata.feb_work_allot,
+            $scope.monthlydata.march_work_allot
+          ];
+      $scope.demand_labourbudget_chart.data.columns[2] = [
+            'Person-days projected',
+            $scope.monthlydata.april_lb,
+            $scope.monthlydata.may_lb - $scope.monthlydata.april_lb,
+            $scope.monthlydata.june_lb - $scope.monthlydata.may_lb,
+            $scope.monthlydata.july_lb - $scope.monthlydata.june_lb,
+            $scope.monthlydata.aug_lb - $scope.monthlydata.july_lb,
+            $scope.monthlydata.sep_lb - $scope.monthlydata.aug_lb,
+            $scope.monthlydata.oct_lb - $scope.monthlydata.sep_lb,
+            $scope.monthlydata.nov_lb - $scope.monthlydata.oct_lb,
+            $scope.monthlydata.dec_lb - $scope.monthlydata.nov_lb,
+            $scope.monthlydata.jan_lb - $scope.monthlydata.dec_lb,
+            $scope.monthlydata.feb_lb - $scope.monthlydata.jan_lb,
+            $scope.monthlydata.march_lb - $scope.monthlydata.feb_lb
+          ];
+
+
+      // Chart 2
+      $scope.unemployment_allowances_chart.data.columns[1] = [
+            'Person-days of unemployment due',
+            $scope.monthlydata.april_unemp,
+            $scope.monthlydata.may_unemp,
+            $scope.monthlydata.june_unemp,
+            $scope.monthlydata.july_unemp,
+            $scope.monthlydata.aug_unemp,
+            $scope.monthlydata.sep_unemp,
+            $scope.monthlydata.oct_unemp,
+            $scope.monthlydata.nov_unemp,
+            $scope.monthlydata.dec_unemp,
+            $scope.monthlydata.jan_unemp,
+            $scope.monthlydata.feb_unemp,
+            $scope.monthlydata.march_unemp
+          ];
+      $scope.unemployment_allowances_chart.data.columns[2] = [
+            'Amount payable (Rs.)',
+            $scope.monthlydata.april_unemp_amt,
+            $scope.monthlydata.may_unemp_amt,
+            $scope.monthlydata.june_unemp_amt,
+            $scope.monthlydata.july_unemp_amt,
+            $scope.monthlydata.aug_unemp_amt,
+            $scope.monthlydata.sep_unemp_amt,
+            $scope.monthlydata.oct_unemp_amt,
+            $scope.monthlydata.nov_unemp_amt,
+            $scope.monthlydata.dec_unemp_amt,
+            $scope.monthlydata.jan_unemp_amt,
+            $scope.monthlydata.feb_unemp_amt,
+            $scope.monthlydata.march_unemp_amt
+          ];
+
+
+      $scope.work_category_wise_chart.data.columns = [
+              ['Aanganbadi', $scope.monthlydata.AV_work],
+              ['Coastal areas', $scope.monthlydata.CA_work],
+              ['Drought proofing', $scope.monthlydata.DP_work],
+              ['Rural drinking water', $scope.monthlydata.DW_work],
+              ['Food grain', $scope.monthlydata.FG_work],
+              ['Flood control protection', $scope.monthlydata.FP_work],
+              ['Fisheries', $scope.monthlydata.FR_work],
+              ['Micro irrigation works', $scope.monthlydata.IC_work],
+              ["Works on individuals' land (Cat 4)", $scope.monthlydata.IF_work],
+              ['Land development', $scope.monthlydata.LD_work],
+              ['Other works', $scope.monthlydata.OP_work],
+              ['Playground', $scope.monthlydata.PG_work],
+              ['Rural connectivity', $scope.monthlydata.RC_work],
+              ['Rural sanitation', $scope.monthlydata.RS_work],
+              ['Bharat Nirman Rajiv Gandhi Seva Kendra', $scope.monthlydata.SK_work],
+              ['Water conservation and harvesting', $scope.monthlydata.WC_work],
+              ['Renovation of traditional water bodies', $scope.monthlydata.WH_work]
+          ];
+
+
+      $scope.expenditure_category_wise_chart.data.columns = [
+              ['Aanganbadi', $scope.monthlydata.AV_exp],
+              ['Coastal areas', $scope.monthlydata.CA_exp],
+              ['Drought proofing', $scope.monthlydata.DP_exp],
+              ['Rural drinking water', $scope.monthlydata.DW_exp],
+              ['Food grain', $scope.monthlydata.FG_exp],
+              ['Flood control protection', $scope.monthlydata.FP_exp],
+              ['Fisheries', $scope.monthlydata.FR_exp],
+              ['Micro irrigation works', $scope.monthlydata.IC_exp],
+              ["Works on individuals' land (Cat 4)", $scope.monthlydata.IF_exp],
+              ['Land development', $scope.monthlydata.LD_exp],
+              ['Other works', $scope.monthlydata.OP_exp],
+              ['Playground', $scope.monthlydata.PG_exp],
+              ['Rural connectivity', $scope.monthlydata.RC_exp],
+              ['Rural sanitation', $scope.monthlydata.RS_exp],
+              ['Bharat Nirman Rajiv Gandhi Seva Kendra', $scope.monthlydata.SK_exp],
+              ['Water conservation and harvesting', $scope.monthlydata.WC_exp],
+              ['Renovation of traditional water bodies', $scope.monthlydata.WH_exp]
+          ];
+
+      $scope.hh_providedemployment_chart.data.columns[1] = [
+            'Previous Year',
+            $scope.monthlydata.april_hh_P_emp_pre,
+            $scope.monthlydata.may_hh_P_emp_pre,
+            $scope.monthlydata.june_hh_P_emp_pre,
+            $scope.monthlydata.july_hh_P_emp_pre,
+            $scope.monthlydata.aug_hh_P_emp_pre,
+            $scope.monthlydata.sep_hh_P_emp_pre,
+            $scope.monthlydata.oct_hh_P_emp_pre,
+            $scope.monthlydata.nov_hh_P_emp_pre,
+            $scope.monthlydata.dec_hh_P_emp_pre,
+            $scope.monthlydata.jan_hh_P_emp_pre,
+            $scope.monthlydata.feb_hh_P_emp_pre,
+            $scope.monthlydata.march_hh_P_emp_pre
+          ];
+      $scope.hh_providedemployment_chart.data.columns[2] = [
+            'Households provided employment',
+            $scope.monthlydata.april_hh_P_emp,
+            $scope.monthlydata.may_hh_P_emp,
+            $scope.monthlydata.june_hh_P_emp,
+            $scope.monthlydata.july_hh_P_emp,
+            $scope.monthlydata.aug_hh_P_emp,
+            $scope.monthlydata.sep_hh_P_emp,
+            $scope.monthlydata.oct_hh_P_emp,
+            $scope.monthlydata.nov_hh_P_emp,
+            $scope.monthlydata.dec_hh_P_emp,
+            $scope.monthlydata.jan_hh_P_emp,
+            $scope.monthlydata.feb_hh_P_emp,
+            $scope.monthlydata.march_hh_P_emp
+          ];
+
+      $scope.wage_expenditure_chart.data.columns[1] = [
+            'Previous Year',
+            $scope.monthlydata.apr_lab_pre,
+            $scope.monthlydata.may_lab_pre,
+            $scope.monthlydata.jun_lab_pre,
+            $scope.monthlydata.jul_lab_pre,
+            $scope.monthlydata.aug_lab_pre,
+            $scope.monthlydata.sep_lab_pre,
+            $scope.monthlydata.oct_lab_pre,
+            $scope.monthlydata.nov_lab_pre,
+            $scope.monthlydata.dec_lab_pre,
+            $scope.monthlydata.jan_lab_pre,
+            $scope.monthlydata.feb_lab_pre,
+            $scope.monthlydata.march_lab_pre
+          ];
+      $scope.wage_expenditure_chart.data.columns[2] = [
+            'Wage expenditure (in lacs of Rs.)',
+            $scope.monthlydata.apr_lab,
+            $scope.monthlydata.may_lab,
+            $scope.monthlydata.jun_lab,
+            $scope.monthlydata.jul_lab,
+            $scope.monthlydata.aug_lab,
+            $scope.monthlydata.sep_lab,
+            $scope.monthlydata.oct_lab,
+            $scope.monthlydata.nov_lab,
+            $scope.monthlydata.dec_lab,
+            $scope.monthlydata.jan_lab,
+            $scope.monthlydata.feb_lab,
+            $scope.monthlydata.march_lab
+          ];
+      $scope.unpaid_delay_chart.data.columns[1] = [
+            'Muster rolls with delayed payment',
+            $scope.monthlydata.april_unpaid_delay,
+            $scope.monthlydata.may_unpaid_delay,
+            $scope.monthlydata.june_unpaid_delay,
+            $scope.monthlydata.july_unpaid_delay,
+            $scope.monthlydata.aug_unpaid_delay,
+            $scope.monthlydata.sep_unpaid_delay,
+            $scope.monthlydata.oct_unpaid_delay,
+            $scope.monthlydata.nov_unpaid_delay,
+            $scope.monthlydata.dec_unpaid_delay,
+            $scope.monthlydata.jan_unpaid_delay,
+            $scope.monthlydata.feb_unpaid_delay,
+            $scope.monthlydata.march_unpaid_delay
+          ];
+
+
+      $scope.delayedpayment_chart.data.columns[1] = [
+            'Delay in days',
+            $scope.monthlydata.april_delay,
+            $scope.monthlydata.may_delay,
+            $scope.monthlydata.june_delay,
+            $scope.monthlydata.july_delay,
+            $scope.monthlydata.aug_delay,
+            $scope.monthlydata.sep_delay,
+            $scope.monthlydata.oct_delay,
+            $scope.monthlydata.nov_delay,
+            $scope.monthlydata.dec_delay,
+            $scope.monthlydata.jan_delay,
+            $scope.monthlydata.feb_delay,
+            $scope.monthlydata.march_delay
+          ];
+      $scope.delayedpayment_chart.data.columns[2] = [
+            'Amount payable (Rs.)',
+            $scope.monthlydata.april_delay_amt,
+            $scope.monthlydata.may_delay_amt,
+            $scope.monthlydata.june_delay_amt,
+            $scope.monthlydata.july_delay_amt,
+            $scope.monthlydata.aug_delay_amt,
+            $scope.monthlydata.sep_delay_amt,
+            $scope.monthlydata.oct_delay_amt,
+            $scope.monthlydata.nov_delay_amt,
+            $scope.monthlydata.dec_delay_amt,
+            $scope.monthlydata.jan_delay_amt,
+            $scope.monthlydata.feb_delay_amt,
+            $scope.monthlydata.march_delay_amt
+          ];
+    }
+
+
+
+      }
+        ]);
