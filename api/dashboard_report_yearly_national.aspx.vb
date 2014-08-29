@@ -67,8 +67,8 @@ Partial Class dashboard_report_yearly_national
             Try
 
 
-                'str = "select state_name as name,state_code as code from states where state_code in ('17','18')  order by state_address5 ,state_name "
-                str = "select state_name as name,state_code as code from states  order by state_address5 ,state_name "
+                str = "select state_name as name,state_code as code from states where state_code in ('02','00','36')  order by state_address5 ,state_name "
+                '  str = "select state_name as name,state_code as code from states  order by state_address5 ,state_name "
                 con = conobj.connectCitizen("24")
                 If con.State = ConnectionState.Closed Then
                     con.Open()
@@ -152,8 +152,8 @@ Partial Class dashboard_report_yearly_national
             str = "select p." & val_code & " state_code, "
             str = str & " isnull(SUM(case when type='delay' then delay end ),0)payable_days_delay,"
             str = str & " isnull(SUM(case when type='delay' then dueamt end ),0)payable_amount_delay,"
-            str = str & "  isnull(SUM(case when type='unemp' then duedays end ),0)payable_days_unemp,"
-            str = str & " isnull(SUM(case when type='unemp' then dueamt end ),0)payable_amount_unemp"
+            str = str & "  isnull(SUM(case when type='unemp' and p.state_code not in ('02','36') then duedays end ),0)payable_days_unemp,"
+            str = str & " isnull(SUM(case when type='unemp' and p.state_code not in ('02','36') then dueamt end ),0)payable_amount_unemp"
             str = str & "  from panchayats_rep" & yr & " p  left outer join nrega_unemp_allow" & yr & " pp on p.panchayat_code=pp.panchayat_code"
             str = str & "   where  p." & cond & " "
             str = str & " Group by p." & val_code & ""
@@ -167,8 +167,8 @@ Partial Class dashboard_report_yearly_national
 
             str = ""
             str = "select p." & val_code & " state_code, "
-            str = str & " isnull(sum(case when bdo_po_approval='Y' then isnull(eligible_unemployement_days,0) end ),0)approved_days,  "
-            str = str & " isnull(sum(case when bdo_po_approval='N' then isnull(eligible_unemployement_days,0) end ),0)rejected_days "
+            str = str & " isnull(sum(case when bdo_po_approval='Y' and p.state_code not in ('02','36') then isnull(eligible_unemployement_days,0) end ),0)approved_days,  "
+            str = str & " isnull(sum(case when bdo_po_approval='N' and p.state_code not in ('02','36') then isnull(eligible_unemployement_days,0) end ),0)rejected_days "
             str = str & "  from panchayats_rep" & yr & " p  left outer join approval_unemployment pp on p.panchayat_code=pp.panchayat_code"
             str = str & "   where p." & cond & " and financial_year='" & fin_year & "'"
             str = str & " Group by p." & val_code & ""
@@ -184,18 +184,28 @@ Partial Class dashboard_report_yearly_national
             '***********************************PD(Generated)
             '*********************************** SC % / ST%  / Women%  /  HHs provided Employment / Average wage per PD/ Average Cost per PD 
             str = ""
-            str = "select  p." & val_code & " state_code,"
-            str = str & "   round( (case when (isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))>0"
-            str = str & "   then (sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)) *100)/((isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))) else 0 end ),2)SCper,"
-            str = str & "  round( (case when (isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))>0"
-            str = str & "   then (sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)) *100)/((isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))) else 0 end ),2) STper,"
-            str = str & "   round((case when (isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))>0"
-            str = str & "   then (sum(isnull(cast(emp_gen_women as bigint),0)) *100)/((isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))) else 0 end ),2) Womenper,"
+            'str = "select  p." & val_code & " state_code,"
+            'str = str & "   round( (case when (isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))>0"
+            'str = str & "   then (sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)) *100)/((isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))) else 0 end ),2)SCper,"
+            'str = str & "  round( (case when (isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))>0"
+            'str = str & "   then (sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)) *100)/((isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))) else 0 end ),2) STper,"
+            'str = str & "   round((case when (isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))>0"
+            'str = str & "   then (sum(isnull(cast(emp_gen_women as bigint),0)) *100)/((isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0))) else 0 end ),2) Womenper,"
+            'str = str & "   (isnull(sum(isnull(cast(emp_gen_hh_sc as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_hh_st as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_hh_oth as bigint),0)),0)) hh_provided_employment,"
+            'str = str & "    round(isnull(case when (sum(wage_persondays))>0 then (sum(tot_wage_paid))/(sum(wage_persondays)) else 0 end,0),0)avg_wage_per_PD ,"
+            'str = str & "   round((case when (select isnull(act_lab,0)+isnull((act_mat+act_skilled+act_tax),0)+(isnull(contin,0)+isnull(n_contin,0)) from " & tbl_fund & " where " & cond & ")>0 then"
+            'str = str & "    sum(wage_persondays)/(select isnull(act_lab,0)+isnull((act_mat+act_skilled+act_tax),0)+(isnull(contin,0)+isnull(n_contin,0)) from " & tbl_fund & " where " & cond & ") else 0 end ),2)avg_cost_per_PD"
+            'str = str & "   from panchayats_rep" & yr & " p  left outer join misdemregister_panch" & yr & "  pp on p.panchayat_code=pp.panchayat_code where p." & cond & " group by p." & val_code & ""
+
+
+            str = "select  p." & val_code & " state_code, isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)sc, isnull(sum(isnull(cast(emp_gen_women as bigint),0)),0)wom,"
+            str = str & "isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)st,isnull(sum(isnull(cast(emp_gen_HH_SC_pers as bigint),0)),0)+"
+            str = str & " isnull(sum(isnull(cast(emp_gen_HH_ST_pers as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_HH_OTH_pers as bigint),0)),0)tot_pers,"
             str = str & "   (isnull(sum(isnull(cast(emp_gen_hh_sc as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_hh_st as bigint),0)),0)+isnull(sum(isnull(cast(emp_gen_hh_oth as bigint),0)),0)) hh_provided_employment,"
-            str = str & "    round(isnull(case when (sum(wage_persondays))>0 then (sum(tot_wage_paid))/(sum(wage_persondays)) else 0 end,0),0)avg_wage_per_PD ,"
-            str = str & "   round((case when (select isnull(act_lab,0)+isnull((act_mat+act_skilled+act_tax),0)+(isnull(contin,0)+isnull(n_contin,0)) from " & tbl_fund & " where " & cond & ")>0 then"
-            str = str & "    sum(wage_persondays)/(select isnull(act_lab,0)+isnull((act_mat+act_skilled+act_tax),0)+(isnull(contin,0)+isnull(n_contin,0)) from " & tbl_fund & " where " & cond & ") else 0 end ),2)avg_cost_per_PD"
+            str = str & "    sum(tot_wage_paid)wage_paid,sum(wage_persondays)wage_pers "
             str = str & "   from panchayats_rep" & yr & " p  left outer join misdemregister_panch" & yr & "  pp on p.panchayat_code=pp.panchayat_code where p." & cond & " group by p." & val_code & ""
+
+
             cmd = New SqlCommand(str, con)
             cmd.CommandTimeout = 0
             da = New SqlDataAdapter(cmd)
@@ -207,28 +217,49 @@ Partial Class dashboard_report_yearly_national
             '***********************************Demand_registered
 
             str = ""
-            str = "select"
-            str = str & "    round((case when ( select count(*) as cnt  from wrkdtlcmp w     "
-            str = str & "    left outer join " & short_name & "work_sanction b on w.work_code=b.work_code "
-            str = str & "    and left(w.panchayat_code,7)=b.block_code       "
-            str = str & "    inner join panchayats_rep" & yr & " p on p.panchayat_code=w.panchayat_code    "
-            str = str & "    where    p." & cond & " and    "
-            str = str & "     ( ( datediff(d,dateadd(m,est_mon_complete,w.Dt_Work_Start),getdate())>0   "
-            str = str & "     and workstatus in ('03','04','05') )   "
-            str = str & "     or (workstatus='05') ))>0 then "
-            str = str & "     (   select count(*) as comp_cnt  from wrkdtlcmp w    "
+            'str = "select"
+            'str = str & "    round((case when ( select count(*) as cnt  from wrkdtlcmp w     "
+            'str = str & "    left outer join " & short_name & "work_sanction b on w.work_code=b.work_code "
+            'str = str & "    and left(w.panchayat_code,7)=b.block_code       "
+            'str = str & "    inner join panchayats_rep" & yr & " p on p.panchayat_code=w.panchayat_code    "
+            'str = str & "    where    p." & cond & " and    "
+            'str = str & "     ( ( datediff(d,dateadd(m,est_mon_complete,w.Dt_Work_Start),getdate())>0   "
+            'str = str & "     and workstatus in ('03','04','05') )   "
+            'str = str & "     or (workstatus='05') ))>0 then "
+            'str = str & "     (   select count(*) as comp_cnt  from wrkdtlcmp w    "
+            'str = str & "    left outer join " & short_name & "work_sanction b on w.work_code=b.work_code and left(w.panchayat_code,7)=b.block_code"
+            'str = str & "    inner join panchayats_rep" & yr & " p on p.panchayat_code=w.panchayat_code   "
+            'str = str & "    where  (workstatus='05')  and p." & cond & ")*100         "
+            'str = str & "    /     "
+            'str = str & "    ( select count(*) as cnt  from wrkdtlcmp w     "
+            'str = str & "    left outer join " & short_name & "work_sanction b on w.work_code=b.work_code "
+            'str = str & "    and left(w.panchayat_code,7)=b.block_code       "
+            'str = str & "    inner join panchayats_rep" & yr & " p on p.panchayat_code=w.panchayat_code    "
+            'str = str & "     where    p." & cond & " and    "
+            'str = str & "     ( ( datediff(d,dateadd(m,est_mon_complete,w.Dt_Work_Start),getdate())>0   "
+            'str = str & "    and workstatus in ('03','04','05') )   "
+            'str = str & "    or (workstatus='05') )) else 0 end),2)	Work_completion_rate"
+
+       
+            str = "     select count(case when workstatus='05' then 1 end) as comp_cnt ,"
+            str = str & "   count(case when ( datediff(d,dateadd(m,est_mon_complete,w.Dt_Work_Start),getdate())>0 and workstatus in ('03','04','05') )  or (workstatus='05')  then 1 end)as cnt"
+            str = str & "  from wrkdtlcmp w    "
             str = str & "    left outer join " & short_name & "work_sanction b on w.work_code=b.work_code and left(w.panchayat_code,7)=b.block_code"
             str = str & "    inner join panchayats_rep" & yr & " p on p.panchayat_code=w.panchayat_code   "
-            str = str & "    where  (workstatus='05')  and p." & cond & ")*100         "
-            str = str & "    /     "
-            str = str & "    ( select count(*) as cnt  from wrkdtlcmp w     "
-            str = str & "    left outer join " & short_name & "work_sanction b on w.work_code=b.work_code "
-            str = str & "    and left(w.panchayat_code,7)=b.block_code       "
-            str = str & "    inner join panchayats_rep" & yr & " p on p.panchayat_code=w.panchayat_code    "
-            str = str & "     where    p." & cond & " and    "
-            str = str & "     ( ( datediff(d,dateadd(m,est_mon_complete,w.Dt_Work_Start),getdate())>0   "
-            str = str & "    and workstatus in ('03','04','05') )   "
-            str = str & "    or (workstatus='05') )) else 0 end),2)	Work_completion_rate"
+            str = str & "    where  p." & cond & "    and  dbo.fiscalyear(w.Dt_Work_Start)='" & Request.QueryString("fin_year") & "' "
+
+            'str = str & "    ( select count(*) as cnt  from wrkdtlcmp w     "
+            'str = str & "    left outer join " & short_name & "work_sanction b on w.work_code=b.work_code "
+            'str = str & "    and left(w.panchayat_code,7)=b.block_code       "
+            'str = str & "    inner join panchayats_rep" & yr & " p on p.panchayat_code=w.panchayat_code    "
+            'str = str & "     where    p." & cond & " and    "
+            'str = str & "     ( ( datediff(d,dateadd(m,est_mon_complete,w.Dt_Work_Start),getdate())>0   "
+            'str = str & "    and workstatus in ('03','04','05') )   "
+            'str = str & "    or (workstatus='05') )) else 0 end),2)	Work_completion_rate"
+
+
+
+
             cmd = New SqlCommand("select p." & val_code & " state_code,isnull(SUM(isnull(reghh,0)),0)demand_register  from panchayats_rep" & yr & " p  left outer join demregister_panch" & yr & " pp on p.panchayat_code=pp.panchayat_code where p." & cond & " group by p." & val_code & "", con)
             cmd.CommandTimeout = 0
             da = New SqlDataAdapter(cmd)
@@ -317,12 +348,20 @@ Partial Class dashboard_report_yearly_national
 
 
             str = ""
+            'str = "select round(isnull(act_lab,0)+isnull((act_mat+act_skilled+act_tax),0)+(isnull(contin,0)+isnull(n_contin,0)),2) tot_exp,"
+            'str = str & " round((case when isnull(act_lab,0)+isnull((act_mat+act_skilled+act_tax),0)+(isnull(contin,0)+isnull(n_contin,0))> 0"
+            'str = str & " then ((isnull(act_lab,0)*100)/(isnull(act_lab,0)+isnull((act_mat+act_skilled+act_tax),0)+(isnull(contin,0)+isnull(n_contin,0)))) else 0 end),2)wage_perc,"
+            'str = str & " round((case when isnull(act_lab,0)+isnull((act_mat+act_skilled+act_tax),0)+(isnull(contin,0)+isnull(n_contin,0))> 0"
+            'str = str & " then ((isnull(contin,0)+isnull(n_contin,0))*100)/(isnull(act_lab,0)+isnull((act_mat+act_skilled+act_tax),0)+(isnull(contin,0)+isnull(n_contin,0))) else 0 end ),2)adm_perc"
+            'str = str & "  from " & tbl_fund & " where " & cond & " "
+
+
+
             str = "select round(isnull(act_lab,0)+isnull((act_mat+act_skilled+act_tax),0)+(isnull(contin,0)+isnull(n_contin,0)),2) tot_exp,"
-            str = str & " round((case when isnull(act_lab,0)+isnull((act_mat+act_skilled+act_tax),0)+(isnull(contin,0)+isnull(n_contin,0))> 0"
-            str = str & " then ((isnull(act_lab,0)*100)/(isnull(act_lab,0)+isnull((act_mat+act_skilled+act_tax),0)+(isnull(contin,0)+isnull(n_contin,0)))) else 0 end),2)wage_perc,"
-            str = str & " round((case when isnull(act_lab,0)+isnull((act_mat+act_skilled+act_tax),0)+(isnull(contin,0)+isnull(n_contin,0))> 0"
-            str = str & " then ((isnull(contin,0)+isnull(n_contin,0))*100)/(isnull(act_lab,0)+isnull((act_mat+act_skilled+act_tax),0)+(isnull(contin,0)+isnull(n_contin,0))) else 0 end ),2)adm_perc"
+            str = str & " isnull(act_lab,0)wage,"
+            str = str & " isnull(contin,0)+isnull(n_contin,0)adm"
             str = str & "  from " & tbl_fund & " where " & cond & " "
+
             cmd = New SqlCommand(str, con)
             cmd.CommandTimeout = 0
             da = New SqlDataAdapter(cmd)
@@ -362,14 +401,25 @@ Partial Class dashboard_report_yearly_national
             '*******************************************% of active workers A/Cs freezed /  % of Aadhaar seeding against total Active worker
 
             str = ""
-            str = "select round((case when isnull(SUM( case when active='y' then worker end),0)>0 then "
-            str = str & "  (isnull(SUM( case when active='Y' and ac_freezed='Y' and modepay is not null then worker end),0) *100)/(isnull(SUM( case when active='y' then worker end),0)) else 0 end),2) frez_act_pers,"
-            str = str & " round((case when isnull(SUM( case when active='y' then worker end),0)>0 then "
-            str = str & " (isnull(SUM( case when active='Y' and uid='Y' then worker end),0) *100)/(isnull(SUM( case when active='y' then worker end),0) )else 0 end ),2) aadhaar_seedpers"
+            'str = "select round((case when isnull(SUM( case when active='y' then worker end),0)>0 then "
+            'str = str & "  (isnull(SUM( case when active='Y' and ac_freezed='Y' and modepay is not null then worker end),0) *100)/(isnull(SUM( case when active='y' then worker end),0)) else 0 end),2) frez_act_pers,"
+            'str = str & " round((case when isnull(SUM( case when active='y' then worker end),0)>0 then "
+            'str = str & " (isnull(SUM( case when active='Y' and uid='Y' then worker end),0) *100)/(isnull(SUM( case when active='y' then worker end),0) )else 0 end ),2) aadhaar_seedpers"
+            'str = str & "  from panchayats_rep" & yr & " p inner join nrega_worker_detail w on"
+            'str = str & "     p.panchayat_code = w.panchayat_code"
+            'str = str & "  where active='Y' and p." & cond & " and"
+            'str = str & "  (Event_Flag is null or Event_Flag<>'D')"
+
+
+
+            str = "select  isnull(SUM( case when active='y' then worker end),0)tot_act,"
+            str = str & "  isnull(SUM( case when active='Y' and ac_freezed='Y' and modepay is not null then worker end),0)frez_act,"
+            str = str & " isnull(SUM( case when active='Y' and uid='Y' then worker end),0) aadhaar_seed"
             str = str & "  from panchayats_rep" & yr & " p inner join nrega_worker_detail w on"
             str = str & "     p.panchayat_code = w.panchayat_code"
             str = str & "  where active='Y' and p." & cond & " and"
             str = str & "  (Event_Flag is null or Event_Flag<>'D')"
+
             cmd = New SqlCommand(str, con)
             cmd.CommandTimeout = 0
             da = New SqlDataAdapter(cmd)
@@ -386,7 +436,7 @@ Partial Class dashboard_report_yearly_national
         End Try
 
         ''******************************************//////////////////////////////////////////////////////////////////////*********************************************************************
-       
+
 
     End Sub
 
@@ -397,28 +447,48 @@ Partial Class dashboard_report_yearly_national
 
         Dim data As New Dictionary(Of String, Object)
         For Each table As DataTable In ds.Tables
-           ' For Each dr1 As DataRow In table.Rows
-                Dim dd As Double = 0
-                Dim i As Integer
-                For Each col1 As DataColumn In table.Columns
-                    If col1.ColumnName <> "state_code" Then
-                        For Each dr2 As DataRow In table.Rows()
-                            If dr2(col1).ToString = "" Then
-                                dr2(col1) = 0
-                            End If
-                            If dr2(col1).ToString <> "" Then
-                                dd = dd + dr2(col1)
-                            End If
-                            'dr2(col1) = 0
-                        Next
-                    End If
-                    If Not data.ContainsKey(col1.ColumnName) Then
-                        data.Add(col1.ColumnName, Round(Convert.ToDecimal(dd), 2))
-                    End If
-                    dd = 0
-                Next
-           ' Next
+            ' For Each dr1 As DataRow In table.Rows
+            Dim dd As Double = 0
+            Dim i As Integer
+            For Each col1 As DataColumn In table.Columns
+                If col1.ColumnName <> "state_code" Then
+                    For Each dr2 As DataRow In table.Rows()
+                        If dr2(col1).ToString = "" Then
+                            dr2(col1) = 0
+                        End If
+                        If dr2(col1).ToString <> "" Then
+                            dd = dd + dr2(col1)
+                        End If
+                        'dr2(col1) = 0
+                    Next
+                End If
+                If Not data.ContainsKey(col1.ColumnName) Then
+                    data.Add(col1.ColumnName, Round(Convert.ToDecimal(dd), 2))
+                End If
+                dd = 0
+            Next
+            ' Next
+
         Next
+        If data("tot_pers") > 0 Then
+            data.Add("SCper", Round(Convert.ToDecimal(data("sc") * 100 / data("tot_pers")), 2))
+            data.Add("STper", Round(Convert.ToDecimal(data("st") * 100 / data("tot_pers")), 2))
+            data.Add("Womenper", Round(Convert.ToDecimal(data("wom") * 100 / data("tot_pers")), 2))
+        End If
+        If data("cnt") > 0 Then
+            data.Add("Work_completion_rate", Round(Convert.ToDecimal(data("comp_cnt") * 100 / data("cnt")), 2))
+        End If
+        If data("tot_exp") > 0 Then
+            data.Add("wage_perc", Round(Convert.ToDecimal(data("wage") * 100 / data("tot_exp")), 2))
+            data.Add("adm_perc", Round(Convert.ToDecimal(data("adm") * 100 / data("tot_exp")), 2))
+        End If
+        If data("tot_act") > 0 Then
+            data.Add("frez_act_pers", Round(Convert.ToDecimal(data("frez_act") * 100 / data("tot_act")), 2))
+            data.Add("aadhaar_seedpers", Round(Convert.ToDecimal(data("aadhaar_seed") * 100 / data("tot_act")), 2))
+        End If
+        If data("wage_pers") > 0 Then
+            data.Add("avg_wage_per_PD", Round(Convert.ToDecimal(data("wage_paid") / data("wage_pers")), 2))
+        End If
         rows.Add(data)
 
         Response.Write(serializer.Serialize(rows))

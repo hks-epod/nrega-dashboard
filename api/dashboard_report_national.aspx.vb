@@ -55,8 +55,8 @@ Partial Class dashboard_report_national
             Try
 
 
-                'str = "select state_name as name,state_code as code from states where state_code in ('17','18')  order by state_address5 ,state_name "
-                str = "select state_name as name,state_code as code from states   order by state_address5 ,state_name "
+                str = "select state_name as name,state_code as code from states where state_code in ('17','30')  order by state_address5 ,state_name "
+                ' str = "select state_name as name,state_code as code from states   order by state_address5 ,state_name "
                 con = conobj.connectCitizen("24")
                 If con.State = ConnectionState.Closed Then
                     con.Open()
@@ -126,7 +126,7 @@ Partial Class dashboard_report_national
             mon = mon - 3
         End If
 
-        str = "select  " & val_code_p & " state_code"
+        str = "select  p." & val_code & " state_code"
         str = str & "    , isnull(SUM(isnull(aprilreg,0)),0)april_demand_reg "
         If mon >= 2 Then
             str = str & "   , isnull(SUM(isnull(mayreg,0)),0)may_demand_reg"
@@ -162,7 +162,7 @@ Partial Class dashboard_report_national
             str = str & "     ,isnull(SUM(isnull(marchreg,0)),0)march_demand_reg"
         End If
         str = str & "    from panchayats_rep" & yr & " p  left outer join mon_wise_dmd" & yr & "  pp on p.panchayat_code=pp.panchayat_code"
-        str = str & "  where " & cond_p & " group by " & val_code_p & ""
+        str = str & "  where p." & cond & " group by p." & val_code & ""
         cmd = New SqlCommand(str, con)
         cmd.CommandTimeout = 0
         da = New SqlDataAdapter(cmd)
@@ -201,7 +201,7 @@ Partial Class dashboard_report_national
 
         '***********************************Work_Allotted *********** HH provided employement
 
-        str = "select " & val_code_p & " state_code ,"
+        str = "select p." & val_code & " state_code ,"
         str = str & "     isnull(SUM(isnull(aprilAPP,0)),0)april_work_allot,isnull(SUM(isnull(aprilreg,0)),0)april_hh_P_emp"
         If mon >= 2 Then
             str = str & "     , isnull(SUM(isnull(mayAPP,0)),0)may_work_allot,isnull(SUM(isnull(mayreg,0)),0)may_hh_P_emp"
@@ -237,7 +237,7 @@ Partial Class dashboard_report_national
             str = str & "     ,isnull(SUM(isnull(marchAPP,0)),0)march_work_allot , isnull(SUM(isnull(marchreg,0)),0)march_hh_P_emp "
         End If
         str = str & "    from panchayats_rep" & yr & " p  left outer join mon_wise_empprov" & yr & "  pp on p.panchayat_code=pp.panchayat_code"
-        str = str & "  where " & cond_p & " group by " & val_code_p & ""
+        str = str & "  where p." & cond & " group by p." & val_code & ""
         cmd = New SqlCommand(str, con)
         cmd.CommandTimeout = 0
         da = New SqlDataAdapter(cmd)
@@ -295,32 +295,32 @@ Partial Class dashboard_report_national
 
         '***********************************Unemployment Allowance/Amount Payable
         str = " select p." & val_code & " state_code,"
-        str = str & " isnull(SUM(case when mon='april' and type='unemp' then  isnull(duedays,0) end),0) april_unemp,"
-        str = str & " isnull(SUM(case when mon='may' and type='unemp' then  isnull(duedays,0) end),0) may_unemp ,"
-        str = str & " isnull(SUM(case when mon='june' and type='unemp' then  isnull(duedays,0) end),0) june_unemp , "
-        str = str & " isnull(SUM(case when mon='july' and type='unemp' then  isnull(duedays,0) end),0) july_unemp ,"
-        str = str & " isnull(SUM(case when mon='August' and type='unemp' then  isnull(duedays,0) end),0) aug_unemp,"
-        str = str & " isnull(SUM(case when mon='September' and type='unemp' then  isnull(duedays,0) end),0) sep_unemp ,"
-        str = str & " isnull(SUM(case when mon='October' and type='unemp' then  isnull(duedays,0) end),0) oct_unemp ,"
-        str = str & " isnull(SUM(case when mon='November' and type='unemp' then  isnull(duedays,0) end),0) nov_unemp ,"
-        str = str & " isnull(SUM(case when mon='December' and type='unemp' then  isnull(duedays,0) end),0) dec_unemp,"
-        str = str & " isnull(SUM(case when mon='January' and type='unemp' then  isnull(duedays,0) end),0) jan_unemp ,"
-        str = str & " isnull(SUM(case when mon='February' and type='unemp' then  isnull(duedays,0) end),0) feb_unemp ,"
-        str = str & " isnull(SUM(case when mon='March' and type='unemp' then  isnull(duedays,0) end),0) march_unemp ,"
+        str = str & " isnull(SUM(case when mon='april' and type='unemp' and p.state_code not in ('02','36') then  isnull(duedays,0) end),0) april_unemp,"
+        str = str & " isnull(SUM(case when mon='may' and type='unemp'  and p.state_code not in ('02','36') then  isnull(duedays,0) end),0) may_unemp ,"
+        str = str & " isnull(SUM(case when mon='june' and type='unemp'  and p.state_code not in ('02','36') then  isnull(duedays,0) end),0) june_unemp , "
+        str = str & " isnull(SUM(case when mon='july' and type='unemp'  and p.state_code not in ('02','36') then  isnull(duedays,0) end),0) july_unemp ,"
+        str = str & " isnull(SUM(case when mon='August' and type='unemp' and p.state_code not in ('02','36')  then  isnull(duedays,0) end),0) aug_unemp,"
+        str = str & " isnull(SUM(case when mon='September' and type='unemp' and p.state_code not in ('02','36')  then  isnull(duedays,0) end),0) sep_unemp ,"
+        str = str & " isnull(SUM(case when mon='October' and type='unemp' and p.state_code not in ('02','36')  then  isnull(duedays,0) end),0) oct_unemp ,"
+        str = str & " isnull(SUM(case when mon='November' and type='unemp' and p.state_code not in ('02','36')  then  isnull(duedays,0) end),0) nov_unemp ,"
+        str = str & " isnull(SUM(case when mon='December' and type='unemp' and p.state_code not in ('02','36')  then  isnull(duedays,0) end),0) dec_unemp,"
+        str = str & " isnull(SUM(case when mon='January' and type='unemp' and p.state_code not in ('02','36')  then  isnull(duedays,0) end),0) jan_unemp ,"
+        str = str & " isnull(SUM(case when mon='February' and type='unemp' and p.state_code not in ('02','36')  then  isnull(duedays,0) end),0) feb_unemp ,"
+        str = str & " isnull(SUM(case when mon='March' and type='unemp' and p.state_code not in ('02','36')  then  isnull(duedays,0) end),0) march_unemp ,"
 
 
-        str = str & " round(isnull(SUM(case when mon='april' and type='unemp' then  isnull(dueamt,0) end),0),2) april_unemp_amt,"
-        str = str & " round(isnull(SUM(case when mon='may' and type='unemp' then  isnull(dueamt,0) end),0),2) may_unemp_amt ,"
-        str = str & " round(isnull(SUM(case when mon='june' and type='unemp' then  isnull(dueamt,0) end),0),2) june_unemp_amt , "
-        str = str & " round(isnull(SUM(case when mon='july' and type='unemp' then  isnull(dueamt,0) end),0),2) july_unemp_amt ,"
-        str = str & " round(isnull(SUM(case when mon='August' and type='unemp' then  isnull(dueamt,0) end),0),2) aug_unemp_amt,"
-        str = str & " round(isnull(SUM(case when mon='September' and type='unemp' then  isnull(dueamt,0) end),0),2) sep_unemp_amt ,"
-        str = str & " round(isnull(SUM(case when mon='October' and type='unemp' then  isnull(dueamt,0) end),0),2) oct_unemp_amt ,"
-        str = str & " round(isnull(SUM(case when mon='November' and type='unemp' then  isnull(dueamt,0) end),0),2) nov_unemp_amt ,"
-        str = str & " round(isnull(SUM(case when mon='December' and type='unemp' then  isnull(dueamt,0) end),0),2) dec_unemp_amt,"
-        str = str & " round(isnull(SUM(case when mon='January' and type='unemp' then  isnull(dueamt,0) end),0),2) jan_unemp_amt ,"
-        str = str & " round(isnull(SUM(case when mon='February' and type='unemp' then  isnull(dueamt,0) end),0),2) feb_unemp_amt ,"
-        str = str & " round(isnull(SUM(case when mon='March' and type='unemp' then  isnull(dueamt,0) end),0),2) march_unemp_amt "
+        str = str & " round(isnull(SUM(case when mon='april' and type='unemp' and p.state_code not in ('02','36')  then  isnull(dueamt,0) end),0),2) april_unemp_amt,"
+        str = str & " round(isnull(SUM(case when mon='may' and type='unemp' and p.state_code not in ('02','36')  then  isnull(dueamt,0) end),0),2) may_unemp_amt ,"
+        str = str & " round(isnull(SUM(case when mon='june' and type='unemp' and p.state_code not in ('02','36')  then  isnull(dueamt,0) end),0),2) june_unemp_amt , "
+        str = str & " round(isnull(SUM(case when mon='july' and type='unemp' and p.state_code not in ('02','36')  then  isnull(dueamt,0) end),0),2) july_unemp_amt ,"
+        str = str & " round(isnull(SUM(case when mon='August' and type='unemp' and p.state_code not in ('02','36')  then  isnull(dueamt,0) end),0),2) aug_unemp_amt,"
+        str = str & " round(isnull(SUM(case when mon='September' and type='unemp' and p.state_code not in ('02','36')  then  isnull(dueamt,0) end),0),2) sep_unemp_amt ,"
+        str = str & " round(isnull(SUM(case when mon='October' and type='unemp' and p.state_code not in ('02','36')  then  isnull(dueamt,0) end),0),2) oct_unemp_amt ,"
+        str = str & " round(isnull(SUM(case when mon='November' and type='unemp' and p.state_code not in ('02','36')  then  isnull(dueamt,0) end),0),2) nov_unemp_amt ,"
+        str = str & " round(isnull(SUM(case when mon='December' and type='unemp' and p.state_code not in ('02','36')  then  isnull(dueamt,0) end),0),2) dec_unemp_amt,"
+        str = str & " round(isnull(SUM(case when mon='January' and type='unemp' and p.state_code not in ('02','36')  then  isnull(dueamt,0) end),0),2) jan_unemp_amt ,"
+        str = str & " round(isnull(SUM(case when mon='February' and type='unemp' and p.state_code not in ('02','36')  then  isnull(dueamt,0) end),0),2) feb_unemp_amt ,"
+        str = str & " round(isnull(SUM(case when mon='March' and type='unemp' and p.state_code not in ('02','36')  then  isnull(dueamt,0) end),0),2) march_unemp_amt "
 
 
         str = str & " from panchayats_rep" & yr & "  p  "
@@ -560,7 +560,7 @@ Partial Class dashboard_report_national
 
 
         '***********************HH provided Employement Previous Year
-        str = "select " & val_code_p & " state_code,"
+        str = "select p." & val_code & " state_code,"
         str = str & "     isnull(SUM(isnull(aprilreg,0)),0)april_hh_P_emp_pre, isnull(SUM(isnull(mayreg,0)),0)may_hh_P_emp_pre,"
         str = str & "     isnull(SUM(isnull(junereg,0)),0)june_hh_P_emp_pre,isnull(SUM(isnull(julyreg,0)),0)july_hh_P_emp_pre,"
         str = str & "      isnull(SUM(isnull(augreg,0)),0)aug_hh_P_emp_pre, isnull(SUM(isnull(sepreg,0)),0)sep_hh_P_emp_pre, "
@@ -568,7 +568,7 @@ Partial Class dashboard_report_national
         str = str & "      isnull(SUM(isnull(decreg,0)),0)dec_hh_P_emp_pre,  isnull(SUM(isnull(janreg,0)),0)jan_hh_P_emp_pre,"
         str = str & "     isnull(SUM(isnull(febreg,0)),0)feb_hh_P_emp_pre,isnull(SUM(isnull(marchreg,0)),0)march_hh_P_emp_pre "
         str = str & "    from panchayats_rep" & pre_yr & " p  left outer join mon_wise_empprov" & pre_yr & "  pp on p.panchayat_code=pp.panchayat_code"
-        str = str & "  where " & cond_p & " group by " & val_code_p & ""
+        str = str & "  where p." & cond & " group by p." & val_code & ""
         cmd = New SqlCommand(str, con)
         cmd.CommandTimeout = 0
         da = New SqlDataAdapter(cmd)
@@ -579,21 +579,37 @@ Partial Class dashboard_report_national
 
 
         '***********************Average No. of Persondays per Houshold 
-        str = "select " & val_code_p & " state_code,"
-        str = str & "  (case when sum(isnull(aprilreg,0))>0 then sum(isnull(aprilapp,0))/sum(isnull(aprilreg,0)) else 0 end)apr_PD_per_hh, "
-        str = str & "  (case when sum(isnull(mayreg,0))>0 then sum(isnull(mayapp,0))/sum(isnull(mayreg,0)) else 0 end)may_PD_per_hh ,"
-        str = str & " (case when sum(isnull(junereg,0))>0 then sum(isnull(juneapp,0))/sum(isnull(junereg,0)) else 0 end)jun_PD_per_hh ,"
-        str = str & " (case when sum(isnull(julyreg,0))>0 then sum(isnull(julyapp,0))/sum(isnull(julyreg,0)) else 0 end)jul_PD_per_hh ,"
-        str = str & "  (case when sum(isnull(augreg,0))>0 then sum(isnull(augapp,0))/sum(isnull(augreg,0)) else 0 end)aug_PD_per_hh ,"
-        str = str & "  (case when sum(isnull(sepreg,0))>0 then sum(isnull(sepapp,0))/sum(isnull(sepreg,0)) else 0 end)sep_PD_per_hh ,"
-        str = str & "  (case when sum(isnull(octreg,0))>0 then sum(isnull(octapp,0))/sum(isnull(octreg,0)) else 0 end)oct_PD_per_hh ,"
-        str = str & "  (case when sum(isnull(novreg,0))>0 then sum(isnull(novapp,0))/sum(isnull(novreg,0)) else 0 end)nov_PD_per_hh ,"
-        str = str & "  (case when sum(isnull(decreg,0))>0 then sum(isnull(decapp,0))/sum(isnull(decreg,0)) else 0 end)dec_PD_per_hh ,"
-        str = str & "  (case when sum(isnull(janreg,0))>0 then sum(isnull(janapp,0))/sum(isnull(janreg,0)) else 0 end)jan_PD_per_hh ,"
-        str = str & " (case when sum(isnull(febreg,0))>0 then sum(isnull(febapp,0))/sum(isnull(febreg,0)) else 0 end)feb_PD_per_hh ,"
-        str = str & "  (case when sum(isnull(marchreg,0))>0 then sum(isnull(marchapp,0))/sum(isnull(marchreg,0)) else 0 end)mar_PD_per_hh "
+        'str = "select " & val_code_p & " state_code,"
+        'str = str & "  (case when sum(isnull(aprilreg,0))>0 then sum(isnull(aprilapp,0))/sum(isnull(aprilreg,0)) else 0 end)apr_PD_per_hh, "
+        'str = str & "  (case when sum(isnull(mayreg,0))>0 then sum(isnull(mayapp,0))/sum(isnull(mayreg,0)) else 0 end)may_PD_per_hh ,"
+        'str = str & " (case when sum(isnull(junereg,0))>0 then sum(isnull(juneapp,0))/sum(isnull(junereg,0)) else 0 end)jun_PD_per_hh ,"
+        'str = str & " (case when sum(isnull(julyreg,0))>0 then sum(isnull(julyapp,0))/sum(isnull(julyreg,0)) else 0 end)jul_PD_per_hh ,"
+        'str = str & "  (case when sum(isnull(augreg,0))>0 then sum(isnull(augapp,0))/sum(isnull(augreg,0)) else 0 end)aug_PD_per_hh ,"
+        'str = str & "  (case when sum(isnull(sepreg,0))>0 then sum(isnull(sepapp,0))/sum(isnull(sepreg,0)) else 0 end)sep_PD_per_hh ,"
+        'str = str & "  (case when sum(isnull(octreg,0))>0 then sum(isnull(octapp,0))/sum(isnull(octreg,0)) else 0 end)oct_PD_per_hh ,"
+        'str = str & "  (case when sum(isnull(novreg,0))>0 then sum(isnull(novapp,0))/sum(isnull(novreg,0)) else 0 end)nov_PD_per_hh ,"
+        'str = str & "  (case when sum(isnull(decreg,0))>0 then sum(isnull(decapp,0))/sum(isnull(decreg,0)) else 0 end)dec_PD_per_hh ,"
+        'str = str & "  (case when sum(isnull(janreg,0))>0 then sum(isnull(janapp,0))/sum(isnull(janreg,0)) else 0 end)jan_PD_per_hh ,"
+        'str = str & " (case when sum(isnull(febreg,0))>0 then sum(isnull(febapp,0))/sum(isnull(febreg,0)) else 0 end)feb_PD_per_hh ,"
+        'str = str & "  (case when sum(isnull(marchreg,0))>0 then sum(isnull(marchapp,0))/sum(isnull(marchreg,0)) else 0 end)mar_PD_per_hh "
+        'str = str & "    from panchayats_rep" & yr & " p  left outer join mon_wise_empprov" & yr & "  pp on p.panchayat_code=pp.panchayat_code"
+        'str = str & "  where " & cond_p & " group by " & val_code_p & ""
+
+        str = "select p." & val_code & " state_code,"
+        str = str & "  sum(isnull(aprilapp,0))aprilapp_c,sum(isnull(aprilreg,0))aprilreg_c , "
+        str = str & "  sum(isnull(mayapp,0))mayapp_c,sum(isnull(mayreg,0))mayreg_c ,"
+        str = str & " sum(isnull(juneapp,0))juneapp_c,sum(isnull(junereg,0))junereg_c,"
+        str = str & " sum(isnull(julyapp,0))julyapp_c,sum(isnull(julyreg,0))julyreg_c,"
+        str = str & " sum(isnull(augapp,0))augapp_c,sum(isnull(augreg,0))augreg_c,"
+        str = str & "  sum(isnull(sepapp,0))sepapp_c,sum(isnull(sepreg,0))sepreg_c,"
+        str = str & " sum(isnull(octapp,0))octapp_c,sum(isnull(octreg,0))octreg_c  ,"
+        str = str & "  sum(isnull(novapp,0))novapp_c,sum(isnull(novreg,0))novreg_c  ,"
+        str = str & "  sum(isnull(decapp,0))decapp_c,sum(isnull(decreg,0))decreg_c ,"
+        str = str & "  sum(isnull(janapp,0))janapp_c,sum(isnull(janreg,0))janreg_c ,"
+        str = str & " sum(isnull(febapp,0))febapp_c,sum(isnull(febreg,0))febreg_c,"
+        str = str & "  sum(isnull(marchapp,0))marchapp_c,sum(isnull(marchreg,0))marchreg_c "
         str = str & "    from panchayats_rep" & yr & " p  left outer join mon_wise_empprov" & yr & "  pp on p.panchayat_code=pp.panchayat_code"
-        str = str & "  where " & cond_p & " group by " & val_code_p & ""
+        str = str & "  where p." & cond & " group by p." & val_code & ""
         cmd = New SqlCommand(str, con)
         cmd.CommandTimeout = 0
         da = New SqlDataAdapter(cmd)
@@ -604,21 +620,37 @@ Partial Class dashboard_report_national
 
 
         '***********************Average No. of Persondays per Houshold Previous year
-        str = "select " & val_code_p & " state_code,"
-        str = str & "  (case when sum(isnull(aprilreg,0))>0 then sum(isnull(aprilapp,0))/sum(isnull(aprilreg,0)) else 0 end)apr_PD_per_hh_preyr, "
-        str = str & "  (case when sum(isnull(mayreg,0))>0 then sum(isnull(mayapp,0))/sum(isnull(mayreg,0)) else 0 end)may_PD_per_hh_preyr,"
-        str = str & " (case when sum(isnull(junereg,0))>0 then sum(isnull(juneapp,0))/sum(isnull(junereg,0)) else 0 end)jun_PD_per_hh_preyr,"
-        str = str & " (case when sum(isnull(julyreg,0))>0 then sum(isnull(julyapp,0))/sum(isnull(julyreg,0)) else 0 end)jul_PD_per_hh_preyr,"
-        str = str & "  (case when sum(isnull(augreg,0))>0 then sum(isnull(augapp,0))/sum(isnull(augreg,0)) else 0 end)aug_PD_per_hh_preyr,"
-        str = str & "  (case when sum(isnull(sepreg,0))>0 then sum(isnull(sepapp,0))/sum(isnull(sepreg,0)) else 0 end)sep_PD_per_hh_preyr,"
-        str = str & "  (case when sum(isnull(octreg,0))>0 then sum(isnull(octapp,0))/sum(isnull(octreg,0)) else 0 end)oct_PD_per_hh_preyr,"
-        str = str & "  (case when sum(isnull(novreg,0))>0 then sum(isnull(novapp,0))/sum(isnull(novreg,0)) else 0 end)nov_PD_per_hh_preyr,"
-        str = str & "  (case when sum(isnull(decreg,0))>0 then sum(isnull(decapp,0))/sum(isnull(decreg,0)) else 0 end)dec_PD_per_hh_preyr,"
-        str = str & "  (case when sum(isnull(janreg,0))>0 then sum(isnull(janapp,0))/sum(isnull(janreg,0)) else 0 end)jan_PD_per_hh_preyr,"
-        str = str & " (case when sum(isnull(febreg,0))>0 then sum(isnull(febapp,0))/sum(isnull(febreg,0)) else 0 end)feb_PD_per_hh_preyr,"
-        str = str & "  (case when sum(isnull(marchreg,0))>0 then sum(isnull(marchapp,0))/sum(isnull(marchreg,0)) else 0 end)mar_PD_per_hh_preyr "
+        'str = "select " & val_code_p & " state_code,"
+        'str = str & "  (case when sum(isnull(aprilreg,0))>0 then sum(isnull(aprilapp,0))/sum(isnull(aprilreg,0)) else 0 end)apr_PD_per_hh_preyr, "
+        'str = str & "  (case when sum(isnull(mayreg,0))>0 then sum(isnull(mayapp,0))/sum(isnull(mayreg,0)) else 0 end)may_PD_per_hh_preyr,"
+        'str = str & " (case when sum(isnull(junereg,0))>0 then sum(isnull(juneapp,0))/sum(isnull(junereg,0)) else 0 end)jun_PD_per_hh_preyr,"
+        'str = str & " (case when sum(isnull(julyreg,0))>0 then sum(isnull(julyapp,0))/sum(isnull(julyreg,0)) else 0 end)jul_PD_per_hh_preyr,"
+        'str = str & "  (case when sum(isnull(augreg,0))>0 then sum(isnull(augapp,0))/sum(isnull(augreg,0)) else 0 end)aug_PD_per_hh_preyr,"
+        'str = str & "  (case when sum(isnull(sepreg,0))>0 then sum(isnull(sepapp,0))/sum(isnull(sepreg,0)) else 0 end)sep_PD_per_hh_preyr,"
+        'str = str & "  (case when sum(isnull(octreg,0))>0 then sum(isnull(octapp,0))/sum(isnull(octreg,0)) else 0 end)oct_PD_per_hh_preyr,"
+        'str = str & "  (case when sum(isnull(novreg,0))>0 then sum(isnull(novapp,0))/sum(isnull(novreg,0)) else 0 end)nov_PD_per_hh_preyr,"
+        'str = str & "  (case when sum(isnull(decreg,0))>0 then sum(isnull(decapp,0))/sum(isnull(decreg,0)) else 0 end)dec_PD_per_hh_preyr,"
+        'str = str & "  (case when sum(isnull(janreg,0))>0 then sum(isnull(janapp,0))/sum(isnull(janreg,0)) else 0 end)jan_PD_per_hh_preyr,"
+        'str = str & " (case when sum(isnull(febreg,0))>0 then sum(isnull(febapp,0))/sum(isnull(febreg,0)) else 0 end)feb_PD_per_hh_preyr,"
+        'str = str & "  (case when sum(isnull(marchreg,0))>0 then sum(isnull(marchapp,0))/sum(isnull(marchreg,0)) else 0 end)mar_PD_per_hh_preyr "
+        'str = str & "    from panchayats_rep" & pre_yr & " p  left outer join mon_wise_empprov" & pre_yr & "  pp on p.panchayat_code=pp.panchayat_code"
+        'str = str & "  where " & cond_p & " group by " & val_code_p & ""
+
+        str = "select p." & val_code & " state_code,"
+        str = str & "  sum(isnull(aprilapp,0))aprilapp_p,sum(isnull(aprilreg,0))aprilreg_p , "
+        str = str & "  sum(isnull(mayapp,0))mayapp_p,sum(isnull(mayreg,0))mayreg_p ,"
+        str = str & " sum(isnull(juneapp,0))juneapp_p,sum(isnull(junereg,0))junereg_p,"
+        str = str & " sum(isnull(julyapp,0))julyapp_p,sum(isnull(julyreg,0))julyreg_p,"
+        str = str & " sum(isnull(augapp,0))augapp_p,sum(isnull(augreg,0))augreg_p,"
+        str = str & "  sum(isnull(sepapp,0))sepapp_p,sum(isnull(sepreg,0))sepreg_p,"
+        str = str & " sum(isnull(octapp,0))octapp_p,sum(isnull(octreg,0))octreg_p  ,"
+        str = str & "  sum(isnull(novapp,0))novapp_p,sum(isnull(novreg,0))novreg_p  ,"
+        str = str & "  sum(isnull(decapp,0))decapp_p,sum(isnull(decreg,0))decreg_p ,"
+        str = str & "  sum(isnull(janapp,0))janapp_p,sum(isnull(janreg,0))janreg_p ,"
+        str = str & " sum(isnull(febapp,0))febapp_p,sum(isnull(febreg,0))febreg_p,"
+        str = str & "  sum(isnull(marchapp,0))marchapp_p,sum(isnull(marchreg,0))marchreg_p "
         str = str & "    from panchayats_rep" & pre_yr & " p  left outer join mon_wise_empprov" & pre_yr & "  pp on p.panchayat_code=pp.panchayat_code"
-        str = str & "  where " & cond_p & " group by " & val_code_p & ""
+        str = str & "  where p." & cond & " group by p." & val_code & ""
         cmd = New SqlCommand(str, con)
         cmd.CommandTimeout = 0
         da = New SqlDataAdapter(cmd)
@@ -679,28 +711,105 @@ Partial Class dashboard_report_national
 
         Dim data As New Dictionary(Of String, Object)
         For Each table As DataTable In ds.Tables
-         '   For Each dr1 As DataRow In table.Rows
-                Dim dd As Double = 0
-                Dim i As Integer
-                For Each col1 As DataColumn In table.Columns
-                    If col1.ColumnName <> "state_code" Then
-                        For Each dr2 As DataRow In table.Rows()
-                            If dr2(col1).ToString = "" Then
-                                dr2(col1) = 0
-                            End If
-                            If dr2(col1).ToString <> "" Then
-                                dd = dd + dr2(col1)
-                            End If
-                            'dr2(col1) = 0
-                        Next
-                    End If
-                    If Not data.ContainsKey(col1.ColumnName) Then
-                        data.Add(col1.ColumnName, Round(Convert.ToDecimal(dd), 2))
-                    End If
-                    dd = 0
-                Next
-           ' Next
+            '   For Each dr1 As DataRow In table.Rows
+            Dim dd As Double = 0
+            Dim i As Integer
+            For Each col1 As DataColumn In table.Columns
+                If col1.ColumnName <> "state_code" Then
+                    For Each dr2 As DataRow In table.Rows()
+                        If dr2(col1).ToString = "" Then
+                            dr2(col1) = 0
+                        End If
+                        If dr2(col1).ToString <> "" Then
+                            dd = dd + dr2(col1)
+                        End If
+                        'dr2(col1) = 0
+                    Next
+                End If
+                If Not data.ContainsKey(col1.ColumnName) Then
+                    data.Add(col1.ColumnName, Round(Convert.ToDecimal(dd), 2))
+                End If
+                dd = 0
+            Next
+            ' Next
         Next
+        If data("aprilreg_c") > 0 Then
+            data.Add("apr_PD_per_hh", Round(Convert.ToDecimal(data("aprilapp_c") / data("aprilreg_c")), 2))
+        End If
+        If data("mayreg_c") > 0 Then
+            data.Add("may_PD_per_hh", Round(Convert.ToDecimal(data("mayapp_c") / data("mayreg_c")), 2))
+        End If
+        If data("junereg_c") > 0 Then
+            data.Add("jun_PD_per_hh", Round(Convert.ToDecimal(data("juneapp_c") / data("junereg_c")), 2))
+        End If
+        If data("julyreg_c") > 0 Then
+            data.Add("jul_PD_per_hh", Round(Convert.ToDecimal(data("julyapp_c") / data("julyreg_c")), 2))
+        End If
+        If data("augreg_c") > 0 Then
+            data.Add("aug_PD_per_hh", Round(Convert.ToDecimal(data("augapp_c") / data("augreg_c")), 2))
+        End If
+        If data("sepreg_c") > 0 Then
+            data.Add("sep_PD_per_hh", Round(Convert.ToDecimal(data("sepapp_c") / data("sepreg_c")), 2))
+        End If
+        If data("octreg_c") > 0 Then
+            data.Add("oct_PD_per_hh", Round(Convert.ToDecimal(data("octapp_c") / data("octreg_c")), 2))
+        End If
+        If data("novreg_c") > 0 Then
+            data.Add("nov_PD_per_hh", Round(Convert.ToDecimal(data("novapp_c") / data("novreg_c")), 2))
+        End If
+        If data("decreg_c") > 0 Then
+            data.Add("dec_PD_per_hh", Round(Convert.ToDecimal(data("decapp_c") / data("decreg_c")), 2))
+        End If
+        If data("janreg_c") > 0 Then
+            data.Add("jan_PD_per_hh", Round(Convert.ToDecimal(data("janapp_c") / data("janreg_c")), 2))
+        End If
+        If data("febreg_c") > 0 Then
+            data.Add("feb_PD_per_hh", Round(Convert.ToDecimal(data("febapp_c") / data("febreg_c")), 2))
+        End If
+        If data("marchreg_c") > 0 Then
+            data.Add("mar_PD_per_hh", Round(Convert.ToDecimal(data("marchapp_c") / data("marchreg_c")), 2))
+        End If
+
+
+
+
+        If data("aprilreg_p") > 0 Then
+            data.Add("apr_PD_per_hh_preyr", Round(Convert.ToDecimal(data("aprilapp_p") / data("aprilreg_p")), 2))
+        End If
+        If data("mayreg_p") > 0 Then
+            data.Add("may_PD_per_hh_preyr", Round(Convert.ToDecimal(data("mayapp_p") / data("mayreg_p")), 2))
+        End If
+        If data("junereg_p") > 0 Then
+            data.Add("jun_PD_per_hh_preyr", Round(Convert.ToDecimal(data("juneapp_p") / data("junereg_p")), 2))
+        End If
+        If data("julyreg_p") > 0 Then
+            data.Add("jul_PD_per_hh_preyr", Round(Convert.ToDecimal(data("julyapp_p") / data("julyreg_p")), 2))
+        End If
+        If data("augreg_p") > 0 Then
+            data.Add("aug_PD_per_hh_preyr", Round(Convert.ToDecimal(data("augapp_p") / data("augreg_p")), 2))
+        End If
+        If data("sepreg_p") > 0 Then
+            data.Add("sep_PD_per_hh_preyr", Round(Convert.ToDecimal(data("sepapp_p") / data("sepreg_p")), 2))
+        End If
+        If data("octreg_p") > 0 Then
+            data.Add("oct_PD_per_hh_preyr", Round(Convert.ToDecimal(data("octapp_p") / data("octreg_p")), 2))
+        End If
+        If data("novreg_p") > 0 Then
+            data.Add("nov_PD_per_hh_preyr", Round(Convert.ToDecimal(data("novapp_p") / data("novreg_p")), 2))
+        End If
+        If data("decreg_p") > 0 Then
+            data.Add("dec_PD_per_hh_preyr", Round(Convert.ToDecimal(data("decapp_p") / data("decreg_p")), 2))
+        End If
+        If data("janreg_p") > 0 Then
+            data.Add("jan_PD_per_hh_preyr", Round(Convert.ToDecimal(data("janapp_p") / data("janreg_p")), 2))
+        End If
+        If data("febreg_p") > 0 Then
+            data.Add("feb_PD_per_hh_preyr", Round(Convert.ToDecimal(data("febapp_p") / data("febreg_p")), 2))
+        End If
+        If data("marchreg_p") > 0 Then
+            data.Add("mar_PD_per_hh_preyr", Round(Convert.ToDecimal(data("marchapp_p") / data("marchreg_p")), 2))
+        End If
+
         rows.Add(data)
 
         Response.Write(serializer.Serialize(rows))
