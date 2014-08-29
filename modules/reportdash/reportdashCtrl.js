@@ -1,7 +1,7 @@
 var reportdash = angular.module('ReportDash', []);
 
-reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport', 'Regions', 'GPRegions', 'MonthlyReport', 'YearlyReportNational', 'MonthlyReportNational',
-  function($scope, $rootScope, YearlyReport, Regions, GPRegions, MonthlyReport, YearlyReportNational, MonthlyReportNational) {
+reportdash.controller('reportdashCtrl', ['$scope','$window','$location', '$rootScope', 'YearlyReport', 'Regions', 'GPRegions', 'MonthlyReport', 'YearlyReportNational', 'MonthlyReportNational',
+  function($scope, $window, $location, $rootScope, YearlyReport, Regions, GPRegions, MonthlyReport, YearlyReportNational, MonthlyReportNational) {
     $scope.isTable = false;
     $scope.switchview = function() {
       $scope.isTable = !$scope.isTable;
@@ -270,7 +270,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         columns: [
             ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
             ['Previous year', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ['Households provided employment', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            ['Current year', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         ],
         type: 'bar',
       },
@@ -296,7 +296,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         columns: [
             ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
             ['Previous year', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ['Average person-days per household', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            ['Current year', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         ],
         type: 'bar',
       },
@@ -323,12 +323,12 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
         columns: [
             ['x', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01', '2014-01-01', '2014-02-01', '2014-03-01'],
             ['Previous year', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ['Wage expenditure (in lacs of Rs.)', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            ['Current year', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
         ],
         type: 'bar',
         types: {
-          'Wage expenditure (in lacs of Rs.)': 'bar',
+          'Current year': 'bar',
         },
       },
       axis: {
@@ -420,6 +420,8 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
 
     $scope.viewResults = function() {
       params = buildCode();
+      $window.ga('send', 'event',$scope.selectedYear, params.code_type, params.code);
+
 
       YearlyReport.fetch(params, $scope.selectedYear).then(function(response) {
         $scope.yearlydata = response[0];
@@ -480,7 +482,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
             $scope.monthlydata.march_PD_per_hh_preyr
           ];
       $scope.persondays_per_hh_chart.data.columns[2] = [
-            'Average person-days per household',
+            'Current year',
             $scope.monthlydata.apr_PD_per_hh,
             $scope.monthlydata.may_PD_per_hh,
             $scope.monthlydata.jun_PD_per_hh,
@@ -604,7 +606,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
           ];
 
       $scope.hh_providedemployment_chart.data.columns[1] = [
-            'Previous Year',
+            'Previous year',
             $scope.monthlydata.april_hh_P_emp_pre,
             $scope.monthlydata.may_hh_P_emp_pre,
             $scope.monthlydata.june_hh_P_emp_pre,
@@ -619,7 +621,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
             $scope.monthlydata.march_hh_P_emp_pre
           ];
       $scope.hh_providedemployment_chart.data.columns[2] = [
-            'Households provided employment',
+            'Current year',
             $scope.monthlydata.april_hh_P_emp,
             $scope.monthlydata.may_hh_P_emp,
             $scope.monthlydata.june_hh_P_emp,
@@ -635,7 +637,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
           ];
 
       $scope.wage_expenditure_chart.data.columns[1] = [
-            'Previous Year',
+            'Previous year',
             $scope.monthlydata.apr_lab_pre,
             $scope.monthlydata.may_lab_pre,
             $scope.monthlydata.jun_lab_pre,
@@ -650,7 +652,7 @@ reportdash.controller('reportdashCtrl', ['$scope', '$rootScope', 'YearlyReport',
             $scope.monthlydata.march_lab_pre
           ];
       $scope.wage_expenditure_chart.data.columns[2] = [
-            'Wage expenditure (in lacs of Rs.)',
+            'Current year',
             $scope.monthlydata.apr_lab,
             $scope.monthlydata.may_lab,
             $scope.monthlydata.jun_lab,
