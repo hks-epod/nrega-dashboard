@@ -35,6 +35,11 @@
     <span class="glyphicon glyphicon-list-alt"></span>&nbsp; Expenditure By Category
   </div>
   <div id="expenditure_category_wise_chart" vizconfig="expenditure_category_wise_chart" c3chart></div>
+  <div class="text-center lead">Total Expenditure: {{ monthlydata.AV_exp + monthlydata.CA_exp + monthlydata.DP_exp+monthlydata.DW_exp +
+         monthlydata.FG_exp + monthlydata.FP_exp + monthlydata.FR_exp + monthlydata.IC_exp +
+         monthlydata.IF_exp + monthlydata.LD_exp + monthlydata.OP_exp + monthlydata.PG_exp + 
+         monthlydata.RC_exp + monthlydata.RS_exp + monthlydata.SK_exp + monthlydata.WC_exp + 
+        monthlydata.WH_exp | number}}</div>
 </div>
 
 
@@ -55,7 +60,7 @@
 
 <div class="chart">
   <div class="chart-header">
-    <span class="glyphicon glyphicon-list-alt"></span>&nbsp; Wage Expenditure
+    <span class="glyphicon glyphicon-list-alt"></span>&nbsp; Wage Expenditure (in lakhs of Rs.)
   </div>
   <div id="wage_expenditure_chart" vizconfig="wage_expenditure_chart" c3chart></div>
 </div>

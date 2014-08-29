@@ -8,7 +8,6 @@ reportdash.controller('reportdashCtrl', ['$scope','$window','$location', '$rootS
     };
 
     //*****************[ Region Handelers ]*******************//
-
     $scope.years = ['2014-2015', '2013-2014', '2012-2013'];
     $scope.selectedYear = $scope.years[0];
     $scope.$watch('selectedYear', function() {
@@ -30,7 +29,7 @@ reportdash.controller('reportdashCtrl', ['$scope','$window','$location', '$rootS
     });
 
     function fetchDistricts(selectedState) {
-       console.log(selectedState);
+       
       $scope.districts = [];
       $scope.selectedDistrict = null;
       $scope.districts = $scope.regions[1][selectedState];
@@ -222,6 +221,9 @@ reportdash.controller('reportdashCtrl', ['$scope','$window','$location', '$rootS
         ],
         type: 'donut'
       },
+      color: {
+        pattern: ['#96281B', '#CF000F', '#F64747', '#F62459', '#9A12B3', '#663399', '#2C3E50', '#336E7B', '#9467bd', '#26A65B', '#8c564b', '#16A085', '#F89406', '#D35400', '#7f7f7f', '#c7c7c7', '#bcbd22', '#dbdb8d', '#17becf', '#9edae5']
+    },
       donut: {
         title: "Total Work",
       },
@@ -254,8 +256,11 @@ reportdash.controller('reportdashCtrl', ['$scope','$window','$location', '$rootS
         ],
         type: 'donut'
       },
+      color: {
+        pattern: ['#96281B', '#CF000F', '#F64747', '#F62459', '#9A12B3', '#663399', '#2C3E50', '#336E7B', '#9467bd', '#26A65B', '#8c564b', '#16A085', '#F89406', '#D35400', '#7f7f7f', '#c7c7c7', '#bcbd22', '#dbdb8d', '#17becf', '#9edae5']
+    },
       donut: {
-        title: "Total Expenditure",
+        title: "Total Expenditure"
       },
       size: {
         'height': 400
@@ -410,26 +415,37 @@ reportdash.controller('reportdashCtrl', ['$scope','$window','$location', '$rootS
     //      View Results    //
     //////////////////////////
 
-    YearlyReportNational.fetch($scope.selectedYear).then(function(response) {
-      $scope.yearlydata = response[0];
-    });
-    MonthlyReportNational.fetch($scope.selectedYear).then(function(response) {
-      $scope.monthlydata = response[0];
-      loadGraph();
-    });
-
-    $scope.viewResults = function() {
-      params = buildCode();
-      $window.ga('send', 'event',$scope.selectedYear, params.code_type, params.code);
-
-
-      YearlyReport.fetch(params, $scope.selectedYear).then(function(response) {
+    function loadNational(){
+      YearlyReportNational.fetch($scope.selectedYear).then(function(response) {
         $scope.yearlydata = response[0];
       });
-      MonthlyReport.fetch(params, $scope.selectedYear).then(function(response) {
+      MonthlyReportNational.fetch($scope.selectedYear).then(function(response) {
         $scope.monthlydata = response[0];
         loadGraph();
       });
+    };
+    loadNational();
+
+    $scope.viewResults = function() {
+      
+
+      if ($scope.selectedYear && !$scope.selectedState && !$scope.selectedDistrict && !$scope.selectedBlock && !$scope.selectedGP){
+         $window.ga('send', 'event',$scope.selectedYear, 'National');
+        loadNational();
+      }
+
+      else
+      {
+        params = buildCode();
+      $window.ga('send', 'event',$scope.selectedYear, params.code_type, params.code);
+        YearlyReport.fetch(params, $scope.selectedYear).then(function(response) {
+          $scope.yearlydata = response[0];
+        });
+        MonthlyReport.fetch(params, $scope.selectedYear).then(function(response) {
+          $scope.monthlydata = response[0];
+          loadGraph();
+        });
+      }
     };
 
     function loadGraph() {
@@ -604,6 +620,7 @@ reportdash.controller('reportdashCtrl', ['$scope','$window','$location', '$rootS
               ['Water conservation and harvesting', $scope.monthlydata.WC_exp],
               ['Renovation of traditional water bodies', $scope.monthlydata.WH_exp]
           ];
+
 
       $scope.hh_providedemployment_chart.data.columns[1] = [
             'Previous year',

@@ -12,36 +12,36 @@
     <tbody>
       <tr>
         <td colspan="2">Households demanded employment</td>
-        <td>{{yearlydata.demand_register}}</td>
+        <td>{{yearlydata.demand_register | number}}</td>
       </tr>
       <tr>
         <td colspan="2">Households allotted employment</td>
-        <td>{{yearlydata.work_alloted}}</td>
+        <td>{{yearlydata.work_alloted | number}}</td>
       </tr>
       <tr>
         <td colspan="2">Households provided employment</td>
-        <td>{{yearlydata.hh_provided_employment}}</td>
+        <td>{{yearlydata.hh_provided_employment | number}}</td>
       </tr>
       <!-- <tr>
           <td colspan="2">Unmet Demand</td>
-          <td>{{yearlydata.work_alloted}}</td>
+          <td>{{yearlydata.work_alloted | number}}</td>
         </tr> -->
       <tr>
         <td rowspan="4">Unemployment allowances</td>
         <td>Person-days of unemployment due</td>
-        <td>{{yearlydata.payable_days_unemp}}</td>
+        <td>{{yearlydata.payable_days_unemp | number}}</td>
       </tr>
       <tr>
         <td>Amount payable (Rs.)</td>
-        <td>{{yearlydata.payable_amount_unemp}}</td>
+        <td>{{yearlydata.payable_amount_unemp | number}}</td>
       </tr>
       <tr>
         <td>Approved days</td>
-        <td>{{yearlydata.approved_days}}</td>
+        <td>{{yearlydata.approved_days | number}}</td>
       </tr>
       <tr>
         <td>Rejected days</td>
-        <td>{{yearlydata.rejected_days}}</td>
+        <td>{{yearlydata.rejected_days | number}}</td>
       </tr>
     </tbody>
   </table>
@@ -60,48 +60,48 @@
     <tbody>
       <tr>
         <td colspan="2">Person-days projected</td>
-        <td>{{yearlydata.labour_budget}}</td>
+        <td>{{yearlydata.labour_budget | number}}</td>
       </tr>
       <tr>
         <td rowspan="3">Person-days generated</td>
         <td>SC %</td>
-        <td>{{yearlydata.SCper}}</td>
+        <td>{{yearlydata.SCper | number}}</td>
       </tr>
       <tr>
         <td>ST %</td>
-        <td>{{yearlydata.STper}}</td>
+        <td>{{yearlydata.STper | number}}</td>
       </tr>
       <tr>
         <td>Women %</td>
-        <td>{{yearlydata.Womenper}}</td>
+        <td>{{yearlydata.Womenper | number}}</td>
       </tr>
       <tr>
         <td colspan="2">Work completion rate</td>
-        <td>{{yearlydata.Work_completion_rate}}</td>
+        <td>{{yearlydata.Work_completion_rate | number}}</td>
       </tr>
       <tr>
         <td colspan="2">Total GPs</td>
-        <td>{{yearlydata.Tgp}}</td>
+        <td>{{yearlydata.Tgp | number}}</td>
       </tr>
       <tr>
         <td colspan="2">GPs with nil expenditure</td>
-        <td>{{yearlydata.NIL_EXP}}</td>
+        <td>{{yearlydata.NIL_EXP | number}}</td>
       </tr>
       <tr>
         <td colspan="2">GPs with no employment generation in last month</td>
-        <td>{{yearlydata.lastmon_nilgp}}</td>
+        <td>{{yearlydata.lastmon_nilgp | number}}</td>
       </tr>
       <tr>
         <td colspan="2">GPs with no approved works</td>
-        <td>{{yearlydata.app_panch}}</td>
+        <td>{{yearlydata.app_panch | number}}</td>
       </tr>
       <tr>
         <td colspan="2">GPs with no ongoing works</td>
-        <td>{{yearlydata.ong_panch}}</td>
+        <td>{{yearlydata.ong_panch | number}}</td>
       </tr>
       <tr>
         <td colspan="2">Households completed 100 days</td>
-        <td>{{yearlydata.hh_completed_100days}}</td>
+        <td>{{yearlydata.hh_completed_100days | number}}</td>
       </tr>
     </tbody>
   </table>
@@ -119,59 +119,59 @@
     <tbody>
       <tr>
         <td colspan="2">Total expenditure (in lacs of Rs.)</td>
-        <td>{{yearlydata.tot_exp}}</td>
+        <td>{{yearlydata.tot_exp | number}}</td>
       </tr>
       <tr>
         <td rowspan="2">Total Expenditure</td>
         <td>Wage (%)</td>
-        <td>{{yearlydata.wage_perc}}</td>
+        <td>{{yearlydata.wage_perc | number}}</td>
       </tr>
       <tr>
         <td>Admin (%)</td>
-        <td>{{yearlydata.adm_perc}}</td>
+        <td>{{yearlydata.adm_perc | number}}</td>
       </tr>
       <tr>
         <td rowspan="2">Delayed compensation</td>
         <td>Payable (in delay days)</td>
-        <td>{{yearlydata.payable_days_delay}}</td>
+        <td>{{yearlydata.payable_days_delay | number}}</td>
       </tr>
       <tr>
         <td>Amount payable (Rs.)</td>
-        <td>{{yearlydata.payable_amount_delay}}</td>
+        <td>{{yearlydata.payable_amount_delay | number}}</td>
       </tr>
       <tr>
         <td colspan="2">Average wage per person-day</td>
-        <td>{{yearlydata.avg_wage_per_PD}}</td>
+        <td>{{yearlydata.avg_wage_per_PD | number}}</td>
       </tr>
      <!-- <tr>
         <td colspan="2">Average cost per PD</td>
-        <td>{{yearlydata.avg_cost_per_PD}}</td>
+        <td>{{yearlydata.avg_cost_per_PD | number}}</td>
       </tr>-->
       <!--<tr>
         <td rowspan="4">eFMS</td>
         <td>Total number of blocks %</td>
-        <td>{{yearlydata.total_blk}}</td>
+        <td>{{yearlydata.total_blk | number}}</td>
       </tr>
       <tr>
         <td>Started in No. of blocks(wages)</td>
-        <td>{{yearlydata.blk_wage_efms}}</td>
+        <td>{{yearlydata.blk_wage_efms | number}}</td>
       </tr>
       <tr>
         <td>Started in No. of blocks(Material)</td>
-        <td>{{yearlydata.blk_mat_efms}}</td>
+        <td>{{yearlydata.blk_mat_efms | number}}</td>
       </tr>
       <tr>
         <td>Started in No. of blocks(Admin)</td>
-        <td>{{yearlydata.blk_adm_efms}}</td>
+        <td>{{yearlydata.blk_adm_efms | number}}</td>
       </tr>
       <tr>-->
         <td rowspan="2">DBT</td>
         <td>Percent of active workers' A/Cs freezed</td>
-        <td>{{yearlydata.frez_act_pers}}</td>
+        <td>{{yearlydata.frez_act_pers | number}}</td>
       </tr>
       <tr>
         <td>Percent of Aadhar seeding against total active workers</td>
-        <td>{{yearlydata.aadhaar_seedpers}}</td>
+        <td>{{yearlydata.aadhaar_seedpers | number}}</td>
       </tr>
     </tbody>
   </table>
