@@ -11,7 +11,7 @@ reportdash.directive('downloadchart', function() {
 
           $('#demand_reg_chart svg').inlinify();
 
-          svgenie.save('test', {
+          svgenie.save('demand_reg_chart', {
             name: 'xy.png'
           })
 
