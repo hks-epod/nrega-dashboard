@@ -2,7 +2,7 @@ reportdash.directive('downloadchart', function() {
   return {
     restrict: 'AE',
     replace: false,
-    template: '<button class="btn btn-success" ng-click="downloadChart()">Download Chart</button>',
+    template: '<button class="btn btn-sm btn-default pull-right " ng-click="downloadChart()"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>',
     controller: ['$rootScope', '$scope',
       function($rootScope, $scope) {
 
