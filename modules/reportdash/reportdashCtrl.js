@@ -1,6 +1,6 @@
 var reportdash = angular.module('ReportDash', []);
 
-reportdash.controller('reportdashCtrl', ['$scope','$window','$location', '$rootScope', 'YearlyReport', 'Regions', 'GPRegions', 'MonthlyReport', 'YearlyReportNational', 'MonthlyReportNational',
+reportdash.controller('reportdashCtrl', ['$scope','$window','$location', '$rootScope', 'YearlyReport', 'Regions', 'GPRegions', 'MonthlyReport', 'YearlyReportNational', 'MonthlyReportNational', 
   function($scope, $window, $location, $rootScope, YearlyReport, Regions, GPRegions, MonthlyReport, YearlyReportNational, MonthlyReportNational) {
     $scope.isTable = false;
     $scope.switchview = function() {
@@ -19,7 +19,7 @@ reportdash.controller('reportdashCtrl', ['$scope','$window','$location', '$rootS
     });
 
     $scope.$watch('selectedState', function() {
-      if ($scope.regions) fetchDistricts($scope.selectedState);
+      if ($scope.regions) fetchDistricts($scope.selectedState)
     });
     $scope.$watch('selectedDistrict', function() {
       if ($scope.regions) fetchBlocks($scope.selectedState, $scope.selectedDistrict);
