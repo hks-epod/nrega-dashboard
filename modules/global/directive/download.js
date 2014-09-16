@@ -8,10 +8,13 @@ reportdash.directive('downloadchart', function() {
 
         $scope.downloadChart = function() {
 
-          $('#'+scope.downid+ 'svg').inlinify();
+          idtext= '#'+$scope.downid+ ' svg';
+          console.log(idtext);
 
-          svgenie.save(scope.downid, {
-            name: 'xy.png'
+          $(idtext).inlinify();
+
+          svgenie.save($scope.downid, {
+            name: $scope.downid+'chart.png'
           })
 
 
@@ -20,9 +23,12 @@ reportdash.directive('downloadchart', function() {
 
       }
     ],
+    scope: {
+            elename: '@elename'
+        },
     link: function(scope, el, attrs) {
 
-      scope.downid = attr["elename"];
+      scope.downid = attrs["elename"];
 
       $.fn.inlinify = function() {
 
