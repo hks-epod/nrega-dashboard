@@ -9,7 +9,6 @@ reportdash.directive('downloadchart', function() {
         $scope.downloadChart = function() {
 
           idtext= '#'+$scope.downid+ ' svg';
-          console.log(idtext);
 
           $(idtext).inlinify();
 
@@ -32,7 +31,6 @@ reportdash.directive('downloadchart', function() {
 
       $.fn.inlinify = function() {
 
-        console.log("runnig inlinify");
         var rules, i, j, len, sheets, nodes, parent;
         sheets = document.styleSheets;
         // nodes should be children and actual node itself
