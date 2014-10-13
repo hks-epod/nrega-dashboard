@@ -1,4 +1,4 @@
-var nregadash = angular.module('Nregadash', ['ngRoute', 'ReportDash','ui.select2','angular-loading-bar']);
+var nregadash = angular.module('Nregadash', ['ngRoute', 'ReportDash','Pdp','ui.select2','angular-loading-bar']);
 
 nregadash.run(['uiSelect2Config', function(uiSelect2Config) {
     uiSelect2Config.allowClear= true;
@@ -12,6 +12,11 @@ nregadash.config(['$routeProvider', '$locationProvider',
     when('/', {
       templateUrl: 'modules/reportdash/reportdashView.html',
       controller: 'reportdashCtrl'
+    }).
+    $routeProvider.
+    when('/pdp', {
+      templateUrl: 'modules/pdp/pdpView.html',
+      controller: 'pdpCtrl'
     }).
     otherwise({
       redirectTo: '/'
