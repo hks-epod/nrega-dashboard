@@ -13,7 +13,6 @@ nregadash.config(['$routeProvider', '$locationProvider',
       templateUrl: 'modules/reportdash/reportdashView.html',
       controller: 'reportdashCtrl'
     }).
-    $routeProvider.
     when('/pdp', {
       templateUrl: 'modules/pdp/pdpView.html',
       controller: 'pdpCtrl'
