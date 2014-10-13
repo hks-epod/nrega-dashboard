@@ -213,6 +213,31 @@
 }
 
 
+/**/
+.pdp-main{
+  padding-top: 90px;
+}
+/*-------------[ Global: Viz]-------------------*/
+.content-box{
+  border:solid 1px #ddd;
+  width: 100%;
+  padding:0;
+  border-radius: 2px;
+  /*background-color: rgba(252, 248,238,1);*/
+  background-color: rgba(255,255,255,0.5);
+  box-shadow: 0px 0px 1px rgba(0,0,0,0);
+  margin-bottom: 20px;
+}
+.content-header{
+  padding: 10px 16px;
+  color: #333;
+  font-size: 16px;
+  background-color: #f3ede1;
+  border-bottom: solid 1px #ddd;
+  margin-bottom: 20px;
+}
+
+
 
 .footer{
   padding: 20px;
