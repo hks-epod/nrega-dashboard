@@ -92,7 +92,9 @@
                     Select regions
                 </div>
                 <div class="pdpslct-content">
-                    
+                    <ul>
+                        <li class="checkbox" ng-repeat="(key, value) in regions[0]"> <input type="checkbox">{{key}}</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -102,7 +104,10 @@
                     Select year
                 </div>
                 <div class="pdpslct-content">
-                    
+                    <select name="" id="" ng-model="selectedYear">
+                        <option ng-repeat="year in years" value="{{year}}">{{year}}</option>
+                    </select>
+                    {{selectedYear}}
                 </div>
             </div>
         </div>
