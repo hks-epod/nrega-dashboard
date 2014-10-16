@@ -1,119 +1,136 @@
 <section class="sub-nav">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <ul class="nav nav-pills">
-                    <li>
-                        <a href="#">
-                            <span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="glyphicon glyphicon-dashboard"></span>&nbsp;Report Dashboard</a>
-                    </li>
-                    <li class="active">
-                        <a target="_blank" href="http://mnregaweb4.nic.in/netnrega/dynamic2/dynamicreport_new4.aspx">
-                            <span class="glyphicon glyphicon-tasks"></span>&nbsp;Public Data Portal</a>
-                    </li>
-                </ul>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="nav nav-pills">
+          <li>
+            <a href="#">
+              <span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="glyphicon glyphicon-dashboard"></span>&nbsp;Report Dashboard</a>
+          </li>
+          <li class="active">
+            <a target="_blank" href="http://mnregaweb4.nic.in/netnrega/dynamic2/dynamicreport_new4.aspx">
+              <span class="glyphicon glyphicon-tasks"></span>&nbsp;Public Data Portal</a>
+          </li>
+        </ul>
 
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </section>
 
 <section class="container pdp-main">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="pdpslct-box">
-                <div class="pdpslct-header">
-                    Select indicators
-                </div>
-                <div class="pdpslct-content">
-                    <h4>Worker participation details</h4>
-                    <h5>Job cards</h5>
-                    <ul>
-                        <li class="checkbox">
-                            <input type="checkbox">Total households applied for job card</li>
-                        <li class="checkbox">
-                            <input type="checkbox">Total job cards issued</li>
-                        <li class="checkbox">
-                            <input type="checkbox">Total job cards (SC)</li>
-                        <li class="checkbox">
-                            <input type="checkbox">Total job cards (ST)</li>
-                        <li class="checkbox">
-                            <input type="checkbox">Total job cards (non-SC/ST)</li>
-                    </ul>
-                    <h5>Demand for work</h5>
-                    <ul>
-                        <li class="checkbox">
-                            <input type="checkbox">Total households demanded work</li>
-                        <li class="checkbox">
-                            <input type="checkbox">Total persons demanded work</li>
-                    </ul>
-                    <hr>
-                    <h4>Expenditure details</h4>
-                    <ul>
-                        <li class="checkbox">
-                            <input type="checkbox">Labour exp. (disbursed, Rs. In Lakhs)
-                        </li>
-                        <li class="checkbox">
-                            <input type="checkbox">Material exp. (disbursed, Rs. In Lakhs)</li>
-                        <li class="checkbox">
-                            <input type="checkbox">Labour exp. (disbursed + pending, Rs. In Lakhs)</li>
-                        <li class="checkbox">
-                            <input type="checkbox">Material exp. (disbursed + pending, Rs. In Lakhs)</li>
-                    </ul>
-                    <hr>
-                    <h4>Worker account details</h4>
-                    <ul>
-                        <li class="checkbox">
-                            <input type="checkbox">Total bank accounts
-                        </li>
-                        <li class="checkbox">
-                            <input type="checkbox">Total individual bank accounts
-                        </li>
-                        <li class="checkbox">
-                            <input type="checkbox">Total joint bank accounts
-                        </li>
-                        <li class="checkbox">
-                            <input type="checkbox">Amount disbursed to bank accounts
-                        </li>
-                        <li class="checkbox">
-                            <input type="checkbox">Total post office accounts
-                        </li>
-                    </ul>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="pdpslct-box">
+        <div class="pdpslct-header">
+          Select indicators
         </div>
-        <div class="col-md-4">
-            <div class="pdpslct-box">
-                <div class="pdpslct-header">
-                    Select regions
-                </div>
-                <div class="pdpslct-content">
-                    <ul class="region-list">
-                        <li class="checkbox" ng-repeat="(key, value) in regions[0]"> <span class="detail">+</span> <input type="checkbox">{{key}}</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="pdpslct-content">
+          <h4>Worker participation details</h4>
+          <h5>Job cards</h5>
+          <ul>
+            <li class="checkbox">
+              <input type="checkbox">Total households applied for job card</li>
+            <li class="checkbox">
+              <input type="checkbox">Total job cards issued</li>
+            <li class="checkbox">
+              <input type="checkbox">Total job cards (SC)</li>
+            <li class="checkbox">
+              <input type="checkbox">Total job cards (ST)</li>
+            <li class="checkbox">
+              <input type="checkbox">Total job cards (non-SC/ST)</li>
+          </ul>
+          <h5>Demand for work</h5>
+          <ul>
+            <li class="checkbox">
+              <input type="checkbox">Total households demanded work</li>
+            <li class="checkbox">
+              <input type="checkbox">Total persons demanded work</li>
+          </ul>
+          <hr>
+          <h4>Expenditure details</h4>
+          <ul>
+            <li class="checkbox">
+              <input type="checkbox">Labour exp. (disbursed, Rs. In Lakhs)
+            </li>
+            <li class="checkbox">
+              <input type="checkbox">Material exp. (disbursed, Rs. In Lakhs)</li>
+            <li class="checkbox">
+              <input type="checkbox">Labour exp. (disbursed + pending, Rs. In Lakhs)</li>
+            <li class="checkbox">
+              <input type="checkbox">Material exp. (disbursed + pending, Rs. In Lakhs)</li>
+          </ul>
+          <hr>
+          <h4>Worker account details</h4>
+          <ul>
+            <li class="checkbox">
+              <input type="checkbox">Total bank accounts
+            </li>
+            <li class="checkbox">
+              <input type="checkbox">Total individual bank accounts
+            </li>
+            <li class="checkbox">
+              <input type="checkbox">Total joint bank accounts
+            </li>
+            <li class="checkbox">
+              <input type="checkbox">Amount disbursed to bank accounts
+            </li>
+            <li class="checkbox">
+              <input type="checkbox">Total post office accounts
+            </li>
+          </ul>
         </div>
-        <div class="col-md-3">
-            <div class="pdpslct-box">
-                <div class="pdpslct-header">
-                    Select year
-                </div>
-                <div class="pdpslct-content">
-                    <select name="" id="" ng-model="selectedYear">
-                        <option ng-repeat="year in years" value="{{year}}">{{year}}</option>
-                    </select>
-                    {{selectedYear}}
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+    <div class="col-md-4">
+      <div class="pdpslct-box">
+        <div class="pdpslct-header">
+          Select regions
+        </div>
+        <div class="pdpslct-content">
+          <ul id="stateul" class="region-list">
+            <li class="checkbox" ng-repeat="(state, state_code) in regions[0]">
+              <span class="detail">+</span>
+              <input value="{{state_code}}" type="checkbox">{{state}}
+
+              <ul id="districtul">
+                <li class="checkbox" ng-repeat="(district, district_code) in regions[1][state_code]">
+                  <span class="detail">+</span>
+                  <input value="{{district_code}}" type="checkbox">{{district}}
+
+                  <ul id="blockul">
+                    <li class="checkbox" ng-repeat="(block, block_code) in regions[2][state_code][district_code]">
+                      <span class="detail">+</span>
+                      <input value="{{block_code}}" type="checkbox">{{block}}
+                    </li>
+                  </ul>
+
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="pdpslct-box">
+        <div class="pdpslct-header">
+          Select year
+        </div>
+        <div class="pdpslct-content">
+          <select name="" id="" ng-model="selectedYear">
+            <option ng-repeat="year in years" value="{{year}}">{{year}}</option>
+          </select>
+          {{selectedYear}}
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <div ng-include="'modules/global/views/footer.html'">
 </div>
-

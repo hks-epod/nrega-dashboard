@@ -240,7 +240,7 @@
 .pdpslct-content{
   max-height: 490px;
   overflow: scroll;
-  padding: 15px 10px;
+  padding: 10px;
 }
 .pdpslct-box h4{
   font-size: 16px;
@@ -254,14 +254,19 @@
 .pdpslct-box ul {
   padding-left: 10px;
 }
+.region-list{
+  font-size: 13px;
+  padding-left: 0px;
+  margin-left: -20px
+}
 .region-list .checkbox{
-  padding-left: 0;
+  padding-left: 15px;
 }
 .region-list .checkbox input{
   float: none;
   display: inline-block;
-  margin-right: 7px;
-  margin-left: 10px;
+  margin-right: 4px;
+  margin-left: 2px;
 
 }
 .region-list .checkbox .detail{
