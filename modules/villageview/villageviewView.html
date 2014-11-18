@@ -16,7 +16,7 @@
               <span class="glyphicon glyphicon-tasks"></span>&nbsp;Public Data Portal</a>
           </li>
           <li class="active">
-            <a  target="_blank" href="http://mnregaweb4.nic.in/netnrega/dynamic2/dynamicreport_new4.aspx">
+            <a   href="#/villageview">
               <span class="glyphicon glyphicon-tasks"></span>&nbsp;Village view</a>
           </li>
         </ul>
@@ -46,7 +46,7 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
       <div class="status-bar btselector warning">
         <span class="brcrumb">
-          {{selectedYear}} | {{getKeyByValue(regions[0], selectedState)}}
+           {{getKeyByValue(regions[0], selectedState)}}
           <span ng-show="selectedDistrict" class="glyphicon glyphicon-chevron-right"></span> {{getKeyByValue(regions[1][selectedState], selectedDistrict)}}
           <span ng-show="selectedBlock" style="font-weight:lighter" class="glyphicon glyphicon-chevron-right"></span>
            {{getKeyByValue(regions[2][selectedState][selectedDistrict], selectedBlock)}}
@@ -55,14 +55,21 @@
         </span>
         <div class="btn-group pull-right">
 
-          <button type="button" class="btn btn-default" ng-click="switchview()" ng-class="{'active disabled': isTable==true}">
-            <span class="glyphicon glyphicon-th"></span>&nbsp; Table View
+          <button type="button" class="btn btn-default" ng-click="switchview()" ng-class="{'active disabled': isStat==true}">
+            <span class="glyphicon glyphicon-th"></span>&nbsp; Village Stats
           </button>
-          <button type="button" class="btn btn-default" ng-click="switchview()" ng-class="{'active disabled': isTable==false}">
-            <span class="glyphicon glyphicon-stats"></span>&nbsp; Graph View
+          <button type="button" class="btn btn-default" ng-click="switchview()" ng-class="{'active disabled': isStat==false}">
+            <span class="glyphicon glyphicon-stats"></span>&nbsp; Work Details
           </button>
         </div>
         <div class="clearfix"></div>
+      </div>
+
+       <div ng-show="isStat" ng-include="'modules/villageview/vv_statView.html'"></div>
+      <div class="">
+        <div style="width:100%">
+          <div ng-hide="isStat" ng-include="'modules/villageview/vv_workView.html'"></div>
+        </div>
       </div>
 
 

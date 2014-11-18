@@ -2,9 +2,9 @@ var villageview = angular.module('VillageView', []);
 
 villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$rootScope', 'YearlyReport', 'Regions', 'GPRegions', 'MonthlyReport', 'YearlyReportNational', 'MonthlyReportNational',
   function($scope, $window, $location, $rootScope, YearlyReport, Regions, GPRegions, MonthlyReport, YearlyReportNational, MonthlyReportNational) {
-    $scope.isTable = false;
+    $scope.isStat = false;
     $scope.switchview = function() {
-      $scope.isTable = !$scope.isTable;
+      $scope.isStat = !$scope.isStat;
     };
 
     //*****************[ Region Handelers ]*******************//
