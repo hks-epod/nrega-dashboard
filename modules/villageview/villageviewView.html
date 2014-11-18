@@ -1,4 +1,4 @@
-<section class="sub-nav" ng-controller="reportdashCtrl">
+<section class="sub-nav" ng-controller="villageviewCtrl">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
@@ -7,7 +7,7 @@
             <a href="#">
               <span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
           </li>
-          <li class="active">
+          <li >
             <a href="#">
               <span class="glyphicon glyphicon-dashboard"></span>&nbsp;Report Dashboard</a>
           </li>
@@ -15,7 +15,7 @@
             <a target="_blank" href="http://mnregaweb4.nic.in/netnrega/dynamic2/dynamicreport_new4.aspx">
               <span class="glyphicon glyphicon-tasks"></span>&nbsp;Public Data Portal</a>
           </li>
-          <li>
+          <li class="active">
             <a  target="_blank" href="http://mnregaweb4.nic.in/netnrega/dynamic2/dynamicreport_new4.aspx">
               <span class="glyphicon glyphicon-tasks"></span>&nbsp;Village view</a>
           </li>
@@ -33,7 +33,6 @@
       <div class="sidebar-header">
         <span class="glyphicon glyphicon-sound-stereo"></span>&nbsp;FILTERS
       </div>
-      <selectyear></selectyear>
       <selectstate></selectstate>
       <selectdistrict></selectdistrict>
       <selectblock></selectblock>
@@ -65,12 +64,7 @@
         </div>
         <div class="clearfix"></div>
       </div>
-      <div ng-show="isTable" ng-include="'modules/reportdash/tabular/tableview.html'"></div>
-      <div class="main-content">
-        <div style="width:100%">
-          <div ng-hide="isTable" ng-include="'modules/reportdash/viz/viz.html'"></div>
-        </div>
-      </div>
+
 
       <div ng-include="'modules/global/views/footer.html'"></div>
 

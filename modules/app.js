@@ -1,7 +1,7 @@
-var nregadash = angular.module('Nregadash', ['ngRoute', 'ReportDash','Pdp','ui.select2','angular-loading-bar']);
+var nregadash = angular.module('Nregadash', ['ngRoute', 'ReportDash', 'Pdp', 'VillageView', 'ui.select2', 'angular-loading-bar']);
 
 nregadash.run(['uiSelect2Config', function(uiSelect2Config) {
-    uiSelect2Config.allowClear= true;
+  uiSelect2Config.allowClear = true;
 }]);
 
 nregadash.config(['$routeProvider', '$locationProvider',
@@ -17,7 +17,12 @@ nregadash.config(['$routeProvider', '$locationProvider',
       templateUrl: 'modules/pdp/pdpView.html',
       controller: 'pdpCtrl'
     }).
+    when('/villageview', {
+      templateUrl: 'modules/villageview/villageviewView.html',
+      controller: 'villageviewCtrl'
+    }).
     otherwise({
       redirectTo: '/'
     });
-  }]);
+  }
+]);

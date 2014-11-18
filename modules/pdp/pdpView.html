@@ -89,22 +89,26 @@
     <div class="col-md-4">
       <div class="pdpslct-box">
         <div class="pdpslct-header">
-          Select regions
+          Select regions 
+          <span class="pull-right">
+              <button class="btn btn-xs btn-success">Select all</button>
+               <button class="btn btn-xs ">Select one</button>
+          </span>
         </div>
         <div class="pdpslct-content">
           <ul id="stateul" class="region-list">
             <li class="checkbox" ng-repeat="(state, state_code) in regions[0]">
-              <span class="detail">+</span>
+              <span class="detail" ng-click="accordion()">-</span>
               <input value="{{state_code}}" type="checkbox">{{state}}
 
               <ul id="districtul">
                 <li class="checkbox" ng-repeat="(district, district_code) in regions[1][state_code]">
-                  <span class="detail">+</span>
+                  <span class="detail">-</span>
                   <input value="{{district_code}}" type="checkbox">{{district}}
 
                   <ul id="blockul">
                     <li class="checkbox" ng-repeat="(block, block_code) in regions[2][state_code][district_code]">
-                      <span class="detail">+</span>
+                      <span class="detail">-</span>
                       <input value="{{block_code}}" type="checkbox">{{block}}
                     </li>
                   </ul>
