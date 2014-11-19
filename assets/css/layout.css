@@ -297,11 +297,29 @@
   padding: 10px;
   border-bottom: solid 1px #dfdfdf;
 }
+.vv_field .top_title{
+  font-size: 13px;
+}
 .vv_field .status{
   color: #666;
+  font-size:13px;
   font-style: italic;
 }
+.vv_field .top_title .top_date{
+  color: #999
+}
+.vv_field .title{
+  padding: 5px 0;
+  font-size: 15px;
+}
 
+.vv_field .status_sep{
+  color: #000;
+  /*font-weight: bold;*/
+  font-style: normal;
+  font-size: 16px;
+  padding: 0 5px;
+}
 
 
 

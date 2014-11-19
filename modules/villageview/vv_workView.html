@@ -5,14 +5,15 @@
         <span class="glyphicon glyphicon-user"></span>WORKS</div>
       <div class="vv_content">
         <div ng-repeat="work in works" class="vv_field">
-          <div class="title">
+          <div class="top_title">
             <span class="text-primary">{{work.work_type}}</span>
-            <span class="pull-right">{{work.start_date}}- {{work.completion_date}}</span>
-            
+            <span class="pull-right top_date">{{work.start_date}}- {{work.completion_date}}</span>
+
           </div>
-         {{work.work_name}}
+          <div class="title">{{work.work_name}}</div>
           <div class="status">
-            {{total_workers}} Workers  |  Rs. {{work.total_exp}}
+            {{work.total_workers}} Workers 
+            <span class="status_sep">|</span> Rs. {{work.total_exp}}
           </div>
 
           <!-- <br>{{work}} -->
