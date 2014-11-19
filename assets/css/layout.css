@@ -278,15 +278,28 @@
 
 }
 .villageview_work .column{
-  border-right: solid 1px #ddd;
-  min-height: 650px; 
+  border-right: solid 1px #ddd; 
   padding: 0;  
+ 
 } 
 .villageview_work .vv_header{
   border-bottom: solid 1px #dfdfdf;
   padding: 7px 5px;
   font-weight: bold;  
   background-color: rgba(255, 255, 255, 0.2);
+}
+.vv_content{
+  height: 620px;
+  overflow-y: scroll; 
+  word-wrap: break-word;
+}
+.vv_field{
+  padding: 10px;
+  border-bottom: solid 1px #dfdfdf;
+}
+.vv_field .status{
+  color: #666;
+  font-style: italic;
 }
 
 

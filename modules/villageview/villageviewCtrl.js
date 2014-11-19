@@ -1,7 +1,7 @@
 var villageview = angular.module('VillageView', []);
 
-villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$rootScope', 'YearlyReport', 'Regions', 'GPRegions', 'MonthlyReport', 'YearlyReportNational', 'MonthlyReportNational',
-  function($scope, $window, $location, $rootScope, YearlyReport, Regions, GPRegions, MonthlyReport, YearlyReportNational, MonthlyReportNational) {
+villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$rootScope','Regions', 'GPRegions','Workers', 'Works', 'Musters',
+  function($scope, $window, $location, $rootScope, Regions, GPRegions,Workers, Works, Musters) {
     $scope.isStat = false;
     $scope.switchview = function() {
       $scope.isStat = !$scope.isStat;
@@ -109,19 +109,12 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$r
 
     $scope.viewResults = function() {
 
+      Works.fetch().then(function(response){
+        $scope.works= response;
+      });
 
-      if ($scope.selectedYear && !$scope.selectedState && !$scope.selectedDistrict && !$scope.selectedBlock && !$scope.selectedGP) {
-        // $window.ga('send', 'event', $scope.selectedYear, 'National');
+      
 
-        // 
-
-
-      } else {
-        params = buildCode();
-        // $window.ga('send', 'event', $scope.selectedYear, params.code_type, params.code);
-
-
-      }
     };
 
 
