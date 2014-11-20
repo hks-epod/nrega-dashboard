@@ -7,7 +7,7 @@
             <a href="#">
               <span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
           </li>
-          <li >
+          <li>
             <a href="#">
               <span class="glyphicon glyphicon-dashboard"></span>&nbsp;Report Dashboard</a>
           </li>
@@ -16,7 +16,7 @@
               <span class="glyphicon glyphicon-tasks"></span>&nbsp;Public Data Portal</a>
           </li>
           <li class="active">
-            <a   href="#/villageview">
+            <a href="#/villageview">
               <span class="glyphicon glyphicon-tasks"></span>&nbsp;Village view</a>
           </li>
         </ul>
@@ -48,10 +48,8 @@
         <span class="brcrumb">
            {{getKeyByValue(regions[0], selectedState)}}
           <span ng-show="selectedDistrict" class="glyphicon glyphicon-chevron-right"></span> {{getKeyByValue(regions[1][selectedState], selectedDistrict)}}
-          <span ng-show="selectedBlock" style="font-weight:lighter" class="glyphicon glyphicon-chevron-right"></span>
-           {{getKeyByValue(regions[2][selectedState][selectedDistrict], selectedBlock)}}
-          <span ng-show="selectedGP" style="font-weight:lighter" class="glyphicon glyphicon-chevron-right"></span>
-          {{gps[selectedGP]}}
+        <span ng-show="selectedBlock" style="font-weight:lighter" class="glyphicon glyphicon-chevron-right"></span> {{getKeyByValue(regions[2][selectedState][selectedDistrict], selectedBlock)}}
+        <span ng-show="selectedGP" style="font-weight:lighter" class="glyphicon glyphicon-chevron-right"></span> {{gps[selectedGP]}}
         </span>
         <div class="btn-group pull-right">
 
@@ -65,7 +63,7 @@
         <div class="clearfix"></div>
       </div>
 
-       <div ng-show="isStat" ng-include="'modules/villageview/vv_statView.html'"></div>
+      <div ng-show="isStat" ng-include="'modules/villageview/vv_statView.html'"></div>
       <div class="">
         <div style="width:100%">
           <div ng-hide="isStat" ng-include="'modules/villageview/vv_workView.html'"></div>

@@ -1,7 +1,7 @@
 var villageview = angular.module('VillageView', []);
 
-villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$rootScope','Regions', 'GPRegions','Workers', 'Works', 'Musters',
-  function($scope, $window, $location, $rootScope, Regions, GPRegions,Workers, Works, Musters) {
+villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$rootScope', 'Regions', 'GPRegions', 'Workers', 'Works', 'Musters',
+  function($scope, $window, $location, $rootScope, Regions, GPRegions, Workers, Works, Musters) {
     $scope.isStat = false;
     $scope.switchview = function() {
       $scope.isStat = !$scope.isStat;
@@ -109,14 +109,47 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$r
 
     $scope.viewResults = function() {
 
-      Works.fetch().then(function(response){
-        $scope.works= response;
+      Works.fetch().then(function(response) {
+        $scope.works = response;
       });
 
-      
+      Musters.fetch().then(function(response) {
+        $scope.musters = response;
+      });
+
+      Workers.fetch().then(function(response) {
+        $scope.workers = response;
+      });
+
+
 
     };
 
+
+    function loadMustersbyWork(workcode) {
+      $scope.filteredMusters = [];
+      $scope.musters.forEach(function(muster, index) {
+        if (muster.work_code == workcode) {
+          $scope.filteredMusters.push(muster);
+        }
+      });
+    }
+
+    function loadWorkersbyMuster(muster) {
+      $scope.workers = muster.workers;
+    }
+
+
+
+    $scope.loadMusters = function(work) {
+      $scope.activeWork = work;
+      loadMustersbyWork(work.work_code);
+    };
+
+    $scope.loadWorkers = function(muster) {
+      $scope.activeMuster = muster;
+      loadWorkersbyMuster(muster);
+    };
 
 
 
