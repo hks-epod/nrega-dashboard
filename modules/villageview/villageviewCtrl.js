@@ -136,7 +136,7 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$r
     }
 
     function loadWorkersbyMuster(muster) {
-      $scope.workers = muster.workers;
+      $scope.filteredWorkers = muster.workers;
     }
 
 
@@ -148,7 +148,8 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$r
 
     $scope.loadWorkers = function(muster) {
       $scope.activeMuster = muster;
-      loadWorkersbyMuster(muster);
+     
+        loadWorkersbyMuster(muster);
     };
 
 
