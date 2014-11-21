@@ -324,7 +324,9 @@
 .vv_content .active{
   background-color: #efefef;
 }
-
+.villageview_work .c-btns .btn{
+  text-align: left ;
+}
 
 .footer{
   padding: 20px;
@@ -338,5 +340,6 @@
 .footer img{
   padding: 0 20px;
 }
+
 
 

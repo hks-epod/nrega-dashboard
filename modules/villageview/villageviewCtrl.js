@@ -107,22 +107,29 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$r
     //      View Results    //
     //////////////////////////
 
-    $scope.viewResults = function() {
+    $scope.selectedState = '4';
+    $scope.selectedDistrict = '10';
+    $scope.selectedBlock = '10';
 
-      Works.fetch().then(function(response) {
-        $scope.works = response;
-      });
+    $scope.viewResults = function() {};
+    Works.fetch().then(function(response) {
+      $scope.works = response;
+    });
+    Musters.fetch().then(function(response) {
+      $scope.musters = response;
+    });
+    Workers.fetch().then(function(response) {
+      $scope.workers = response;
+    });
 
-      Musters.fetch().then(function(response) {
-        $scope.musters = response;
-      });
-
-      Workers.fetch().then(function(response) {
-        $scope.workers = response;
-      });
-
-
-
+    // Load Column 
+    $scope.col1 = false;
+    $scope.col2 = false;
+    $scope.loadColumn = function(colName) {
+      $scope.col1 = true;
+    };
+    $scope.loadColumn2 = function(colName) {
+      $scope.col2 = true;
     };
 
 
@@ -133,18 +140,36 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$r
           $scope.filteredMusters.push(muster);
         }
       });
+    };
+
+
+    function extend(a, b) {
+      for (var key in b)
+        if (b.hasOwnProperty(key))
+          a[key] = b[key];
+      return a;
     }
 
     function loadWorkersbyMuster(muster) {
-      $scope.filteredWorkers = muster.workers;
+      $scope.filteredWorkers=[];
+
+      muster.workers.forEach(function(filterWorker) {
+        $scope.workers.forEach(function(worker) {
+          if (filterWorker.worker_code == worker.worker_code) {
+            $scope.filteredWorkers.push(extend(filterWorker, worker));
+          }
+        });
+      });
+
+
     }
 
 
 
     $scope.loadMusters = function(work) {
       $scope.activeWork = work;
-      $scope.filteredWorkers= [];
-      $scope.activeMuster={};
+      $scope.filteredWorkers = [];
+      $scope.activeMuster = {};
       loadMustersbyWork(work.work_code);
     };
 

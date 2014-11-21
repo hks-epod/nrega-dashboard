@@ -1,6 +1,22 @@
 <div class="container-fluid">
   <div class="row villageview_work">
-    <div class="col-md-4 column">
+    <div ng-hide="col1" class="col-md-4 column text-center">
+      <br>
+      <br><br><br><br><br>
+      <div class="btn-group-vertical c-btns" role="group" aria-label="...">
+        <button disabled="disabled" ng-click="loadColumn('WORKERS')" type="button" class="btn btn-lg btn-default">
+        	<span class="glyphicon glyphicon-user"></span> WORKERS
+        </button>
+        <button ng-click="loadColumn('WORKS')" type="button" class="btn btn-lg btn-default">
+        	<span class="glyphicon glyphicon-shopping-cart"></span> WORKS
+        </button>
+        <button disabled="disabled" ng-click="loadColumn('MUSTERS')" type="button" class="btn btn-lg btn-default"> 
+        	<span class="glyphicon glyphicon-file"></span> MUSTERS
+        </button>
+  		</div>
+  		<br><br><br><br><br><br><br>
+  	</div>
+    <div ng-show="col1" class="col-md-4 column">
       <div class="vv_header">
         <span class="glyphicon glyphicon-shopping-cart"></span> WORKS</div>
       <div class="vv_content">
@@ -15,19 +31,34 @@
             {{work.total_workers}} Workers
             <span class="status_sep">|</span> Rs. {{work.total_exp}}
           </div>
-
-          <!-- <br>{{work}} -->
         </div>
       </div>
     </div>
+	
+		<div ng-hide="!col1 || col2" class="col-md-4 column text-center">
+      <br>
+      <br><br><br><br><br>
+      <div class="btn-group-vertical c-btns" role="group" aria-label="...">
+        <button disabled="disabled" ng-click="loadColumn('WORKERS')" type="button" class="btn btn-lg btn-default">
+        	<span class="glyphicon glyphicon-user"></span> WORKERS
+        </button>
+        <button ng-click="loadColumn2()" type="button" class="btn btn-lg btn-default"> 
+        	<span class="glyphicon glyphicon-file"></span> MUSTERS
+        </button>
+  		</div>
+  	</div>
 
-    <div class="col-md-4 column">
+
+    <div  ng-show="col2" class="col-md-4 column">
       <div class="vv_header">
         <span class="glyphicon glyphicon-file"></span> MUSTER ROLL</div>
       <div class="vv_content">
         <div ng-repeat="muster in filteredMusters" class="vv_field" ng-class="{'active': muster.mr_no == activeMuster.mr_no }" ng-click="loadWorkers(muster)">
           <div class="top_title">
-            <span class="text-primary">Paid</span>
+            <span class="text-primary">
+            	{{muster.mr_payment_date == "" ? "Pending Payment" : "Paid on "+muster.mr_payment_date}}
+            
+            </span>
             <span class="pull-right top_date">{{muster.work_start_date}} - {{muster.work_end_date}}</span>
 
           </div>
@@ -36,28 +67,24 @@
             {{muster.workers.length}} Workers
             <span class="status_sep">|</span> {{muster.total_persondays}} person-days
           </div>
-
-          <!-- <br>{{muster}} -->
         </div>
       </div>
     </div>
-    <div class="col-md-4 column">
+    <div ng-show="col2" class="col-md-4 column">
       <div class="vv_header">
         <span class="glyphicon glyphicon-user"></span> WORKERS</div>
       <div class="vv_content">
         <div ng-repeat="worker in filteredWorkers" class="vv_field">
           <div class="top_title">
-            <span class="text-primary">Paid</span>
-            <span class="pull-right top_date">{{worker.account_no.}}</span>
+            <span class="text-primary">{{worker.bank_po_name}}</span>
+            <span class="pull-right top_date">{{worker.gender}}</span>
 
           </div>
-          <div class="title">{{worker.worker_code}}</div>
+          <div class="title">{{worker.worker_name}}</div>
           <div class="status">
-            {{worker.workers.length}} Workers
-            <span class="status_sep">|</span> {{worker.total_persondays}} person-days
+            Rs. {{worker.dues}}
+            <span class="status_sep">|</span> {{worker.days_worked}} days
           </div>
-
-          <!-- <br>{{worker}} -->
         </div>
       </div>
     </div>
