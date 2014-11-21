@@ -1,4 +1,4 @@
-var nregadash = angular.module('Nregadash', ['ngRoute', 'ReportDash', 'Pdp', 'VillageView', 'ui.select2', 'angular-loading-bar']);
+var nregadash = angular.module('Nregadash', ['ngRoute', 'ReportDash', 'Pdp', 'VillageView', 'ui.select2', 'angular-loading-bar', 'ui.bootstrap']);
 
 nregadash.run(['uiSelect2Config', function(uiSelect2Config) {
   uiSelect2Config.allowClear = true;

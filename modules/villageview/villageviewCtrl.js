@@ -1,7 +1,7 @@
 var villageview = angular.module('VillageView', []);
 
-villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$rootScope', 'Regions', 'GPRegions', 'Workers', 'Works', 'Musters',
-  function($scope, $window, $location, $rootScope, Regions, GPRegions, Workers, Works, Musters) {
+villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$modal', '$rootScope', 'Regions', 'GPRegions', 'Workers', 'Works', 'Musters',
+  function($scope, $window, $location, $modal, $rootScope, Regions, GPRegions, Workers, Works, Musters) {
     $scope.isStat = false;
     $scope.switchview = function() {
       $scope.isStat = !$scope.isStat;
@@ -122,6 +122,8 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$r
       $scope.workers = response;
     });
 
+
+
     // Load Column 
     $scope.col1 = false;
     $scope.col2 = false;
@@ -151,7 +153,7 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$r
     }
 
     function loadWorkersbyMuster(muster) {
-      $scope.filteredWorkers=[];
+      $scope.filteredWorkers = [];
 
       muster.workers.forEach(function(filterWorker) {
         $scope.workers.forEach(function(worker) {
@@ -178,7 +180,49 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$r
       loadWorkersbyMuster(muster);
     };
 
+    $scope.items = ['item1', 'item2', 'item3'];
+
+    $scope.open = function(size) {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'myModalContent.html',
+        controller: 'ModalInstanceCtrl',
+        size: size,
+        resolve: {
+          items: function() {
+            return $scope.items;
+          }
+        }
+      });
+
+      modalInstance.result.then(function(selectedItem) {
+        $scope.selected = selectedItem;
+      }, function() {
+        // $log.info('Modal dismissed at: ' + new Date());
+      });
+    };
+
+
+
 
 
   }
 ]);
+
+
+
+villageview.controller('ModalInstanceCtrl', function($scope, $modalInstance, items) {
+
+  $scope.items = items;
+  $scope.selected = {
+    item: $scope.items[0]
+  };
+
+  $scope.ok = function() {
+    $modalInstance.close($scope.selected.item);
+  };
+
+  $scope.cancel = function() {
+    $modalInstance.dismiss('cancel');
+  };
+});
