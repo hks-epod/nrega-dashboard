@@ -180,25 +180,16 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
       loadWorkersbyMuster(muster);
     };
 
-    $scope.items = ['item1', 'item2', 'item3'];
-
-    $scope.open = function(size) {
-
+    $scope.open = function(item) {
       var modalInstance = $modal.open({
         templateUrl: 'myModalContent.html',
         controller: 'ModalInstanceCtrl',
-        size: size,
+        size: 'lg',
         resolve: {
-          items: function() {
-            return $scope.items;
+          detailItem: function() {
+            return item;
           }
         }
-      });
-
-      modalInstance.result.then(function(selectedItem) {
-        $scope.selected = selectedItem;
-      }, function() {
-        // $log.info('Modal dismissed at: ' + new Date());
       });
     };
 
@@ -211,16 +202,9 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
 
 
 
-villageview.controller('ModalInstanceCtrl', function($scope, $modalInstance, items) {
+villageview.controller('ModalInstanceCtrl', function($scope, $modalInstance, detailItem) {
 
-  $scope.items = items;
-  $scope.selected = {
-    item: $scope.items[0]
-  };
-
-  $scope.ok = function() {
-    $modalInstance.close($scope.selected.item);
-  };
+  $scope.detailItem = detailItem;
 
   $scope.cancel = function() {
     $modalInstance.dismiss('cancel');

@@ -17,7 +17,6 @@
         <button disabled="disabled" ng-click="loadColumn('MUSTERS')" type="button" class="btn btn-lg btn-default">
           <span class="glyphicon glyphicon-file"></span> MUSTERS
         </button>
-        <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
       </div>
       <br>
       <br>
@@ -41,7 +40,9 @@
           <div class="status">
             {{work.total_workers}} Workers
             <span class="status_sep">|</span> Rs. {{work.total_exp}}
+             <a class="text-danger pull-right" ng-click="open(work)">Detail</a>
           </div>
+
         </div>
       </div>
     </div>
@@ -81,6 +82,7 @@
           <div class="status">
             {{muster.workers.length}} Workers
             <span class="status_sep">|</span> {{muster.total_persondays}} person-days
+             <a class="text-danger pull-right" ng-click="open(muster)">Detail</a>
           </div>
         </div>
       </div>
@@ -99,6 +101,7 @@
           <div class="status">
             Rs. {{worker.dues}}
             <span class="status_sep">|</span> {{worker.days_worked}} days
+            <a class="text-danger pull-right" ng-click="open(worker)">Detail</a>
           </div>
         </div>
       </div>
@@ -110,18 +113,19 @@
 
 <script type="text/ng-template" id="myModalContent.html">
   <div class="modal-header">
-    <h3 class="modal-title">I'm a modal!</h3>
+    <h3 class="modal-title">Detail
+    	 <button class="btn btn-warning pull-right" ng-click="cancel()">X</button>
+    </h3>
   </div>
-  <div class="modal-body">
-    <ul>
-      <li ng-repeat="item in items">
-        <a ng-click="selected.item = item">{{ item }}</a>
-      </li>
-    </ul>
-    Selected: <b>{{ selected.item }}</b>
+  <div class="modal-body detail">
+  <table class="table table-striped">
+  	<tr ng-repeat="(key, value) in detailItem">
+  		<td>{{key}}</td>
+  		<td>{{key == 'workers' ? value.length : value }}</td>
+  	</tr>
+  </table>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="ok()">OK</button>
     <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
   </div>
 </script>
