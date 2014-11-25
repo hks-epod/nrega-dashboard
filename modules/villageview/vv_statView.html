@@ -1,10 +1,9 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-    <br>
-			Total works : 10 <br>
-			Total wages : 1133054.88
-    	<br>
+      <br> Total works : 10
+      <br> Total expenditure : 1133054.88
+      <br>
       <br>
       <table class="table table-bordered">
         <tr>
@@ -43,19 +42,25 @@
         </tr>
       </table>
 
-			<br>
-			<h4>List of census village</h4>
-			<table class="table table-bordered">
-			<tr>
-				<th>Village name</th>
-				<th>Village code</th>
-			</tr>
-			<tr ng-repeat="cens in vstats.cens_villages">
-				{{cens}}
-				<td>{{cens.village_name}}</td>
-				<td>{{cens.village_code}}</td>
-			</tr>
-			</table>
+      <br>
+      <accordion close-others="oneAtATime">
+        <accordion-group heading="List of census village" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+          <table class="table table-bordered">
+            <tr>
+              <th>Village name</th>
+              <th>Village code</th>
+            </tr>
+            <tr ng-repeat="cens in vstats.cens_villages">
+              {{cens}}
+              <td>{{cens.village_name}}</td>
+              <td>{{cens.village_code}}</td>
+            </tr>
+          </table>
+        </accordion-group>
+      </accordion>
+
+
+
 
     </div>
   </div>
