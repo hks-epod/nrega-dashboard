@@ -1,7 +1,7 @@
 var villageview = angular.module('VillageView', []);
 
-villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$modal', '$rootScope', 'Regions', 'GPRegions', 'Workers', 'Works', 'Musters',
-  function($scope, $window, $location, $modal, $rootScope, Regions, GPRegions, Workers, Works, Musters) {
+villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$modal', '$rootScope', 'Regions', 'GPRegions', 'Workers', 'Works', 'Musters','Vstats',
+  function($scope, $window, $location, $modal, $rootScope, Regions, GPRegions, Workers, Works, Musters, Vstats) {
     $scope.isStat = false;
     $scope.switchview = function() {
       $scope.isStat = !$scope.isStat;
@@ -120,6 +120,9 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
     });
     Workers.fetch().then(function(response) {
       $scope.workers = response;
+    });
+    Vstats.fetch().then(function(response) {
+      $scope.vstats = response;
     });
 
 

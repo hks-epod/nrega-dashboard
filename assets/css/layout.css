@@ -306,6 +306,9 @@
   font-size:13px;
   font-style: italic;
 }
+.vv_field .status a{
+  font-style: normal;
+}
 .vv_field .top_title .top_date{
   color: #999
 }
@@ -327,6 +330,7 @@
 .villageview_work .c-btns .btn{
   text-align: left ;
 }
+
 
 .footer{
   padding: 20px;

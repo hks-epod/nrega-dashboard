@@ -1,3 +1,62 @@
-<div>
-	ksjdlkdlskd Stata
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+    <br>
+			Total works : 10 <br>
+			Total wages : 1133054.88
+    	<br>
+      <br>
+      <table class="table table-bordered">
+        <tr>
+          <th colspan="2">Census </th>
+          <th colspan="2">NREGA</th>
+        </tr>
+        <tr>
+          <td>Total households</td>
+          <td>{{vstats.hh}}</td>
+          <td>Total active job cards</td>
+          <td>{{vstats.active_job_cards}}</td>
+        </tr>
+        <tr>
+          <td>Total population</td>
+          <td>{{vstats.pop}}</td>
+          <td>Total workers</td>
+          <td>{{vstats.total_workers}}</td>
+        </tr>
+        <tr>
+          <td>Percent female population</td>
+          <td>{{vstats.female_pop_pct}}</td>
+          <td>Percent female persondays</td>
+          <td>{{vstats.pct_f_persondays}}</td>
+        </tr>
+        <tr>
+          <td>Percent SC population</td>
+          <td>{{vstats.sc_pop_pct}}</td>
+          <td>Percent SC persondays</td>
+          <td>{{vstats.pct_sc_persondays}}</td>
+        </tr>
+        <tr>
+          <td>Percent ST population</td>
+          <td>{{vstats.sc_pop_pct}}</td>
+          <td>Percent SC persondays</td>
+          <td>{{vstats.pct_st_persondays}}</td>
+        </tr>
+      </table>
+
+			<br>
+			<h4>List of census village</h4>
+			<table class="table table-bordered">
+			<tr>
+				<th>Village name</th>
+				<th>Village code</th>
+			</tr>
+			<tr ng-repeat="cens in vstats.cens_villages">
+				{{cens}}
+				<td>{{cens.village_name}}</td>
+				<td>{{cens.village_code}}</td>
+			</tr>
+			</table>
+
+    </div>
+  </div>
 </div>

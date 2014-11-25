@@ -51,3 +51,20 @@ villageview.factory('Musters', ['$http',
     return Musters;
   }
 ]);
+
+villageview.factory('Vstats', ['$http',
+  function($http) {
+    var Vstats = function(data) {
+      angular.extend(this, data);
+    };
+
+    Vstats.fetch = function() {
+      return $http.get('api/data/village_stats.json')
+        .then(function(response) {
+          return response.data;
+        });
+    };
+
+    return Vstats;
+  }
+]);
