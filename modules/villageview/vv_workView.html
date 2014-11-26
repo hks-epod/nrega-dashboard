@@ -39,7 +39,7 @@
           <div class="title">{{work.work_name}}</div>
           <div class="status">
             {{work.total_workers}} Workers
-            <span class="status_sep">|</span> Rs. {{work.total_exp}}
+            <span class="status_sep">|</span> Rs. {{work.total_exp | number:2}}
              <a class="text-danger pull-right" ng-click="open(work)">Detail</a>
           </div>
 
