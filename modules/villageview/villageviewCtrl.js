@@ -1,6 +1,6 @@
 var villageview = angular.module('VillageView', []);
 
-villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$modal', '$rootScope', 'Regions', 'GPRegions', 'Workers', 'Works', 'Musters','Vstats',
+villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$modal', '$rootScope', 'Regions', 'GPRegions', 'Workers', 'Works', 'Musters', 'Vstats',
   function($scope, $window, $location, $modal, $rootScope, Regions, GPRegions, Workers, Works, Musters, Vstats) {
     $scope.isStat = false;
     $scope.switchview = function() {
@@ -101,6 +101,16 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
           }
         }
       }
+    };
+
+    $scope.parseDate = function(jsonDate) {
+      // console.log(jsonDate);
+      if (jsonDate == '')
+        newdate = '';
+      else
+
+        newdate = new Date(jsonDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, "$2/$1/$3"));
+      return newdate;
     }
 
     //////////////////////////
