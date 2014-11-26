@@ -54,7 +54,7 @@
            {{getKeyByValue(regions[0], selectedState)}}
           <span ng-show="selectedDistrict" class="glyphicon glyphicon-chevron-right"></span> {{getKeyByValue(regions[1][selectedState], selectedDistrict)}}
         <span ng-show="selectedBlock" style="font-weight:lighter" class="glyphicon glyphicon-chevron-right"></span> {{getKeyByValue(regions[2][selectedState][selectedDistrict], selectedBlock)}}
-        <span ng-show="selectedGP" style="font-weight:lighter" class="glyphicon glyphicon-chevron-right"></span> {{gps[selectedGP]}}
+        <span ng-show="selectedGP" style="font-weight:lighter" class="glyphicon glyphicon-chevron-right"></span> {{gps[selectedGP]}} <span  style="font-weight:lighter" class="glyphicon glyphicon-chevron-right"></span> SEAJULI
         </span>
         <div class="btn-group pull-right">
           <button type="button" class="btn btn-default" ng-click="switchview()" ng-class="{'active disabled': isStat==false}">
