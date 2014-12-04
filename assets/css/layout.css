@@ -4,6 +4,9 @@
   margin-top: 70px;
   font-family: Roboto;
 }
+.p-20{
+  padding: 20px
+}
 /*-------------[ Global: Navbar]-------------------*/
  .nrd-nav {
   background: #f3ede1;
@@ -284,7 +287,7 @@
 } 
 .villageview_work .vv_header{
   border-bottom: solid 1px #dfdfdf;
-  padding: 7px 5px;
+  padding: 10px;
   font-weight: bold;  
   background-color: rgba(255, 255, 255, 0.2);
 }
@@ -308,6 +311,7 @@
 }
 .vv_field .status a{
   font-style: normal;
+  line-height: 25px
 }
 .vv_field .top_title .top_date{
   color: #999

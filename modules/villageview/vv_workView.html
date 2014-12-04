@@ -6,8 +6,9 @@
       <br>
       <br>
       <br>
-      <br><br>
-      <br>
+      <div class="p-20">
+        <span>Select a panchayat at left, then make a selection below to start exploring MGNREGA</span>
+      </div>
       <br>
       
       <br>
@@ -43,23 +44,24 @@
         <span class="glyphicon glyphicon-cog"></span> WORKS</div>
       <div class="vv_content">
         <div ng-repeat="work in works" class="vv_field" ng-class="{'active': work.work_code == activeWork.work_code }" ng-click="loadMusters(work)">
-          <div class="pull-right">
-            <br>
-            <span class="glyphicon glyphicon-chevron-right"></span>
-            <br>
-            <br>
-          </div>
+          
 
           <div class="top_title">
-            <span class="text-primary">{{work.work_type}}</span>
+            <span class="text-danger">{{work.work_type}}</span>
             <span class="pull-right top_date">{{ parseDate(work.start_date) | date : 'mediumDate' }} - {{parseDate(work.completion_date) |date : 'mediumDate'}}</span>
 
           </div>
-          <div class="title">{{work.work_name}}</div>
+          <div class="title">{{work.work_name}}
+            <div class="pull-right">
+           
+              <span class="glyphicon glyphicon-chevron-right"></span>
+             
+            </div>
+          </div>
           <div class="status">
             {{work.total_workers}} Workers
             <span class="status_sep">|</span> Rs. {{work.total_exp | number:2}}
-            <a class="text-danger pull-right" ng-click="open(work)">Detail</a>
+            <a class=" pull-right" ng-click="open(work)">Detail</a>
           </div>
 
         </div>
@@ -72,6 +74,14 @@
       <br>
       <br>
       <br>
+      <br><br>
+      <br>
+      <br>
+      <br>
+      
+      <br>
+      <br>
+      <br>
       <br>
       <div class="btn-group-vertical c-btns" role="group" aria-label="...">
         <button disabled="disabled" ng-click="loadColumn('WORKERS')" type="button" class="btn btn-lg btn-default">
@@ -81,6 +91,22 @@
           <span class="glyphicon glyphicon-file"></span> MUSTERS
         </button>
       </div>
+      <br>
+      <br>
+      <br><br>
+    
+
+     
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br><br>
+      <br>
+      <br>
+      <br>
+      <br>
     </div>
 
 
@@ -89,26 +115,26 @@
         <span class="glyphicon glyphicon-file"></span> MUSTER ROLL</div>
       <div class="vv_content">
         <div ng-repeat="muster in filteredMusters" class="vv_field" ng-class="{'active': muster.mr_no == activeMuster.mr_no }" ng-click="loadWorkers(muster)">
-          <div class="pull-right">
-            <br>
-            <span class="glyphicon glyphicon-chevron-right"></span>
-            <br>
-            <br>
-          </div>
-
+        
           <div class="top_title">
-            <span class="text-primary">
+            <span class="text-danger">
               {{muster.mr_payment_date == "" ? "Pending Payment" : "Paid on "+muster.mr_payment_date}}
             
             </span>
             <span class="pull-right top_date">{{parseDate(muster.work_start_date) | date : 'mediumDate'}} - {{parseDate(muster.work_end_date) | date : 'mediumDate'}}</span>
 
           </div>
-          <div class="title">MUSTER ROLL NO. {{muster.mr_no}}</div>
+          <div class="title">MUSTER ROLL NO. {{muster.mr_no}}
+            <div class="pull-right">
+            
+              <span class="glyphicon glyphicon-chevron-right"></span>
+             
+            </div>
+          </div>
           <div class="status">
             {{muster.workers.length}} Workers
             <span class="status_sep">|</span> {{muster.total_persondays}} person-days
-            <a class="text-danger pull-right" ng-click="open(muster)">Detail</a>
+            <a class=" pull-right" ng-click="open(muster)">Detail</a>
           </div>
         </div>
       </div>
@@ -126,7 +152,7 @@
           </div>
  -->
           <div class="top_title">
-            <span class="text-primary">{{worker.job_card_number}}</span>
+            <span class="text-danger">{{worker.job_card_number}}</span>
             <span class="pull-right top_date">{{worker.gender}}</span>
 
           </div>
@@ -134,7 +160,7 @@
           <div class="status">
             Rs. {{worker.dues}}
             <span class="status_sep">|</span> {{worker.days_worked}} days
-            <a class="text-danger pull-right" ng-click="open(worker)">Detail</a>
+            <a class="pull-right" ng-click="open(worker)">Detail</a>
           </div>
         </div>
       </div>
@@ -159,6 +185,6 @@
     </table>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-warning" ng-click="cancel()">Close</button>
   </div>
 </script>
