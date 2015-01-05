@@ -4,18 +4,26 @@
       <div class="p-20">
         <span>Select a panchayat at left, then make a selection below to start exploring MGNREGA</span>
       </div>
-      <div class="btn-groupc-btns" role="group" aria-label="...">
-        <button ng-click="loadColumn('WORKS')" type="button" class="btn btn-lg btn-default">
-          <span class="glyphicon glyphicon-cog"></span> <br> WORKS
+        <button ng-disabled='!selectedGP' ng-click="loadColumn('WORKS')" type="button" class="btn btn-lg btn-default">
+          <span class="glyphicon glyphicon-cog"></span><br> WORKS
         </button>
-        <button disabled="disabled" ng-click="loadColumn('MUSTERS')" type="button" class="btn btn-lg btn-default">
-          <span class="glyphicon glyphicon-file"></span> <br> MUSTERS
+        <button ng-disabled="!selectedGP" ng-click="loadColumn('MUSTERS')" type="button" class="btn btn-lg btn-default">
+          <span class="glyphicon glyphicon-file"></span><br> MUSTERS
         </button>
-        <button disabled="disabled" ng-click="loadColumn('WORKERS')" type="button" class="btn btn-lg btn-default">
+        <button ng-disabled="!selectedGP" ng-click="loadColumn('WORKERS')" type="button" class="btn btn-lg btn-default">
           <span class="glyphicon glyphicon-user"></span><br> WORKERS
         </button>
-      </div>
     </div>
+
+
+
+
+
+
+
+
+
+
 
 
 

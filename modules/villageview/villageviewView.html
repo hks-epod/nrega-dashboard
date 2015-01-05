@@ -34,18 +34,10 @@
         <span class="glyphicon glyphicon-sound-stereo"></span>&nbsp;FILTERS
       </div>
 
-      <button type="button" class="btn btn-block btn-warning">ASSAM</button>
-      <button type="button" class="btn btn-block btn-warning">LAKHIMPUR</button>
-      <button type="button" class="btn btn-block btn-warning">BOGINADI</button>
-      <button type="button" class="btn btn-block btn-warning">SEAJULI</button>
-      <!-- <selectstate></selectstate>
+      <selectstate></selectstate>
       <selectdistrict></selectdistrict>
       <selectblock></selectblock>
-      <selectgp></selectgp> -->
-      <br>
-      <button ng-click="viewResults()" type="button" class="btn btn-block btn-success">View Results
-        <span class="glyphicon glyphicon-search"></span>
-      </button>
+      <selectgp></selectgp>
     </div>
 
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -54,7 +46,7 @@
            {{getKeyByValue(regions[0], selectedState)}}
           <span ng-show="selectedDistrict" class="glyphicon glyphicon-chevron-right"></span> {{getKeyByValue(regions[1][selectedState], selectedDistrict)}}
         <span ng-show="selectedBlock" style="font-weight:lighter" class="glyphicon glyphicon-chevron-right"></span> {{getKeyByValue(regions[2][selectedState][selectedDistrict], selectedBlock)}}
-        <span ng-show="selectedGP" style="font-weight:lighter" class="glyphicon glyphicon-chevron-right"></span> {{gps[selectedGP]}} <span  style="font-weight:lighter" class="glyphicon glyphicon-chevron-right"></span> SEAJULI
+        <span ng-show="selectedGP" style="font-weight:lighter" class="glyphicon glyphicon-chevron-right"></span> {{gps[selectedGP]}}
         </span>
         <div class="btn-group pull-right">
           <button type="button" class="btn btn-success" ng-click="switchview()" ng-class="{'active disabled': isStat==false}">
@@ -63,7 +55,7 @@
           <button type="button" class="btn btn-success" ng-click="switchview()" ng-class="{'active disabled': isStat==true}">
             <span class="glyphicon glyphicon-th"></span>&nbsp; Village Stats
           </button>
-          
+
         </div>
         <div class="clearfix"></div>
       </div>

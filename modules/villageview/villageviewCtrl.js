@@ -3,17 +3,11 @@ var villageview = angular.module('VillageView', []);
 villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$modal', '$rootScope', 'Regions', 'GPRegions', 'Workers', 'Works', 'Musters', 'Vstats',
   function($scope, $window, $location, $modal, $rootScope, Regions, GPRegions, Workers, Works, Musters, Vstats) {
 
-    $scope.isStat = false;
-    $scope.switchview = function() {
-      $scope.isStat = !$scope.isStat;
-    };
-
-    $scope.columnList = [];
-
-
     //*****************[ Region Handelers ]*******************//
     $scope.years = ['2014-2015', '2013-2014', '2012-2013'];
     $scope.selectedYear = $scope.years[0];
+
+
     Regions.fetch($scope.selectedYear).then(function(data) {
       $scope.regions = data;
     });
@@ -121,11 +115,7 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
     //      View Results    //
     //////////////////////////
 
-    $scope.selectedState = '4';
-    $scope.selectedDistrict = '10';
-    $scope.selectedBlock = '10';
 
-    $scope.viewResults = function() {};
     Works.fetch().then(function(response) {
       $scope.works = response;
     });
@@ -138,6 +128,20 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
     Vstats.fetch().then(function(response) {
       $scope.vstats = response;
     });
+
+
+
+
+
+    // Village View Service
+
+    $scope.isStat = false;
+    $scope.switchview = function() {
+      $scope.isStat = !$scope.isStat;
+    };
+
+    $scope.columnList = [];
+
 
 
 

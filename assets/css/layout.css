@@ -286,8 +286,14 @@
  
 } 
 .vv_homescreen{
-  padding: 50px 20px; 
-
+  padding: 170px 20px 220px; 
+}
+.vv_homescreen .glyphicon {
+  font-size: 50px;
+  padding-bottom: 10px
+}
+.vv_homescreen button {
+  min-width: 150px
 }
 
 
