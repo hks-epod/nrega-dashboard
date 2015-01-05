@@ -114,24 +114,24 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
     //////////////////////////
     //      Village View    //
     //////////////////////////
-    Vstats.fetch().then(function(response) {
-      $scope.vstats = response;
-    });
+
     $scope.isStat = false;
     $scope.switchview = function() {
       $scope.isStat = !$scope.isStat;
     };
+    Vstats.fetch().then(function(response) {
+      $scope.vstats = response;
+    });
 
-
-
+    columnList = ['WORKS', 'WORKERS', 'MUSTERS'];
     $scope.column = {
       1: {
         'status': false
       },
-      2:{
+      2: {
         'status': false
       },
-      3:{
+      3: {
         'status': false
       }
     };
@@ -155,10 +155,30 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
     }
 
     $scope.loadColumn = function(colName, colNo) {
-      $scope.column[colNo].status = true;
       $scope.column[colNo].name = colName;
+      $scope.column[colNo].status = true;
+
+      if (colNo == 2) {
+        columnList.forEach(function(value) {
+          if (value != $scope.column['1'].name && value != $scope.column['2'].name) {
+            $scope.column[3].name = value;
+            $scope.column[3].status = true;
+          }
+        });
+      }
       fetchColumnResults(colName);
     };
+
+
+    $scope.loadRow = function() {
+
+    }
+
+
+
+
+
+
 
 
     function extend(a, b) {
@@ -180,7 +200,7 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
         }
       });
     };
-    
+
     function loadWorkersbyMuster(muster) {
       $scope.filteredWorkers = [];
       muster.workers.forEach(function(filterWorker) {
