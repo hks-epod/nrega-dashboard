@@ -2,10 +2,14 @@ var villageview = angular.module('VillageView', []);
 
 villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$modal', '$rootScope', 'Regions', 'GPRegions', 'Workers', 'Works', 'Musters', 'Vstats',
   function($scope, $window, $location, $modal, $rootScope, Regions, GPRegions, Workers, Works, Musters, Vstats) {
+
     $scope.isStat = false;
     $scope.switchview = function() {
       $scope.isStat = !$scope.isStat;
     };
+
+    $scope.columnList = [];
+
 
     //*****************[ Region Handelers ]*******************//
     $scope.years = ['2014-2015', '2013-2014', '2012-2013'];

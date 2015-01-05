@@ -276,7 +276,7 @@
   cursor: pointer;
 }
 
-/* Village view */
+/* --------------------- Village view ---------------------*/
 .villageview_work{
 
 }
@@ -285,6 +285,14 @@
   padding: 0;  
  
 } 
+.vv_homescreen{
+  padding: 50px 20px; 
+
+}
+
+
+
+
 .villageview_work .vv_header{
   border-bottom: solid 1px #dfdfdf;
   padding: 10px;

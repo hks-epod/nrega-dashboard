@@ -1,50 +1,31 @@
 <div class="container-fluid">
   <div class="row villageview_work">
-    <div ng-hide="col1" class="col-md-4 column text-center">
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
+    <div ng-hide="col1" class="vv_homescreen col-md-12 text-center">
       <div class="p-20">
         <span>Select a panchayat at left, then make a selection below to start exploring MGNREGA</span>
       </div>
-      <br>
-      
-      <br>
-      <div class="btn-group-vertical c-btns" role="group" aria-label="...">
+      <div class="btn-groupc-btns" role="group" aria-label="...">
         <button ng-click="loadColumn('WORKS')" type="button" class="btn btn-lg btn-default">
-          <span class="glyphicon glyphicon-cog"></span> WORKS
+          <span class="glyphicon glyphicon-cog"></span> <br> WORKS
         </button>
         <button disabled="disabled" ng-click="loadColumn('MUSTERS')" type="button" class="btn btn-lg btn-default">
-          <span class="glyphicon glyphicon-file"></span> MUSTERS
+          <span class="glyphicon glyphicon-file"></span> <br> MUSTERS
         </button>
         <button disabled="disabled" ng-click="loadColumn('WORKERS')" type="button" class="btn btn-lg btn-default">
-          <span class="glyphicon glyphicon-user"></span> WORKERS
+          <span class="glyphicon glyphicon-user"></span><br> WORKERS
         </button>
-
-
       </div>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br><br><br><br><br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
     </div>
+
+
+
+
     <div ng-show="col1" class="col-md-4 column">
       <div class="vv_header">
         <span class="glyphicon glyphicon-cog"></span> WORKS</div>
       <div class="vv_content">
         <div ng-repeat="work in works" class="vv_field" ng-class="{'active': work.work_code == activeWork.work_code }" ng-click="loadMusters(work)">
-          
+
 
           <div class="top_title">
             <span class="text-danger">{{work.work_type}}</span>
@@ -53,9 +34,9 @@
           </div>
           <div class="title">{{work.work_name}}
             <div class="pull-right">
-           
+
               <span class="glyphicon glyphicon-chevron-right"></span>
-             
+
             </div>
           </div>
           <div class="status">
@@ -74,11 +55,12 @@
       <br>
       <br>
       <br>
-      <br><br>
       <br>
       <br>
       <br>
-      
+      <br>
+      <br>
+
       <br>
       <br>
       <br>
@@ -93,16 +75,18 @@
       </div>
       <br>
       <br>
-      <br><br>
-    
+      <br>
+      <br>
 
-     
+
+
       <br>
       <br>
       <br>
       <br>
       <br>
-      <br><br>
+      <br>
+      <br>
       <br>
       <br>
       <br>
@@ -115,7 +99,7 @@
         <span class="glyphicon glyphicon-file"></span> MUSTER ROLL</div>
       <div class="vv_content">
         <div ng-repeat="muster in filteredMusters" class="vv_field" ng-class="{'active': muster.mr_no == activeMuster.mr_no }" ng-click="loadWorkers(muster)">
-        
+
           <div class="top_title">
             <span class="text-danger">
               {{muster.mr_payment_date == "" ? "Pending Payment" : "Paid on "+muster.mr_payment_date}}
@@ -126,9 +110,9 @@
           </div>
           <div class="title">MUSTER ROLL NO. {{muster.mr_no}}
             <div class="pull-right">
-            
+
               <span class="glyphicon glyphicon-chevron-right"></span>
-             
+
             </div>
           </div>
           <div class="status">
