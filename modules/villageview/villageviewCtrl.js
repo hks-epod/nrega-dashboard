@@ -136,7 +136,7 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
       }
     };
 
-    function fetchColumnResults(colName) {
+    function fetchColumnResults(colName, params) {
       if (colName == 'WORKS') {
         Works.fetch().then(function(response) {
           $scope.works = response;
@@ -166,11 +166,15 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
           }
         });
       }
-      fetchColumnResults(colName);
+
+      if (colNo == 1) fetchColumnResults(colName);
+    
     };
 
 
-    $scope.loadRow = function() {
+    $scope.loadRow = function(param) {
+
+      fetchColumnResults(param);
 
     }
 

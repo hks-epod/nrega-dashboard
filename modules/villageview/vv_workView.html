@@ -50,13 +50,16 @@
 
     <!-- Column 2 and Column 3 loader  -->
     <div ng-hide="!column['1'].status || column['2'].status" class="vv_homescreen col-md-8 text-center">
+      <div class="p-20">
+        <span>Make a selection below then select a row at left to start exploring.</span>
+      </div>
       <button ng-if="column[1].name != 'WORKERS'" ng-click="loadColumn('WORKERS', 2)" type="button" class="btn btn-lg btn-default">
         <span class="glyphicon glyphicon-user"></span><br> WORKERS
       </button>
       <button  ng-if="column[1].name != 'MUSTERS'" ng-click="loadColumn('MUSTERS', 2)" type="button" class="btn btn-lg btn-default">
         <span class="glyphicon glyphicon-file"></span><br> MUSTERS
       </button>
-      <button  ng-if="column[1].name != 'WORKS'" ng-click="loadColumn('MUSTERS', 2)" type="button" class="btn btn-lg btn-default">
+      <button  ng-if="column[1].name != 'WORKS'" ng-click="loadColumn('WORKS', 2)" type="button" class="btn btn-lg btn-default">
         <span class="glyphicon glyphicon-file"></span><br> WORKS
       </button>
     </div>
