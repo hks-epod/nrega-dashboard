@@ -1,1 +1,20 @@
-workers_template.html
+<div ng-repeat="worker in workers" class="vv_field">
+  <!--           <div class="pull-right">
+           <br>
+           <span class="glyphicon glyphicon-chevron-right"></span>
+           <br>
+           <br>
+         </div>
+-->
+  <div class="top_title">
+    <span class="text-danger">{{worker.job_card_number}}</span>
+    <span class="pull-right top_date">{{worker.gender}}</span>
+
+  </div>
+  <div class="title">{{worker.worker_name}}</div>
+  <div class="status">
+    Rs. {{worker.dues}}
+    <span class="status_sep">|</span> {{worker.days_worked}} days
+    <a class="pull-right" ng-click="open(worker)">Detail</a>
+  </div>
+</div>

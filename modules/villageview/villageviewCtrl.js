@@ -112,40 +112,29 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
     }
 
     //////////////////////////
-    //      View Results    //
+    //      Village View    //
     //////////////////////////
-
-
-
-
-
     Vstats.fetch().then(function(response) {
       $scope.vstats = response;
     });
-
-
-
-
-
-    // Village View Service
-
     $scope.isStat = false;
     $scope.switchview = function() {
       $scope.isStat = !$scope.isStat;
     };
 
 
-    $scope.column1 = {
-      'status': false
-    };
-    $scope.column2 = {
-      'status': false
-    };
-    $scope.column3 = {
-      'status': false
-    };
 
-    // Load Column
+    $scope.column = {
+      1: {
+        'status': false
+      },
+      2:{
+        'status': false
+      },
+      3:{
+        'status': false
+      }
+    };
 
     function fetchColumnResults(colName) {
       if (colName == 'WORKS') {
@@ -165,32 +154,10 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
       };
     }
 
-
-    $scope.loadColumn1 = function(colName) {
-      $scope.column1.status = true;
-      $scope.column1.name = colName;
+    $scope.loadColumn = function(colName, colNo) {
+      $scope.column[colNo].status = true;
+      $scope.column[colNo].name = colName;
       fetchColumnResults(colName);
-    };
-
-
-
-
-
-
-    $scope.col2 = false;
-
-    $scope.loadColumn2 = function(colName) {
-      $scope.col2 = true;
-    };
-
-
-    function loadMustersbyWork(workcode) {
-      $scope.filteredMusters = [];
-      $scope.musters.forEach(function(muster, index) {
-        if (muster.work_code == workcode) {
-          $scope.filteredMusters.push(muster);
-        }
-      });
     };
 
 
@@ -200,10 +167,22 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
           a[key] = b[key];
       return a;
     }
+    $scope.col2 = false;
+    $scope.loadColumn2 = function(colName) {
+      $scope.col2 = true;
+    };
 
+    function loadMustersbyWork(workcode) {
+      $scope.filteredMusters = [];
+      $scope.musters.forEach(function(muster, index) {
+        if (muster.work_code == workcode) {
+          $scope.filteredMusters.push(muster);
+        }
+      });
+    };
+    
     function loadWorkersbyMuster(muster) {
       $scope.filteredWorkers = [];
-
       muster.workers.forEach(function(filterWorker) {
         $scope.workers.forEach(function(worker) {
           if (filterWorker.worker_code == worker.worker_code) {
@@ -211,23 +190,23 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
           }
         });
       });
-
-
     }
-
-
-
     $scope.loadMusters = function(work) {
       $scope.activeWork = work;
       $scope.filteredWorkers = [];
       $scope.activeMuster = {};
       loadMustersbyWork(work.work_code);
     };
-
     $scope.loadWorkers = function(muster) {
       $scope.activeMuster = muster;
       loadWorkersbyMuster(muster);
     };
+
+
+
+
+
+
 
     $scope.open = function(item) {
       var modalInstance = $modal.open({

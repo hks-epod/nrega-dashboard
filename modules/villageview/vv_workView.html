@@ -1,47 +1,47 @@
 <div class="container-fluid">
   <div class="row villageview_work">
-    <div ng-hide="column1.status" class="vv_homescreen col-md-12 text-center">
+    <div ng-hide="column['1'].status" class="vv_homescreen col-md-12 text-center">
       <div class="p-20">
         <span>Select a panchayat at left, then make a selection below to start exploring MGNREGA</span>
       </div>
-      <button ng-disabled='!selectedGP' ng-click="loadColumn1('WORKS')" type="button" class="btn btn-lg btn-default">
+      <button ng-disabled='!selectedGP' ng-click="loadColumn('WORKS', 1)" type="button" class="btn btn-lg btn-default">
         <span class="glyphicon glyphicon-cog"></span>
         <br> WORKS
       </button>
-      <button ng-disabled="!selectedGP" ng-click="loadColumn1('MUSTERS')" type="button" class="btn btn-lg btn-default">
+      <button ng-disabled="!selectedGP" ng-click="loadColumn('MUSTERS', 1)" type="button" class="btn btn-lg btn-default">
         <span class="glyphicon glyphicon-file"></span>
         <br> MUSTERS
       </button>
-      <button ng-disabled="!selectedGP" ng-click="loadColumn1('WORKERS')" type="button" class="btn btn-lg btn-default">
+      <button ng-disabled="!selectedGP" ng-click="loadColumn('WORKERS', 1)" type="button" class="btn btn-lg btn-default">
         <span class="glyphicon glyphicon-user"></span>
         <br> WORKERS
       </button>
     </div>
 
 
-    <div ng-show="column1.status" class="col-md-4 column">
+    <div ng-show="column['1'].status" class="col-md-4 column">
       <div class="vv_header">
-        <span class="glyphicon glyphicon-cog"></span> {{column1.name}} </div>
+        <span class="glyphicon glyphicon-cog"></span> {{column['1'].name}} </div>
       <div class="vv_content">
-        <div ng-include src="'/modules/villageview/'+ column1.name+ '_template.html'"></div>
+        <div ng-include src="'/modules/villageview/'+ column['1'].name + '_template.html'"></div>
       </div>
     </div>
 
 
-    <div ng-show="column2.status" class="col-md-4 column">
+    <div ng-show="column['2'].status" class="col-md-4 column">
       <div class="vv_header">
-        <span class="glyphicon glyphicon-cog"></span> {{column2.name}} </div>
+        <span class="glyphicon glyphicon-cog"></span> {{column['2'].name}} </div>
       <div class="vv_content">
-        <div ng-include src="'/modules/villageview/'+ column2.name+ '_template.html'"></div>
+        <div ng-include src="'/modules/villageview/'+ column['2].name+ '_template.html'"></div>
       </div>
     </div>
 
 
-    <div ng-show="column3.status" class="col-md-4 column">
+    <div ng-show="column['3'].status" class="col-md-4 column">
       <div class="vv_header">
-        <span class="glyphicon glyphicon-cog"></span> {{column3.name}} </div>
+        <span class="glyphicon glyphicon-cog"></span> {{column[3].name}} </div>
       <div class="vv_content">
-        <div ng-include src="'/modules/villageview/'+ column3.name+ '_template.html'"></div>
+        <div ng-include src="'/modules/villageview/'+ column['3'].name+ '_template.html'"></div>
       </div>
     </div>
 
@@ -53,21 +53,6 @@
 
 
     <div ng-hide="!col1 || col2" class="col-md-4 column text-center">
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-
-      <br>
-      <br>
-      <br>
-      <br>
       <div class="btn-group-vertical c-btns" role="group" aria-label="...">
         <button disabled="disabled" ng-click="loadColumn('WORKERS')" type="button" class="btn btn-lg btn-default">
           <span class="glyphicon glyphicon-user"></span> WORKERS
@@ -76,84 +61,11 @@
           <span class="glyphicon glyphicon-file"></span> MUSTERS
         </button>
       </div>
-      <br>
-      <br>
-      <br>
-      <br>
-
-
-
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
     </div>
 
 
-    <div ng-show="col2" class="col-md-4 column">
-      <div class="vv_header">
-        <span class="glyphicon glyphicon-file"></span> MUSTER ROLL</div>
-      <div class="vv_content">
-        <div ng-repeat="muster in filteredMusters" class="vv_field" ng-class="{'active': muster.mr_no == activeMuster.mr_no }" ng-click="loadWorkers(muster)">
 
-          <div class="top_title">
-            <span class="text-danger">
-              {{muster.mr_payment_date == "" ? "Pending Payment" : "Paid on "+muster.mr_payment_date}}
-            
-            </span>
-            <span class="pull-right top_date">{{parseDate(muster.work_start_date) | date : 'mediumDate'}} - {{parseDate(muster.work_end_date) | date : 'mediumDate'}}</span>
-
-          </div>
-          <div class="title">MUSTER ROLL NO. {{muster.mr_no}}
-            <div class="pull-right">
-
-              <span class="glyphicon glyphicon-chevron-right"></span>
-
-            </div>
-          </div>
-          <div class="status">
-            {{muster.workers.length}} Workers
-            <span class="status_sep">|</span> {{muster.total_persondays}} person-days
-            <a class=" pull-right" ng-click="open(muster)">Detail</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div ng-show="col2" class="col-md-4 column">
-      <div class="vv_header">
-        <span class="glyphicon glyphicon-user"></span> WORKERS</div>
-      <div class="vv_content">
-        <div ng-repeat="worker in filteredWorkers" class="vv_field">
-          <!--           <div class="pull-right">
-            <br>
-            <span class="glyphicon glyphicon-chevron-right"></span>
-            <br>
-            <br>
-          </div>
- -->
-          <div class="top_title">
-            <span class="text-danger">{{worker.job_card_number}}</span>
-            <span class="pull-right top_date">{{worker.gender}}</span>
-
-          </div>
-          <div class="title">{{worker.worker_name}}</div>
-          <div class="status">
-            Rs. {{worker.dues}}
-            <span class="status_sep">|</span> {{worker.days_worked}} days
-            <a class="pull-right" ng-click="open(worker)">Detail</a>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
-
 </div>
 
 
