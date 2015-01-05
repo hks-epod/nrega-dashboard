@@ -116,15 +116,9 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
     //////////////////////////
 
 
-    Works.fetch().then(function(response) {
-      $scope.works = response;
-    });
-    Musters.fetch().then(function(response) {
-      $scope.musters = response;
-    });
-    Workers.fetch().then(function(response) {
-      $scope.workers = response;
-    });
+
+
+
     Vstats.fetch().then(function(response) {
       $scope.vstats = response;
     });
@@ -140,17 +134,51 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
       $scope.isStat = !$scope.isStat;
     };
 
-    $scope.columnList = [];
 
-
-
-
-    // Load Column 
-    $scope.col1 = false;
-    $scope.col2 = false;
-    $scope.loadColumn = function(colName) {
-      $scope.col1 = true;
+    $scope.column1 = {
+      'status': false
     };
+    $scope.column2 = {
+      'status': false
+    };
+    $scope.column3 = {
+      'status': false
+    };
+
+    // Load Column
+
+    function fetchColumnResults(colName) {
+      if (colName == 'WORKS') {
+        Works.fetch().then(function(response) {
+          $scope.works = response;
+        });
+      };
+      if (colName == 'MUSTERS') {
+        Musters.fetch().then(function(response) {
+          $scope.musters = response;
+        });
+      };
+      if (colName == 'WORKERS') {
+        Workers.fetch().then(function(response) {
+          $scope.workers = response;
+        });
+      };
+    }
+
+
+    $scope.loadColumn1 = function(colName) {
+      $scope.column1.status = true;
+      $scope.column1.name = colName;
+      fetchColumnResults(colName);
+    };
+
+
+
+
+
+
+    $scope.col2 = false;
+
     $scope.loadColumn2 = function(colName) {
       $scope.col2 = true;
     };

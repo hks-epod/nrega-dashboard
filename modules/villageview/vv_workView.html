@@ -1,61 +1,56 @@
 <div class="container-fluid">
   <div class="row villageview_work">
-    <div ng-hide="col1" class="vv_homescreen col-md-12 text-center">
+    <div ng-hide="column1.status" class="vv_homescreen col-md-12 text-center">
       <div class="p-20">
         <span>Select a panchayat at left, then make a selection below to start exploring MGNREGA</span>
       </div>
-        <button ng-disabled='!selectedGP' ng-click="loadColumn('WORKS')" type="button" class="btn btn-lg btn-default">
-          <span class="glyphicon glyphicon-cog"></span><br> WORKS
-        </button>
-        <button ng-disabled="!selectedGP" ng-click="loadColumn('MUSTERS')" type="button" class="btn btn-lg btn-default">
-          <span class="glyphicon glyphicon-file"></span><br> MUSTERS
-        </button>
-        <button ng-disabled="!selectedGP" ng-click="loadColumn('WORKERS')" type="button" class="btn btn-lg btn-default">
-          <span class="glyphicon glyphicon-user"></span><br> WORKERS
-        </button>
+      <button ng-disabled='!selectedGP' ng-click="loadColumn1('WORKS')" type="button" class="btn btn-lg btn-default">
+        <span class="glyphicon glyphicon-cog"></span>
+        <br> WORKS
+      </button>
+      <button ng-disabled="!selectedGP" ng-click="loadColumn1('MUSTERS')" type="button" class="btn btn-lg btn-default">
+        <span class="glyphicon glyphicon-file"></span>
+        <br> MUSTERS
+      </button>
+      <button ng-disabled="!selectedGP" ng-click="loadColumn1('WORKERS')" type="button" class="btn btn-lg btn-default">
+        <span class="glyphicon glyphicon-user"></span>
+        <br> WORKERS
+      </button>
     </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    <div ng-show="col1" class="col-md-4 column">
+    <div ng-show="column1.status" class="col-md-4 column">
       <div class="vv_header">
-        <span class="glyphicon glyphicon-cog"></span> WORKS</div>
+        <span class="glyphicon glyphicon-cog"></span> {{column1.name}} </div>
       <div class="vv_content">
-        <div ng-repeat="work in works" class="vv_field" ng-class="{'active': work.work_code == activeWork.work_code }" ng-click="loadMusters(work)">
-
-
-          <div class="top_title">
-            <span class="text-danger">{{work.work_type}}</span>
-            <span class="pull-right top_date">{{ parseDate(work.start_date) | date : 'mediumDate' }} - {{parseDate(work.completion_date) |date : 'mediumDate'}}</span>
-
-          </div>
-          <div class="title">{{work.work_name}}
-            <div class="pull-right">
-
-              <span class="glyphicon glyphicon-chevron-right"></span>
-
-            </div>
-          </div>
-          <div class="status">
-            {{work.total_workers}} Workers
-            <span class="status_sep">|</span> Rs. {{work.total_exp | number:2}}
-            <a class=" pull-right" ng-click="open(work)">Detail</a>
-          </div>
-
-        </div>
+        <div ng-include src="'/modules/villageview/'+ column1.name+ '_template.html'"></div>
       </div>
     </div>
+
+
+    <div ng-show="column2.status" class="col-md-4 column">
+      <div class="vv_header">
+        <span class="glyphicon glyphicon-cog"></span> {{column2.name}} </div>
+      <div class="vv_content">
+        <div ng-include src="'/modules/villageview/'+ column2.name+ '_template.html'"></div>
+      </div>
+    </div>
+
+
+    <div ng-show="column3.status" class="col-md-4 column">
+      <div class="vv_header">
+        <span class="glyphicon glyphicon-cog"></span> {{column3.name}} </div>
+      <div class="vv_content">
+        <div ng-include src="'/modules/villageview/'+ column3.name+ '_template.html'"></div>
+      </div>
+    </div>
+
+
+
+
+
+
+
 
     <div ng-hide="!col1 || col2" class="col-md-4 column text-center">
       <br>

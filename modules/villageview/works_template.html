@@ -1,0 +1,22 @@
+<div ng-repeat="work in works" class="vv_field" ng-class="{'active': work.work_code == activeWork.work_code }" ng-click="loadMusters(work)">
+
+
+  <div class="top_title">
+    <span class="text-danger">{{work.work_type}}</span>
+    <span class="pull-right top_date">{{ parseDate(work.start_date) | date : 'mediumDate' }} - {{parseDate(work.completion_date) |date : 'mediumDate'}}</span>
+
+  </div>
+  <div class="title">{{work.work_name}}
+    <div class="pull-right">
+
+      <span class="glyphicon glyphicon-chevron-right"></span>
+
+    </div>
+  </div>
+  <div class="status">
+    {{work.total_workers}} Workers
+    <span class="status_sep">|</span> Rs. {{work.total_exp | number:2}}
+    <a class=" pull-right" ng-click="open(work)">Detail</a>
+  </div>
+
+</div>
