@@ -111,10 +111,8 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
       return newdate;
     }
 
-    //////////////////////////
-    //      Village View    //
-    //////////////////////////
 
+    //      Village View    --- Initialization
     $scope.isStat = false;
     $scope.switchview = function() {
       $scope.isStat = !$scope.isStat;
@@ -135,7 +133,13 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
         'status': false
       }
     };
+    $scope.activeRow = {
+      work: {},
+      worker: {},
+      muster: {}
+    };
 
+    // Functions
     function fetchColumnResults(colName, params) {
       if (colName == 'WORKS') {
         Works.fetch().then(function(response) {
@@ -154,6 +158,14 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
       };
     }
 
+    function whichColumn(colName) {
+      columnList.forEach(function(value, index) {
+        if (value == colName) return index
+      });
+
+    }
+
+    // Load Column 
     $scope.loadColumn = function(colName, colNo) {
       $scope.column[colNo].name = colName;
       $scope.column[colNo].status = true;
@@ -168,13 +180,35 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
       }
 
       if (colNo == 1) fetchColumnResults(colName);
-    
+
     };
 
+    // Load Row
+    $scope.loadRow = function(parentColName, rowData) {
 
-    $scope.loadRow = function(param) {
+      parentColNo = whichColumn(parentColName);
+      
+      if (parentColNo == 3){
+        return 0;
+      }
+      else{
+        childColName = $scope.column[parentColNo + 1 ].name;  
+      }
+      
+      
+      if (parentColName == 'WORKS') {
+        params = rowData.worker_id;
+      };
+      if (parentColName == 'WORKERS') {
+        // params = rowData.worker_id;
+      };
+      if (parentColName == 'MUSTERS') {
+        // params = rowData.worker_id;
+      };
 
-      fetchColumnResults(param);
+
+
+      fetchColumnResults( param);
 
     }
 
