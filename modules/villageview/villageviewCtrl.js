@@ -183,35 +183,25 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
         };
 
         // Load Row
-        $scope.loadRow = function(parentColName, rowData) {
+        $scope.loadRow = function(parentColName, entity) {
 
             parentColNo = whichColumn(parentColName);
 
             if (parentColNo == 3) {
                 return 0;
-            } else {
+            } else if {
                 childColName = $scope.column[parentColNo + 1].name;
             }
 
+            $scope.activeRow[parentColName] = entity;
 
-            if (parentColName == 'WORKS') {
-                params = rowData.worker_id;
-            };
-            if (parentColName == 'WORKERS') {
-                // params = rowData.worker_id;
-            };
-            if (parentColName == 'MUSTERS') {
-                // params = rowData.worker_id;
-            };
+            //Prepare params here or in fetchColumnResults
 
-
-
-            fetchColumnResults(param);
+            fetchColumnResults(childColName, param);
 
         }
 
         // Unload Column
-
         $scope.unloadCol = function(colNo) {
             if (colNo === 1) {
                 $scope.column = {
@@ -223,6 +213,32 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
                         'status': false,
                         'name': null
                     },
+                    3: {
+                        'status': false,
+                        'name': null
+                    }
+                };
+                $scope.activeRow = {
+                    work: {},
+                    worker: {},
+                    muster: {}
+                };
+            } else if (colNo === 2) {
+                $scope.activeRow[$scope.column['2'].name]= null;
+                $scope.column = {
+                    2: {
+                        'status': false,
+                        'name': null
+                    },
+                    3: {
+                        'status': false,
+                        'name': null
+                    }
+                };
+                $scope.activeRow[]
+
+            } else if (colNo === 3) {
+                $scope.column = {
                     3: {
                         'status': false,
                         'name': null
