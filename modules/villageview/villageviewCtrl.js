@@ -120,7 +120,7 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
             $scope.vstats = response;
         });
 
-        var columnList = ['WORKS', 'WORKERS', 'MUSTERS'];
+        var columnList = ['work', 'worker', 'muster'];
         $scope.column = {
             1: {
                 'status': false
@@ -140,17 +140,17 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
 
         // Functions
         function fetchColumnResults(colName, params) {
-            if (colName == 'WORKS') {
+            if (colName == 'work') {
                 Works.fetch().then(function(response) {
                     $scope.works = response;
                 });
             };
-            if (colName == 'MUSTERS') {
+            if (colName == 'muster') {
                 Musters.fetch().then(function(response) {
                     $scope.musters = response;
                 });
             };
-            if (colName == 'WORKERS') {
+            if (colName == 'worker') {
                 Workers.fetch().then(function(response) {
                     $scope.workers = response;
                 });
@@ -158,10 +158,14 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
         }
 
         function whichColumn(colName) {
+            var colNo;
             columnList.forEach(function(value, index) {
-                if (value == colName) return index
+                if ($scope.column[index + 1].name == colName) {
+                    colNo = index + 1
+                }
             });
 
+            return colNo
         }
 
         // Load Column 
@@ -184,20 +188,19 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
 
         // Load Row
         $scope.loadRow = function(parentColName, entity) {
-
             parentColNo = whichColumn(parentColName);
 
             if (parentColNo == 3) {
                 return 0;
-            } else if {
+            } else {
                 childColName = $scope.column[parentColNo + 1].name;
             }
 
             $scope.activeRow[parentColName] = entity;
+            console.log($scope.activeRow);
 
             //Prepare params here or in fetchColumnResults
-
-            fetchColumnResults(childColName, param);
+            // fetchColumnResults(childColName, param);
 
         }
 
@@ -224,7 +227,7 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
                     muster: {}
                 };
             } else if (colNo === 2) {
-                $scope.activeRow[$scope.column['2'].name]= null;
+                $scope.activeRow[$scope.column['2'].name] = null;
                 $scope.column = {
                     2: {
                         'status': false,
@@ -235,7 +238,6 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
                         'name': null
                     }
                 };
-                $scope.activeRow[]
 
             } else if (colNo === 3) {
                 $scope.column = {

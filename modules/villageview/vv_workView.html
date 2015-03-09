@@ -7,15 +7,15 @@
       <div class="p-20">
         <span>Select a panchayat at left, then make a selection below to start exploring MGNREGA</span>
       </div>
-      <button ng-disabled='!selectedGP' ng-click="loadColumn('WORKS', 1)" type="button" class="btn btn-lg btn-default">
+      <button ng-disabled='!selectedGP' ng-click="loadColumn('work', 1)" type="button" class="btn btn-lg btn-default">
         <span class="glyphicon glyphicon-cog"></span>
         <br> WORKS
       </button>
-      <button ng-disabled="!selectedGP" ng-click="loadColumn('MUSTERS', 1)" type="button" class="btn btn-lg btn-default">
+      <button ng-disabled="!selectedGP" ng-click="loadColumn('muster', 1)" type="button" class="btn btn-lg btn-default">
         <span class="glyphicon glyphicon-file"></span>
         <br> MUSTERS
       </button>
-      <button ng-disabled="!selectedGP" ng-click="loadColumn('WORKERS', 1)" type="button" class="btn btn-lg btn-default">
+      <button ng-disabled="!selectedGP" ng-click="loadColumn('worker', 1)" type="button" class="btn btn-lg btn-default">
         <span class="glyphicon glyphicon-user"></span>
         <br> WORKERS
       </button>
@@ -55,13 +55,13 @@
       <div class="p-20">
         <span>Make a selection below then select a row at left to start exploring.</span>
       </div>
-      <button ng-if="column[1].name != 'WORKERS'" ng-click="loadColumn('WORKERS', 2)" type="button" class="btn btn-lg btn-default">
+      <button ng-if="column[1].name != 'worker'" ng-click="loadColumn('worker', 2)" type="button" class="btn btn-lg btn-default">
         <span class="glyphicon glyphicon-user"></span><br> WORKERS
       </button>
-      <button  ng-if="column[1].name != 'MUSTERS'" ng-click="loadColumn('MUSTERS', 2)" type="button" class="btn btn-lg btn-default">
+      <button  ng-if="column[1].name != 'muster'" ng-click="loadColumn('muster', 2)" type="button" class="btn btn-lg btn-default">
         <span class="glyphicon glyphicon-file"></span><br> MUSTERS
       </button>
-      <button  ng-if="column[1].name != 'WORKS'" ng-click="loadColumn('WORKS', 2)" type="button" class="btn btn-lg btn-default">
+      <button  ng-if="column[1].name != 'work'" ng-click="loadColumn('work', 2)" type="button" class="btn btn-lg btn-default">
         <span class="glyphicon glyphicon-file"></span><br> WORKS
       </button>
     </div>

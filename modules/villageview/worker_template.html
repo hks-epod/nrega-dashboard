@@ -1,4 +1,4 @@
-<div ng-repeat="worker in workers" class="vv_field">
+<div ng-repeat="worker in workers" class="vv_field" ng-class="{'active': worker.job_card_number == activeRow.worker.job_card_number }" ng-click="loadRow('worker', worker)">
   <div class="pull-right">
     <br>
     <span class="glyphicon glyphicon-chevron-right"></span>

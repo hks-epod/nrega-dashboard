@@ -1,6 +1,4 @@
-<div ng-repeat="work in works" class="vv_field" ng-class="{'active': work.work_code == activeWork.work_code }" ng-click="loadRow('WORKS' , work)">
-
-
+<div ng-repeat="work in works" class="vv_field" ng-class="{'active': work.work_code == activeRow.work.work_code }" ng-click="loadRow('work', work)">
   <div class="top_title">
     <span class="text-danger">{{work.work_type}}</span>
     <span class="pull-right top_date">{{ parseDate(work.start_date) | date : 'mediumDate' }} - {{parseDate(work.completion_date) |date : 'mediumDate'}}</span>
