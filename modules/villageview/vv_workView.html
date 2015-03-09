@@ -23,7 +23,9 @@
 
     <div ng-show="column['1'].status" class="col-md-4 column">
       <div class="vv_header">
-        <span class="glyphicon glyphicon-cog"></span> {{column['1'].name}} </div>
+        <span class="glyphicon glyphicon-cog"></span> {{column['1'].name}} 
+        <button role="button" ng-click="unloadCol(1)"><span class="glyphicon glyphicon-cog pull-right"></button>
+      </div>
       <div class="vv_content">
         <div ng-include src="'/modules/villageview/'+ column['1'].name + '_template.html'"></div>
       </div>
