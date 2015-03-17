@@ -196,7 +196,6 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
             }
 
             $scope.activeRow[parentColName] = entity;
-            console.log($scope.activeRow);
 
             //Prepare params here or in fetchColumnResults
             fetchColumnResults(childColName);
@@ -205,9 +204,7 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
 
         // Unload Column
         $scope.unloadCol = function(colNo) {
-            console.log(colNo);
             if (colNo === 1) {
-                console.log(colNo);
                 $scope.column = {
                     1: {
                         'status': false,
@@ -256,46 +253,6 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
                     a[key] = b[key];
             return a;
         }
-        $scope.col2 = false;
-        $scope.loadColumn2 = function(colName) {
-            $scope.col2 = true;
-        };
-
-        function loadMustersbyWork(workcode) {
-            $scope.filteredMusters = [];
-            $scope.musters.forEach(function(muster, index) {
-                if (muster.work_code == workcode) {
-                    $scope.filteredMusters.push(muster);
-                }
-            });
-        };
-
-        function loadWorkersbyMuster(muster) {
-            $scope.filteredWorkers = [];
-            muster.workers.forEach(function(filterWorker) {
-                $scope.workers.forEach(function(worker) {
-                    if (filterWorker.worker_code == worker.worker_code) {
-                        $scope.filteredWorkers.push(extend(filterWorker, worker));
-                    }
-                });
-            });
-        }
-        $scope.loadMusters = function(work) {
-            $scope.activeWork = work;
-            $scope.filteredWorkers = [];
-            $scope.activeMuster = {};
-            loadMustersbyWork(work.work_code);
-        };
-        $scope.loadWorkers = function(muster) {
-            $scope.activeMuster = muster;
-            loadWorkersbyMuster(muster);
-        };
-
-
-
-
-
-
 
         $scope.open = function(item) {
             var modalInstance = $modal.open({
@@ -309,10 +266,6 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
                 }
             });
         };
-
-
-
-
 
     }
 ]);
