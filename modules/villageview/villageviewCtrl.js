@@ -164,7 +164,6 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
                     colNo = index + 1
                 }
             });
-
             return colNo
         }
 
@@ -200,13 +199,15 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
             console.log($scope.activeRow);
 
             //Prepare params here or in fetchColumnResults
-            // fetchColumnResults(childColName, param);
+            fetchColumnResults(childColName);
 
         }
 
         // Unload Column
         $scope.unloadCol = function(colNo) {
+            console.log(colNo);
             if (colNo === 1) {
+                console.log(colNo);
                 $scope.column = {
                     1: {
                         'status': false,
@@ -228,24 +229,16 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
                 };
             } else if (colNo === 2) {
                 $scope.activeRow[$scope.column['2'].name] = null;
-                $scope.column = {
-                    2: {
-                        'status': false,
-                        'name': null
-                    },
-                    3: {
-                        'status': false,
-                        'name': null
-                    }
-                };
+                $scope.column['2'].status= false;
+                $scope.column['2'].name= null;
+                $scope.column['3'].status= false;
+                $scope.column['3'].name= null;
+
 
             } else if (colNo === 3) {
-                $scope.column = {
-                    3: {
-                        'status': false,
-                        'name': null
-                    }
-                };
+                $scope.column['3'].status= false;
+                $scope.column['3'].name= null;
+
             }
 
         };
@@ -255,7 +248,7 @@ villageview.controller('villageviewCtrl', ['$scope', '$window', '$location', '$m
 
 
 
-
+        //  Old
 
         function extend(a, b) {
             for (var key in b)

@@ -23,8 +23,8 @@
 
     <div ng-show="column['1'].status" class="col-md-4 column">
       <div class="vv_header">
-        <span class="glyphicon glyphicon-cog"></span> {{column['1'].name}} 
-        <a href="" class="pull-right" ng-click="unloadCol(1)"><span class="glyphicon glyphicon-cog "></a>
+        <span class="glyphicon glyphicon-th-list"></span> {{column['1'].name + 'S' | uppercase}} 
+        <a href="" class="pull-right" ng-click="unloadCol(1)"><span class="glyphicon glyphicon-remove "></a>
       </div>
       <div class="vv_content">
         <div ng-include src="'/modules/villageview/'+ column['1'].name + '_template.html'"></div>
@@ -34,7 +34,9 @@
 
     <div ng-if="column['2'].status" class="col-md-4 column">
       <div class="vv_header">
-        <span class="glyphicon glyphicon-cog"></span> {{column['2'].name}} </div>
+        <span class="glyphicon glyphicon-th-list"></span> {{column['2'].name +'S' | uppercase}} 
+        <a href="" class="pull-right" ng-click="unloadCol(2)"><span class="glyphicon glyphicon-remove "></a>
+      </div>
       <div class="vv_content">
         <div ng-include src="'/modules/villageview/'+ column['2'].name+ '_template.html'"></div>
       </div>
@@ -43,7 +45,9 @@
 
     <div ng-if="column['3'].status" class="col-md-4 column">
       <div class="vv_header">
-        <span class="glyphicon glyphicon-cog"></span> {{column[3].name}} </div>
+        <span class="glyphicon glyphicon-th-list"></span> {{column[3].name + 'S' | uppercase}} 
+        <a href="" class="pull-right" ng-click="unloadCol(3)"><span class="glyphicon glyphicon-remove "></a>
+      </div>
       <div class="vv_content">
         <div ng-include src="'/modules/villageview/'+ column['3'].name + '_template.html'"></div>
       </div>
