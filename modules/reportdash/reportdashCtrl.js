@@ -7,8 +7,14 @@ reportdash.controller('reportdashCtrl', ['$scope','$window','$location', '$rootS
       $scope.isTable = !$scope.isTable;
     };
 
+
     //*****************[ Region Handelers ]*******************//
-    $scope.years = ['2014-2015', '2013-2014', '2012-2013'];
+ 
+
+
+
+
+    $scope.years = ['2015-2016','2014-2015', '2013-2014', '2012-2013'];
     $scope.selectedYear = $scope.years[0];
     $scope.$watch('selectedYear', function() {
       $scope.selectedState = null;

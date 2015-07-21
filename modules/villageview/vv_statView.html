@@ -1,66 +1,35 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <br> Total works : 10
-      <br> Total expenditure : Rs. {{1133054.88 | number:2}}
+      <br> Total works : {{vstats.total_works}}
+      <br> Total expenditure : Rs. {{vstats.total_wages | number:2}}
       <br>
       <br>
       <table class="table table-bordered">
         <tr>
-          <th colspan="2">Census 2011</th>
           <th colspan="2">MGNREGA</th>
         </tr>
         <tr>
-          <td>Total households</td>
-          <td>{{vstats.hh | number}}</td>
-          <td>Total active job cards</td>
-          <td>{{vstats.active_job_cards | number}}</td>
+          <td>Total works in progress</td>
+          <td>{{vstats.total_inprogress| number}}</td>
         </tr>
         <tr>
-          <td>Total population</td>
-          <td>{{vstats.pop | number}}</td>
           <td>Total workers</td>
           <td>{{vstats.total_workers | number}}</td>
         </tr>
         <tr>
-          <td>Percent female population</td>
-          <td>{{vstats.female_pop_pct | number:2}}</td>
           <td>Percent female persondays</td>
           <td>{{vstats.pct_f_persondays | number:2}}</td>
         </tr>
         <tr>
-          <td>Percent SC population</td>
-          <td>{{vstats.sc_pop_pct | number:2}}</td>
           <td>Percent SC persondays</td>
           <td>{{vstats.pct_sc_persondays | number:2}}</td>
         </tr>
         <tr>
-          <td>Percent ST population</td>
-          <td>{{vstats.sc_pop_pct | number:2}}</td>
           <td>Percent SC persondays</td>
           <td>{{vstats.pct_st_persondays | number:2}}</td>
         </tr>
       </table>
-
-      <br>
-      <accordion close-others="oneAtATime">
-        <accordion-group heading="Census 2011 villages of the gram panchayat >" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
-          <table class="table table-bordered">
-            <tr>
-              <th>Village code</th>
-              <th>Village name</th>
-            </tr>
-            <tr ng-repeat="cens in vstats.cens_villages">
-              <td width="20%">{{cens.village_code}}</td>
-              <td>{{cens.village_name }}</td>
-              
-            </tr>
-          </table>
-        </accordion-group>
-      </accordion>
-
-
-
 
     </div>
   </div>
