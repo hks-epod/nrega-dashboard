@@ -7,20 +7,28 @@ MGNREGA Report Dashboard, which was launched by the Secretary of Rural Developme
 ## Village View
 The Village View dashboard is an online interface that allows users to easily access and view granular programmatic data on types of works in progress and completed in the panchayat, workers’ participation in works as noted on muster roles, wage payments, and more. The interface will greatly facilitate users’ access to data on individual-level program participation. The interface is searchable for all Gram Panchayats participating in NREGA. This information is expected to be help engaged citizens and civil society groups hold local officials accountable for information entered in the NREGA MIS and to facilitate social audits.
 
-### In Media
+## Storyboard
+Checkout the project storyboard on behance. 
+[https://www.behance.net/gallery/28441315/MGNREGA-Dashboard] (https://www.behance.net/gallery/28441315/MGNREGA-Dashboard)
+
+
+## In Media
 - [Governance Now](http://www.governancenow.com/news/regular-story/rural-development-ministry-launch-mnrega-dashboard)
 - [EPoD, Harvard] (http://epod.cid.harvard.edu/smart-data-public-stakeholder-accountability) 
 
-### Tech Stack
+## Tech Stack
 * ```Angular JS``` as frond end framework
 * ```D3 JS``` for data visulization 
 * ```Bootstrap 3``` as CSS Framework
 
 
-### Quick Routes
+## Quick Routes
 Check following routes. These routes are realtive to the root path of the project repo on your server.
  - ```/``` Report Dashboard
  - ```#/villageview``` Village View Dashbaord
+
+## Contributors
+ https://github.com/hks-epod/nrega-reportdashboard/graphs/contributors
 
 
 
